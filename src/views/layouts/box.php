@@ -9,7 +9,7 @@
  */
 ?>
 
-<?php $this->beginContent('@app/modules/backend/views/layouts/main.php'); ?>
+<?php $this->beginContent('@vendor/dmstr/yii2-backend-module/src/views/layouts/main.php'); ?>
 
     <div class="box box-default">
         <div class="box-body">

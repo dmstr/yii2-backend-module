@@ -19,7 +19,7 @@ use yii\web\AssetBundle;
  */
 class BackendAsset extends AssetBundle
 {
-    public $sourcePath = '@app/modules/backend/assets/web';
+    public $sourcePath = '@vendor/dmstr/yii2-backend-module/src/assets/web';
 
     public $css = [
         'less/site.less',
