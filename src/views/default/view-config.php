@@ -11,7 +11,9 @@ use yii\widgets\ListView;
 <h1>Configuration</h1>
 
 <h2>Controllers</h2>
-<div class="box">
+
+<?= $this->render('_module', ['key'=>null]) ?>
+
     <?= ListView::widget(
         [
             'dataProvider' => $loadedModulesDataProvider,
@@ -19,7 +21,6 @@ use yii\widgets\ListView;
         ]
     )
     ?>
-</div>
 
 
 <h2>Params</h2>

@@ -32,15 +32,6 @@ $controllerDataProvider = new ArrayDataProvider(
 <?php $this->endBlock() ?>
 
 
-<?= Collapse::widget(
-    [
-        'encodeLabels' => false,
-        'items' => [
-            [
-                'label' => $key.' '.(is_object($model) ? '<span class="label label-info">loaded</span>' : ''),
-                'content' => $this->blocks['routes'],
-            ],
-        ],
-    ]
-); ?>
+<h3><?= $key.' '.(isset($model) && is_object($model) ? '<span class="label label-info">loaded</span>' : '') ?></h3>
+<?= $this->blocks['routes'] ?>
 
