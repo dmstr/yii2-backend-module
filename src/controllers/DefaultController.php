@@ -43,20 +43,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * Actions defined in classes, eg. error page.
-     *
-     * @return array
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
-    /**
      * Application dashboard.
      *
      * @return string
