@@ -12,6 +12,7 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
+        "dmstr/yii2-pages-module": "^0.15.0",
         "dmstr/yii2-helpers": "^0.4"
     },
     "autoload": {

@@ -94,3 +94,24 @@
 </div>
 
 <?= \dmstr\modules\prototype\widgets\HtmlWidget::widget(['enableFlash' => true]); ?>
+
+<div class="row">
+<?php
+$items = \dmstr\modules\pages\models\Tree::getMenuItems(
+    'backend',
+    true,
+    \dmstr\modules\pages\models\Tree::GLOBAL_ACCESS_DOMAIN
+);
+foreach ($items as $item) {
+    echo '<div class="col-sm-4">';
+    echo \insolita\wgadminlte\SmallBox::widget(
+        [
+            'head' => substr($item['label'],0,2),
+            'type' => \insolita\wgadminlte\SmallBox::TYPE_GRAY,
+            'footer' => $item['label'],
+            'footer_link' => $item['url'],
+        ]);
+    echo '</div>';
+}
+?>
+</div>
