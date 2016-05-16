@@ -1,3 +1,5 @@
+<?= \dmstr\modules\prototype\widgets\HtmlWidget::widget(['enableBackendMenuItem' => true]); ?>
+
 <div class="row">
     <div class="col-md-3 col-xs-6">
         <!-- small box -->
@@ -93,7 +95,7 @@
 
 </div>
 
-<?= \dmstr\modules\prototype\widgets\HtmlWidget::widget(['enableFlash' => true]); ?>
+<?= \dmstr\modules\prototype\widgets\TwigWidget::widget(['enableBackendMenuItem' => true]); ?>
 
 <div class="row">
 <?php
@@ -103,15 +105,17 @@ $items = \dmstr\modules\pages\models\Tree::getMenuItems(
     \dmstr\modules\pages\models\Tree::GLOBAL_ACCESS_DOMAIN
 );
 foreach ($items as $item) {
-    echo '<div class="col-sm-4">';
-    echo \insolita\wgadminlte\SmallBox::widget(
-        [
-            'head' => substr($item['label'],0,2),
-            'type' => \insolita\wgadminlte\SmallBox::TYPE_GRAY,
-            'footer' => $item['label'],
-            'footer_link' => $item['url'],
-        ]);
-    echo '</div>';
+    if ($item['visible']) {
+        echo '<div class="col-sm-4">';
+        echo \insolita\wgadminlte\SmallBox::widget(
+            [
+                'head' => substr(trim(strip_tags($item['label'])),0,2),
+                'type' => \insolita\wgadminlte\SmallBox::TYPE_GREEN,
+                'footer' => $item['label'],
+                'footer_link' => $item['url'],
+            ]);
+        echo '</div>';
+    }
 }
 ?>
 </div>

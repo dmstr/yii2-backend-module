@@ -67,6 +67,7 @@ if (Yii::$app->user->identity && Yii::$app->user->identity->isAdmin) {
 echo \dmstr\widgets\Menu::widget(
     [
         'options' => ['class' => 'sidebar-menu'],
+        'encodeLabels' => false,
         'items' => \yii\helpers\ArrayHelper::merge(
             ['items' => ['label' => 'Backend navigation', 'options' => ['class' => 'header']]],
             \dmstr\modules\pages\models\Tree::getMenuItems('backend', true, \dmstr\modules\pages\models\Tree::GLOBAL_ACCESS_DOMAIN),
