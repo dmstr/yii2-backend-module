@@ -2,7 +2,6 @@
 
 namespace _;
 
-use yii\bootstrap\Collapse;
 use yii\data\ArrayDataProvider;
 use yii\widgets\ListView;
 

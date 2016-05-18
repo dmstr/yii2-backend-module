@@ -49,7 +49,37 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        // prepare menu items, get all modules
+        $adminMenuItems = [];
+        $developerMenuItems = [];
+
+        foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
+            $role = $name;
+
+            $defaultItem = [
+                'icon' => 'fa fa-cube',
+                'label' => $name,
+                'url' => ['/'.$name],
+                'visible' => Yii::$app->user->can($role) || (Yii::$app->user->identity && Yii::$app->user->identity->isAdmin),
+                'items' => [],
+            ];
+
+            $developerMenuItems[] = $defaultItem;
+        }
+
+        // create developer menu, when user is admin
+        if (Yii::$app->user->identity && Yii::$app->user->identity->isAdmin) {
+            $adminMenuItems[] = [
+                'url' => '#',
+                'icon' => 'fa fa-cogs',
+                'label' => 'Modules',
+                'items' => $developerMenuItems,
+                'options' => ['class' => 'treeview'],
+                'visible' => Yii::$app->user->identity->isAdmin,
+            ];
+        }
+
+        return $this->render('index', ['allModulesMenuItems'=>$developerMenuItems]);
     }
 
     /**

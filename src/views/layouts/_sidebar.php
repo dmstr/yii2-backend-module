@@ -34,35 +34,6 @@ use Yii;
 
 <?php
 
-// prepare menu items, get all modules
-$adminMenuItems = [];
-$developerMenuItems = [];
-
-foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
-    $role = $name;
-
-    $defaultItem = [
-        'icon' => 'fa fa-cube',
-        'label' => $name,
-        'url' => ['/'.$name],
-        'visible' => Yii::$app->user->can($role) || (Yii::$app->user->identity && Yii::$app->user->identity->isAdmin),
-        'items' => [],
-    ];
-
-    $developerMenuItems[] = $defaultItem;
-}
-
-// create developer menu, when user is admin
-if (Yii::$app->user->identity && Yii::$app->user->identity->isAdmin) {
-    $adminMenuItems[] = [
-        'url' => '#',
-        'icon' => 'fa fa-cogs',
-        'label' => 'Modules',
-        'items' => $developerMenuItems,
-        'options' => ['class' => 'treeview'],
-        'visible' => Yii::$app->user->identity->isAdmin,
-    ];
-}
 
 echo \dmstr\widgets\Menu::widget(
     [
@@ -70,8 +41,7 @@ echo \dmstr\widgets\Menu::widget(
         'encodeLabels' => false,
         'items' => \yii\helpers\ArrayHelper::merge(
             ['items' => ['label' => 'Backend navigation', 'options' => ['class' => 'header']]],
-            \dmstr\modules\pages\models\Tree::getMenuItems('backend', true, \dmstr\modules\pages\models\Tree::GLOBAL_ACCESS_DOMAIN),
-            $adminMenuItems
+            \dmstr\modules\pages\models\Tree::getMenuItems('backend', true, \dmstr\modules\pages\models\Tree::GLOBAL_ACCESS_DOMAIN)
         ),
     ]
 );
