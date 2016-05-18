@@ -120,7 +120,7 @@ use rmrevin\yii\fontawesome\component\Icon;
                     [
                         'head' => substr(trim(strip_tags($item['label'])), 0, 2),
                         'type' => \insolita\wgadminlte\SmallBox::TYPE_GREEN,
-                        'icon' => 'fa fa-'.$item['icon'],
+                        'icon' => (isset($item['icon'])?'fa fa-'.$item['icon']:''),
                         'footer' => $item['label'],
                         'footer_link' => $item['url'],
                     ]);
@@ -137,7 +137,7 @@ use rmrevin\yii\fontawesome\component\Icon;
 
     foreach ($allModulesMenuItems as $item) {
         if ($item['visible']) {
-            echo '<div class="col-sm-4">';
+            echo '<div class="col-sm-3">';
             echo \insolita\wgadminlte\SmallBox::widget(
                 [
                     'head' => substr(trim(strip_tags($item['label'])), 0, 2),
