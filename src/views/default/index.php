@@ -7,8 +7,6 @@ use rmrevin\yii\fontawesome\component\Icon;
 
 ?>
 
-<?= \dmstr\modules\prototype\widgets\HtmlWidget::widget(['enableBackendMenuItem' => true]); ?>
-
     <div class="row">
         <div class="col-md-3 col-xs-6">
             <!-- small box -->
@@ -103,8 +101,6 @@ use rmrevin\yii\fontawesome\component\Icon;
         <?php endif; ?>
 
     </div>
-
-<?= \dmstr\modules\prototype\widgets\TwigWidget::widget(['enableBackendMenuItem' => true]); ?>
 
     <div class="row">
         <?php

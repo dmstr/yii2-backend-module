@@ -89,6 +89,7 @@ $this->title = $this->title.' [Backend]';
                                 </li>
                             </ul>
                         </li>
+                        <?php if (!empty(Yii::$app->params['context.menuItems'])): ?>
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-dashboard"></i>
@@ -98,6 +99,7 @@ $this->title = $this->title.' [Backend]';
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
+
                                         <?php foreach (Yii::$app->params['context.menuItems'] as $item): ?>
                                             <li>
                                                 <?= Html::a(
@@ -110,6 +112,7 @@ $this->title = $this->title.' [Backend]';
                                 </li>
                             </ul>
                         </li>
+                        <?php endif; ?>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
