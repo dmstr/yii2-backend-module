@@ -91,13 +91,18 @@ class DefaultController extends Controller
     {
         $loadedModules = Metadata::getModules();
         $loadedModulesDataProvider = new ArrayDataProvider(['allModels' => $loadedModules]);
+        
+        $components = Yii::$app->getComponents();
+        ksort($components);
+        $modules = Yii::$app->getModules();
+        ksort($modules);
 
         return $this->render(
             'view-config',
             [
                 'params' => Yii::$app->params,
-                'components' => Yii::$app->getComponents(),
-                'modules' => Yii::$app->getModules(),
+                'components' => $components,
+                'modules' => $modules,
                 'loadedModulesDataProvider' => $loadedModulesDataProvider,
             ]
         );

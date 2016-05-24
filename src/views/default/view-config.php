@@ -2,28 +2,32 @@
 
 namespace _;
 
+use insolita\wgadminlte\Box;
+use yii\bootstrap\Tabs;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\widgets\ListView;
 
 ?>
 
-<h1>Configuration</h1>
+<div class="row">
+    <div class="col-sm-6">
+        <?php $this->beginBlock('controllers') ?>
+        <?= $this->render('_module', ['key' => null]) ?>
 
-<h2>Controllers</h2>
+        <?= ListView::widget(
+            [
+                'dataProvider' => $loadedModulesDataProvider,
+                'itemView' => '_module',
+            ]
+        )
+        ?>
+        <?php $this->endBlock('controllers') ?>
+    </div>
+</div>
 
-<?= $this->render('_module', ['key'=>null]) ?>
 
-    <?= ListView::widget(
-        [
-            'dataProvider' => $loadedModulesDataProvider,
-            'itemView' => '_module',
-        ]
-    )
-    ?>
-
-
-<h2>Params</h2>
+<?php $this->beginBlock('params') ?>
 <?php foreach ($params as $name => $element): ?>
     <div class="row">
         <div class="col-sm-2">
@@ -36,9 +40,10 @@ use yii\widgets\ListView;
         </div>
     </div>
 <?php endforeach ?>
+<?php $this->endBlock('params') ?>
 
 
-<h2>Components</h2>
+<?php $this->beginBlock('components') ?>
 <?php foreach ($components as $name => $element): ?>
     <div class="row">
         <div class="col-sm-2">
@@ -51,17 +56,51 @@ use yii\widgets\ListView;
         </div>
     </div>
 <?php endforeach ?>
+<?php $this->endBlock('components') ?>
 
-<h2>Modules</h2>
+<?php $this->beginBlock('modules') ?>
 <?php foreach ($modules as $name => $element): ?>
+    <?php Box::begin([
+        'title' => $name,
+        'collapse' => true,
+        'collapse_remember' => false,
+    ]) ?>
+
     <div class="row">
         <div class="col-sm-2">
             <b><?= $name ?></b>
         </div>
         <div class="col-sm-10">
 <pre>
-<?= VarDumper::dumpAsString($element, 1, true) ?>
+<?= VarDumper::dumpAsString($element, 2, true) ?>
 </pre>
         </div>
     </div>
+
+    <?php Box::end() ?>
 <?php endforeach ?>
+<?php $this->endBlock('modules') ?>
+
+
+<div class="nav-tabs-custom">
+    <?= Tabs::widget([
+        'items' => [
+            [
+                'label' => 'Params',
+                'content' => $this->blocks['params']
+            ],
+            [
+                'label' => 'Components',
+                'content' => $this->blocks['components']
+            ],
+            [
+                'label' => 'Modules',
+                'content' => $this->blocks['modules']
+            ],
+            [
+                'label' => 'Controllers',
+                'content' => $this->blocks['controllers']
+            ],
+        ]
+    ]) ?>
+</div>

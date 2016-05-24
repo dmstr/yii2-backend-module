@@ -2,6 +2,7 @@
 
 namespace _;
 
+use insolita\wgadminlte\Box;
 use yii\data\ArrayDataProvider;
 use yii\widgets\ListView;
 
@@ -31,6 +32,10 @@ $controllerDataProvider = new ArrayDataProvider(
 <?php $this->endBlock() ?>
 
 
-<h3><?= $key.' '.(isset($model) && is_object($model) ? '<span class="label label-info">loaded</span>' : '') ?></h3>
+<?php Box::begin([
+    'title' => $key.' '.(isset($model) && is_object($model) ? '<span class="label label-info">loaded</span>' : ''),
+    'collapse' => true,
+    'collapse_remember' => false,
+]) ?>
 <?= $this->blocks['routes'] ?>
-
+<?php Box::end() ?>
