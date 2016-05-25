@@ -116,7 +116,7 @@ use rmrevin\yii\fontawesome\component\Icon;
                     [
                         'head' => substr(trim(strip_tags($item['label'])), 0, 2),
                         'type' => \insolita\wgadminlte\SmallBox::TYPE_GREEN,
-                        'icon' => (isset($item['icon'])?'fa fa-'.$item['icon']:''),
+                        'icon' => (isset($item['icon'])?$item['icon']:''),
                         'footer' => $item['label'],
                         'footer_link' => $item['url'],
                     ]);
