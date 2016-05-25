@@ -111,7 +111,7 @@ use rmrevin\yii\fontawesome\component\Icon;
         );
         foreach ($items as $item) {
             if ($item['visible']) {
-                echo '<div class="col-sm-4">';
+                echo '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">';
                 echo \insolita\wgadminlte\SmallBox::widget(
                     [
                         'head' => substr(trim(strip_tags($item['label'])), 0, 2),
@@ -133,7 +133,7 @@ use rmrevin\yii\fontawesome\component\Icon;
 
     foreach ($allModulesMenuItems as $item) {
         if ($item['visible']) {
-            echo '<div class="col-sm-3">';
+            echo '<div class="col-xs-6 col-sm-3 col-lg-2">';
             echo \insolita\wgadminlte\SmallBox::widget(
                 [
                     'head' => substr(trim(strip_tags($item['label'])), 0, 2),
