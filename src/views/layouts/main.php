@@ -49,6 +49,9 @@ $this->title = $this->title.' [Backend]';
                     <?php if (!\Yii::$app->user->isGuest): ?>
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="">
+                            <?= \dmstr\modules\prototype\widgets\TwigWidget::widget(['key'=>'extra.menuItems', 'renderEmpty' => false]) ?>
+                        </li>
+                        <li class="">
                             <a href="<?= \yii\helpers\Url::to(['/backend']) ?>" >
                                 <i class="fa fa-cog"></i>
                             </a>
