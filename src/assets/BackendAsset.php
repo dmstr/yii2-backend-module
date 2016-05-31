@@ -10,14 +10,14 @@ namespace dmstr\modules\backend\assets;
  */
 
 use yii\helpers\FileHelper;
-use yii\web\AssetBundle;
+use yii\web\AssetBundle as BaseBackendAsset;
 
 /**
  * Configuration for `backend` client script files.
  *
  * @since 4.0
  */
-class BackendAsset extends AssetBundle
+class BackendAsset extends BaseBackendAsset
 {
     public $sourcePath = '@vendor/dmstr/yii2-backend-module/src/assets/web';
 
