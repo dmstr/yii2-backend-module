@@ -1,6 +1,9 @@
 Backend module for Yii 2.0 Framework
 ====================================
-Admin Dashboard
+
+### AdminLTE Dashboard
+
+![Screenshot](https://raw.githubusercontent.com/dmstr/gh-media/master/dmstr/yii2-backend-module/backend-default-index.png)
 
 Installation
 ------------
@@ -10,22 +13,10 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist dmstr/yii2-backend-module "*"
+composer require dmstr/yii2-backend-module
 ```
-
-or add
-
-```
-"dmstr/yii2-backend-module": "*"
-```
-
-to the require section of your `composer.json` file.
-
 
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
-
-```php
-<?= \dmstr\modules\backend\AutoloadExample::widget(); ?>```# yii2-backend-module
+Add module to application configuration
