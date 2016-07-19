@@ -138,3 +138,10 @@ a.desc:after {
     }
   }
 }
+
+// Fix for cursor position bug (WebKit)
+// see https://github.com/ajaxorg/ace/issues/1078#issuecomment-12839690 and http://stackoverflow.com/a/20932217/291573
+.ace_editor {
+  font-family:monospace !important;
+  font-size: 16px !important;
+}
