@@ -5,12 +5,14 @@ namespace _;
 use dmstr\modules\prototype\widgets\HtmlWidget;
 use rmrevin\yii\fontawesome\component\Icon;
 
+$this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
+
 ?>
 
     <div class="row">
         <div class="col-md-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-blue">
+            <div class="small-box bg-gray">
                 <div class="inner">
                     <h3>
                         ID
@@ -34,7 +36,7 @@ use rmrevin\yii\fontawesome\component\Icon;
 
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-aqua">
+                <div class="small-box bg-light-blue">
                     <div class="inner">
                         <h3>
                             <?= \dektrium\user\models\User::find()->count() ?>
@@ -56,7 +58,7 @@ use rmrevin\yii\fontawesome\component\Icon;
 
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-orange">
+                <div class="small-box bg-purple">
                     <div class="inner">
                         <h3>
                             <?= count(\Yii::$app->getModules()) ?>
@@ -79,7 +81,7 @@ use rmrevin\yii\fontawesome\component\Icon;
 
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-red">
+                <div class="small-box bg-<?= YII_ENV_PROD ? 'green' : 'orange' ?>">
                     <div class="inner">
                         <h3>
                             <?= YII_ENV ?>
@@ -92,8 +94,8 @@ use rmrevin\yii\fontawesome\component\Icon;
                     <div class="icon">
                         <i class="ion ion-grid"></i>
                     </div>
-                    <a href="<?= \yii\helpers\Url::to(['/debug']) ?>" class="small-box-footer">
-                        Debug <i class="fa fa-arrow-circle-right"></i>
+                    <a href="<?= \yii\helpers\Url::to(['/audit']) ?>" class="small-box-footer">
+                        Audit <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
@@ -115,7 +117,7 @@ use rmrevin\yii\fontawesome\component\Icon;
                 echo \insolita\wgadminlte\SmallBox::widget(
                     [
                         'head' => substr(trim(strip_tags($item['label'])), 0, 2),
-                        'type' => \insolita\wgadminlte\SmallBox::TYPE_GREEN,
+                        #'type' => \insolita\wgadminlte\SmallBox::TYPE_DE,
                         'icon' => (isset($item['icon'])?$item['icon']:''),
                         'footer' => $item['label'],
                         'footer_link' => $item['url'],

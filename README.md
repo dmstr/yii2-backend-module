@@ -10,8 +10,6 @@ Installation
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-Either run
-
 ```
 composer require dmstr/yii2-backend-module
 ```
@@ -20,3 +18,21 @@ Usage
 -----
 
 Add module to application configuration
+
+```
+'backend' => [
+    'class' => 'dmstr\modules\backend\Module',
+    'layout' => '@backend/views/layouts/main',
+],
+```
+
+### Settings
+
+*from `settings` module*
+
+- `backend.adminlte.skin` default `black-light`
+
+
+---
+
+#### ![dmstr logo](http://t.phundament.com/dmstr-16-cropped.png) Built by [dmstr](http://diemeisterei.de)

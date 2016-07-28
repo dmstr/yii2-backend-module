@@ -8,6 +8,8 @@ use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\widgets\ListView;
 
+$this->params['breadcrumbs'][] = ['label' => 'Configuration'];
+
 ?>
 
 <div class="row">

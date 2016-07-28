@@ -1,11 +1,20 @@
 <?php
+
+namespace _;
+
 use dmstr\widgets\Alert;
 use yii\helpers\Html;
+use Yii;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 $this->title = $this->title.' [Backend]';
 \dmstr\modules\backend\assets\BackendAsset::register($this);
+
+if (Yii::$app->settings) {
+    $adminLteSkin = (Yii::$app->settings->get('skin', 'backend.adminlte'))?:'black-light';
+}
+
 ?>
 
 <?php $this->beginPage() ?>
@@ -29,7 +38,7 @@ $this->title = $this->title.' [Backend]';
     <![endif]-->
 </head>
 
-<body class="hold-transition skin-black sidebar-mini">
+<body class="hold-transition skin-<?= $adminLteSkin ?> sidebar-mini">
 <?php $this->beginBody() ?>
 
 <div class="wrapper">
