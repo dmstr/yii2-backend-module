@@ -9,15 +9,14 @@ namespace dmstr\modules\backend\assets;
  * @license http://www.yiiframework.com/license/
  */
 
-use yii\helpers\FileHelper;
-use yii\web\AssetBundle as BaseBackendAsset;
+use dmstr\web\AssetBundle as BaseBackendAssetBundle;
 
 /**
  * Configuration for `backend` client script files.
  *
  * @since 4.0
  */
-class BackendAsset extends BaseBackendAsset
+class BackendAsset extends BaseBackendAssetBundle
 {
     public $sourcePath = '@vendor/dmstr/yii2-backend-module/src/assets/web';
 
@@ -31,25 +30,4 @@ class BackendAsset extends BaseBackendAsset
         'yii\bootstrap\BootstrapAsset',
         'dmstr\web\AdminLteAsset',
     ];
-
-    public function init()
-    {
-        parent::init();
-        // we recompile the less files from 'yii\bootstrap\BootstrapAsset' and include the css in app.css
-        // therefore we set bundle to false
-        \Yii::$app->getAssetManager()->bundles['yii\bootstrap\BootstrapAsset'] = false;
-
-        // /!\ CSS/LESS development only setting /!\
-        // Touch the asset folder with the highest mtime of all contained files
-        // This will create a new folder in web/assets for every change and request
-        // made to the app assets.
-        if (getenv('APP_ASSET_FORCE_PUBLISH')) {
-            $files = FileHelper::findFiles(\Yii::getAlias($this->sourcePath));
-            $mtimes = [];
-            foreach ($files as $file) {
-                $mtimes[] = filemtime($file);
-            }
-            touch(\Yii::getAlias($this->sourcePath), max($mtimes));
-        }
-    }
 }
