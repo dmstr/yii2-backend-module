@@ -11,6 +11,22 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "Arial", sans-serif;
 }
 
+a {
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/** fix for select2 **/
+.select2-container {
+  .select2-selection--single {
+    .select2-selection__rendered {
+      margin-top: 0;
+    }
+  }
+}
+
 .wrap {
   min-height: 100%;
   height: auto;
@@ -142,6 +158,6 @@ a.desc:after {
 // Fix for cursor position bug (WebKit)
 // see https://github.com/ajaxorg/ace/issues/1078#issuecomment-12839690 and http://stackoverflow.com/a/20932217/291573
 .ace_editor {
-  font-family:monospace !important;
+  font-family: monospace !important;
   font-size: 16px !important;
 }
