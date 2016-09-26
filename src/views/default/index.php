@@ -138,7 +138,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
             echo '<div class="col-xs-6 col-sm-3 col-lg-2">';
             echo \insolita\wgadminlte\SmallBox::widget(
                 [
-                    'head' => substr(trim(strip_tags($item['label'])), 0, 2),
+                    'head' => ucfirst(substr(trim(strip_tags($item['label'])), 0, 2)),
                     'icon' => 'fa fa-cog',
                     'type' => \insolita\wgadminlte\SmallBox::TYPE_GRAY,
                     'footer' => $item['label'],
