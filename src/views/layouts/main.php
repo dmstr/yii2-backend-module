@@ -60,15 +60,34 @@ if (Yii::$app->settings) {
                         <li class="">
                             <?= \dmstr\modules\prototype\widgets\TwigWidget::widget(['key'=>'extra.menuItems', 'renderEmpty' => false]) ?>
                         </li>
-                        <li class="">
-                            <a href="<?= \yii\helpers\Url::to(['/backend']) ?>" >
+                        <li class="dropdown tasks-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-cog"></i>
+                                <span><i class="caret"></i></span>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">Backend menu items</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+
+                                        <?php foreach (Yii::$app->params['context.menuItems'] as $item): ?>
+                                            <li>
+                                                <?= Html::a(
+                                                    $item['label'],
+                                                    $item['url']
+                                                ) ?>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-flag"></i>
                                 <span class="label label-default"><?= Yii::$app->language ?></span>
+                                <span><i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="header">Languages</li>
@@ -88,27 +107,11 @@ if (Yii::$app->settings) {
                             </ul>
                         </li>
                         <?php if (!empty(Yii::$app->params['context.menuItems'])): ?>
-                        <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <li class="">
+                            <a href="<?= \yii\helpers\Url::to(['/backend']) ?>" >
                                 <i class="fa fa-dashboard"></i>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">Backend menu items</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
 
-                                        <?php foreach (Yii::$app->params['context.menuItems'] as $item): ?>
-                                            <li>
-                                                <?= Html::a(
-                                                    $item['label'],
-                                                    $item['url']
-                                                ) ?>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </li>
-                            </ul>
                         </li>
                         <?php endif; ?>
                         <!-- User Account: style can be found in dropdown.less -->
