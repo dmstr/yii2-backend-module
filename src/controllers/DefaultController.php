@@ -60,7 +60,7 @@ class DefaultController extends Controller
                 'icon' => 'fa fa-cube',
                 'label' => $name,
                 'url' => ['/'.$name],
-                'visible' => Yii::$app->user->can($role) || (Yii::$app->user->identity && Yii::$app->user->identity->isAdmin),
+                'visible' => Yii::$app->user->can($role),
                 'items' => [],
             ];
 
@@ -68,7 +68,7 @@ class DefaultController extends Controller
         }
 
         // create developer menu, when user is admin
-        if (Yii::$app->user->identity && Yii::$app->user->identity->isAdmin) {
+        if (Yii::$app->user->can('Developer')) {
             $adminMenuItems[] = [
                 'url' => '#',
                 'icon' => 'fa fa-cogs',
