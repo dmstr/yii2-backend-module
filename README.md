@@ -26,11 +26,16 @@ Add module to application configuration
 ],
 ```
 
+### Params
+
+- `context.menuItems` menu items to be shown, i.e. used by `dmstr/yii2-prototype-module`
+
 ### Settings
 
 *from `settings` module*
 
 - `backend.adminlte.skin` default `black-light`
+
 
 
 ---
