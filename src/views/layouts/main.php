@@ -60,6 +60,7 @@ if (Yii::$app->settings) {
                         <li class="">
                             <?= \dmstr\modules\prototype\widgets\TwigWidget::widget(['key'=>'extra.menuItems', 'renderEmpty' => false]) ?>
                         </li>
+                        <?php if (isset(Yii::$app->params['context.menuItems']) && is_array(Yii::$app->params['context.menuItems'])): ?>
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-cog"></i>
@@ -83,6 +84,7 @@ if (Yii::$app->settings) {
                                 </li>
                             </ul>
                         </li>
+                        <?php endif; ?>
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-flag"></i>
