@@ -60,14 +60,14 @@ if (Yii::$app->settings) {
                         <li class="">
                             <?= \dmstr\modules\prototype\widgets\TwigWidget::widget(['key'=>'extra.menuItems', 'renderEmpty' => false]) ?>
                         </li>
-                        <?php if (isset(Yii::$app->params['context.menuItems']) && is_array(Yii::$app->params['context.menuItems'])): ?>
+                        <?php if (isset(Yii::$app->params['context.menuItems']) && !empty(Yii::$app->params['context.menuItems'])): ?>
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-cog"></i>
+                                <i class="fa fa-pencil-square-o"></i>
                                 <span><i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="header">Backend menu items</li>
+                                <li class="header">Context menu items</li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
