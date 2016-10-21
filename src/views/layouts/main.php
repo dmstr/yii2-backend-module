@@ -2,7 +2,9 @@
 
 namespace _;
 
+use dmstr\modules\prototype\widgets\TwigWidget;
 use dmstr\widgets\Alert;
+use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use Yii;
 
@@ -40,6 +42,14 @@ if (Yii::$app->settings) {
 
 <body class="hold-transition skin-<?= $adminLteSkin ?> sidebar-mini">
 <?php $this->beginBody() ?>
+
+<?php $this->beginBlock('twig-main-top') ?>
+<?= TwigWidget::widget(['position'=>'main-top', 'registerMenuItems'=>true, 'queryParam'=>false, 'renderEmpty'=>false]) ?>
+<?php $this->endBlock('twig-main-top') ?>
+
+<?php $this->beginBlock('twig-main-bottom') ?>
+<?= TwigWidget::widget(['position'=>'main-bottom', 'registerMenuItems'=>true, 'queryParam'=>false, 'renderEmpty'=>false]) ?>
+<?php $this->endBlock('twig-main-bottom') ?>
 
 <div class="wrapper">
 
@@ -85,6 +95,7 @@ if (Yii::$app->settings) {
                             </ul>
                         </li>
                         <?php endif; ?>
+
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-flag"></i>
@@ -108,14 +119,13 @@ if (Yii::$app->settings) {
                                 </li>
                             </ul>
                         </li>
-                        <?php if (!empty(Yii::$app->params['context.menuItems'])): ?>
+
                         <li class="">
                             <a href="<?= \yii\helpers\Url::to(['/backend']) ?>" >
                                 <i class="fa fa-dashboard"></i>
                             </a>
-
                         </li>
-                        <?php endif; ?>
+
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -188,7 +198,9 @@ if (Yii::$app->settings) {
 
         <section class="content">
             <?= Alert::widget() ?>
+            <?= $this->blocks['twig-main-top'] ?>
             <?= $content ?>
+            <?= $this->blocks['twig-main-bottom'] ?>
         </section>
         <!-- /.content -->
     </div>
