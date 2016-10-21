@@ -197,7 +197,7 @@ if (Yii::$app->settings) {
         <!-- Main content -->
 
         <section class="content">
-            <?= Alert::widget() ?>
+            <?= Alert::widget(['isAjaxRemoveFlash'=>false]) ?>
             <?= $this->blocks['twig-main-top'] ?>
             <?= $content ?>
             <?= $this->blocks['twig-main-bottom'] ?>

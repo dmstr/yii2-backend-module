@@ -11,11 +11,12 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
+        "yiisoft/yii2": "2.*",
         "dmstr/yii2-pages-module": "~0.16",
-        "dmstr/yii2-prototype-module": "^0.2.7 || ~0.3",
+        "dmstr/yii2-prototype-module": "~0.4",
         "dmstr/yii2-helpers": "~0.4",
-        "dmstr/yii2-web": "~0.3"
+        "dmstr/yii2-web": "~0.3",
+        "dmstr/yii2-adminlte-asset": "^2.3.4"
     },
     "autoload": {
         "psr-4": {
