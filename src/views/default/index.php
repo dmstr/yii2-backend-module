@@ -2,41 +2,43 @@
 
 namespace _;
 
-use dmstr\modules\prototype\widgets\HtmlWidget;
-use rmrevin\yii\fontawesome\component\Icon;
+use dmstr\modules\backend\Module;
+use insolita\wgadminlte\Box;
+use yii\helpers\Html;
 
 $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
 
 ?>
 
     <div class="row">
-        <div class="col-md-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-gray">
-                <div class="inner">
-                    <h3>
-                        ID
-                    </h3>
-
-                    <p>
-                        <?= getenv('APP_NAME') ?>
-                    </p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-home"></i>
-                </div>
-                <a href="<?= \yii\helpers\Url::to(['/']) ?>" class="small-box-footer">
-                    Homepage <i class="fa fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-        <!-- ./col -->
 
         <?php if (\Yii::$app->user->identity->isAdmin): ?>
 
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-light-blue">
+                <div class="small-box bg-gray">
+                    <div class="inner">
+                        <h3>
+                            ID
+                        </h3>
+
+                        <p>
+                            <?= getenv('APP_NAME') ?>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-home"></i>
+                    </div>
+                    <a href="<?= \yii\helpers\Url::to(['/']) ?>" class="small-box-footer">
+                        Homepage <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+
+            <div class="col-md-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-gray">
                     <div class="inner">
                         <h3>
                             <?= \dektrium\user\models\User::find()->count() ?>
@@ -58,7 +60,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
 
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-purple">
+                <div class="small-box bg-gray">
                     <div class="inner">
                         <h3>
                             <?= count(\Yii::$app->getModules()) ?>
@@ -81,7 +83,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
 
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-<?= YII_ENV_PROD ? 'green' : 'orange' ?>">
+                <div class="small-box bg-<?= YII_ENV_PROD ? 'gray' : 'orange' ?>">
                     <div class="inner">
                         <h3>
                             <?= YII_ENV ?>
@@ -113,14 +115,15 @@ $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
         );
         foreach ($items as $item) {
             if ($item['visible']) {
-                echo '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">';
-                echo \insolita\wgadminlte\SmallBox::widget(
+                $url = \yii\helpers\Url::to($item['url']);
+                $colorSelect = explode('/', $url);
+                #var_dump($colorSelect);exit;
+                echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
+                echo \insolita\wgadminlte\InfoBox::widget(
                     [
-                        'head' => substr(trim(strip_tags($item['label'])), 0, 2),
-                        #'type' => \insolita\wgadminlte\SmallBox::TYPE_DE,
-                        'icon' => (isset($item['icon'])?$item['icon']:''),
-                        'footer' => $item['label'],
-                        'footer_link' => $item['url'],
+                        'text' => '<h4 style="white-space: normal;">'.Html::a($item['label'], $item['url']).'</h4>',
+                        'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
+                        'icon' => (isset($item['icon']) ? $item['icon'] : ''),
                     ]);
                 echo '</div>';
             }
@@ -130,23 +133,33 @@ $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
 
 
 <?php if (\Yii::$app->user->identity->isAdmin): ?>
-    <div class="row">
+    <div class="Xrow">
     <?php
+
+    \insolita\wgadminlte\Box::begin(
+        [
+            'title' => 'Auto-detected modules',
+            'type' => Box::TYPE_WARNING,
+
+        ]);
+
 
     foreach ($allModulesMenuItems as $item) {
         if ($item['visible']) {
-            echo '<div class="col-xs-6 col-sm-3 col-lg-2">';
-            echo \insolita\wgadminlte\SmallBox::widget(
-                [
-                    'head' => ucfirst(substr(trim(strip_tags($item['label'])), 0, 2)),
-                    'icon' => 'fa fa-cog',
-                    'type' => \insolita\wgadminlte\SmallBox::TYPE_GRAY,
-                    'footer' => $item['label'],
-                    'footer_link' => $item['url'],
-                ]);
-            echo '</div>';
+            #echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
+
+            $linkText = '<i class="fa fa-plug"></i>';
+            $linkText .= $item['label'];
+
+            echo Html::a($linkText, $item['url'], ['class' => 'btn btn-app']);
         }
     }
+    ?>
+
+    <?php
+
+    Box::end();
+
     ?>
     <div>
 <?php endif; ?>

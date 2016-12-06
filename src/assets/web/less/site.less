@@ -1,4 +1,4 @@
-@import "../../../vendor/bower/bootstrap/less/bootstrap.less";
+@import (reference) "../../../vendor/bower/bootstrap/less/bootstrap.less";
 
 html,
 body {
@@ -8,13 +8,21 @@ body {
 body,
 body > .header .logo,
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "Arial", sans-serif;
+  //font-family: "Verdana", sans-serif;
 }
 
 a {
   &:focus,
   &:hover {
     text-decoration: none;
+  }
+}
+
+header {
+  .logo {
+    .title {
+      .hidden-md;
+    }
   }
 }
 
@@ -36,6 +44,12 @@ a {
 
 .wrap > .container {
   padding: 70px 15px 20px;
+}
+
+section.content {
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 }
 
 .footer {
@@ -102,8 +116,28 @@ a.desc:after {
   content: "\e156";
 }
 
-.grid-view th {
-  white-space: nowrap;
+.content {
+  .grid-view {
+    .table-responsive;
+    border: 0px solid white;
+    table {
+      .table-condensed;
+      a {
+        .btn;
+        border: 1px solid;
+        &[title="Delete"] {
+          .btn-danger;
+        }
+        &:hover {
+
+        }
+      }
+    }
+
+    th {
+      white-space: nowrap;
+    }
+  }
 }
 
 .detail-view {
@@ -134,14 +168,16 @@ a.desc:after {
   .crud-navigation {
     margin: 1em 0;
   }
-  table {
-    a {
-      .btn;
-      .btn-default;
-      &[title="Delete"] {
-        .btn-danger;
-      }
+  .btn[type="submit"] {
+    @media (max-width: 768px) {
+      .btn-block;
+      .btn-lg;
     }
+  }
+
+  .well-sm {
+    padding: 5px;
+    //border-radius: @border-radius-small;
   }
 }
 
@@ -181,4 +217,10 @@ a.desc:after {
 .ace_editor {
   font-family: monospace !important;
   font-size: 16px !important;
+}
+
+.info-box {
+  A {
+    color: white;
+  }
 }

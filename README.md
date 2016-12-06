@@ -35,6 +35,7 @@ Add module to application configuration
 *from `settings` module*
 
 - `backend.adminlte.skin` default `black-light`
+- `backend.adminlte.sidebar` default `sidebar-mini`
 
 
 
