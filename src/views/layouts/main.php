@@ -56,8 +56,8 @@ if (Yii::$app->settings) {
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="<?= Yii::$app->homeUrl ?>" class="logo">
-            <?= FA::icon(FA::_HOME) ?>
+        <a href="<?= \yii\helpers\Url::to(['/backend']) ?>" class="logo">
+            <?= FA::icon(FA::_HEART) ?>
             <span class="title"></span><?= getenv('APP_TITLE') ?>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
@@ -164,8 +164,9 @@ if (Yii::$app->settings) {
                         </li>
 
                         <li class="">
-                            <a href="<?= \yii\helpers\Url::to(['/backend']) ?>" >
-                                <i class="fa fa-dashboard"></i>
+
+                            <a href="<?= Yii::$app->homeUrl ?>" >
+                                <i class="fa fa-home"></i>
                             </a>
                         </li>
 

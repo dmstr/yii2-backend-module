@@ -114,18 +114,37 @@ $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
             \dmstr\modules\pages\models\Tree::GLOBAL_ACCESS_DOMAIN
         );
         foreach ($items as $item) {
-            if ($item['visible']) {
+            if ($item['visible'] && $item['url']) {
                 $url = \yii\helpers\Url::to($item['url']);
                 $colorSelect = explode('/', $url);
-                #var_dump($colorSelect);exit;
                 echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
                 echo \insolita\wgadminlte\InfoBox::widget(
                     [
                         'text' => '<h4 style="white-space: normal;">'.Html::a($item['label'], $item['url']).'</h4>',
                         'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
-                        'icon' => (isset($item['icon']) ? $item['icon'] : ''),
+                        'icon' => (!empty($item['icon']) ? $item['icon'] : 'circle-o'),
                     ]);
                 echo '</div>';
+            }
+
+            // TODO: DRY!
+            if (empty($item['items'])) {
+                continue;
+            }
+            foreach ($item['items'] as $item) {
+                if ($item['visible'] && $item['url']) {
+                    $url = \yii\helpers\Url::to($item['url']);
+                    $colorSelect = explode('/', $url);
+                    #var_dump($colorSelect);exit;
+                    echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
+                    echo \insolita\wgadminlte\InfoBox::widget(
+                        [
+                            'text' => '<h4 style="white-space: normal;">'.Html::a($item['label'], $item['url']).'</h4>',
+                            'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
+                            'icon' => (isset($item['icon']) ? $item['icon'] : ''),
+                        ]);
+                    echo '</div>';
+                }
             }
         }
         ?>
@@ -133,7 +152,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
 
 
 <?php if (\Yii::$app->user->identity->isAdmin): ?>
-    <div class="Xrow">
     <?php
 
     \insolita\wgadminlte\Box::begin(
@@ -143,23 +161,24 @@ $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
 
         ]);
 
-
-    foreach ($allModulesMenuItems as $item) {
+?>
+    <div class="row">
+  <?php  foreach ($allModulesMenuItems as $item) {
         if ($item['visible']) {
-            #echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
+            echo '<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 text-error">';
+            $url = \yii\helpers\Url::to($item['url']);
+            $colorSelect = explode('/', $url);
 
-            $linkText = '<i class="fa fa-plug"></i>';
+            $linkText = '<span class="badge bg-'.Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0).'">&nbsp;</span><i class="fa fa-plug"></i>';
             $linkText .= $item['label'];
 
-            echo Html::a($linkText, $item['url'], ['class' => 'btn btn-app']);
+            echo Html::a($linkText, $item['url'], ['class' => 'btn btn-app btn-block']);
+            echo '</div>';
         }
     }
     ?>
 
-    <?php
-
-    Box::end();
-
-    ?>
     <div>
+
+    <?php Box::end(); ?>
 <?php endif; ?>

@@ -3,6 +3,7 @@
 html,
 body {
   height: 100%;
+  //font-size: 16px;
 }
 
 body,
@@ -122,21 +123,35 @@ a.desc:after {
     border: 0px solid white;
     table {
       .table-condensed;
-      a {
-        .btn;
-        border: 1px solid;
-        &[title="Delete"] {
-          .btn-danger;
-        }
-        &:hover {
 
+      th {
+        &.action-column {
+          min-width: 150px;
+          width: 1%;
         }
+        white-space: nowrap;
+      }
+
+      a {
+        &[title="View"],
+        &[title="Update"],
+        &[title="Delete"] {
+          .btn;
+          border: 1px solid;
+          &:hover {
+            .btn-primary;
+          }
+        }
+        &[title="Delete"] {
+          .text-danger;
+          &:hover {
+            .btn-danger;
+          }
+        }
+
       }
     }
 
-    th {
-      white-space: nowrap;
-    }
   }
 }
 
@@ -179,6 +194,7 @@ a.desc:after {
     padding: 5px;
     //border-radius: @border-radius-small;
   }
+
 }
 
 .docs {
