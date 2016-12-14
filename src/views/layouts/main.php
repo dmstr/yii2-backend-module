@@ -5,9 +5,9 @@ namespace _;
 use dmstr\modules\prototype\widgets\TwigWidget;
 use dmstr\widgets\Alert;
 use rmrevin\yii\fontawesome\FA;
-use yii\bootstrap\Nav;
-use yii\helpers\Html;
 use Yii;
+use yii\base\InvalidCallException;
+use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -44,13 +44,54 @@ if (Yii::$app->settings) {
 <body class="hold-transition skin-<?= $adminLteSkin ?> <?= Yii::$app->settings->get('sidebar','backend.adminlte','sidebar-mini sidebar-collapse') ?> ">
 <?php $this->beginBody() ?>
 
-<?php $this->beginBlock('twig-main-top') ?>
-<?= TwigWidget::widget(['position'=>'main-top', 'registerMenuItems'=>true, 'queryParam'=>false, 'renderEmpty'=>false]) ?>
-<?php $this->endBlock('twig-main-top') ?>
+<?php
 
-<?php $this->beginBlock('twig-main-bottom') ?>
-<?= TwigWidget::widget(['position'=>'main-bottom', 'registerMenuItems'=>true, 'queryParam'=>false, 'renderEmpty'=>false]) ?>
-<?php $this->endBlock('twig-main-bottom') ?>
+// Dynamic blocks need to be rendered before `context.menuItems`, otherwise the events are fired too late.
+// TODO: try catch is for open begin/end detection, move to TwigWidget
+try {
+    $this->beginBlock('twig-main-top');
+    echo TwigWidget::widget([
+        'position' => 'main-top',
+        'registerMenuItems' => true,
+        'queryParam' => false,
+        'renderEmpty' => false
+    ]);
+    $this->endBlock('twig-main-top');
+} catch (InvalidCallException $e) {
+    $this->blocks['twig-main-top'] = 'X';
+    Yii::$app->session->addFlash('error', $e->getMessage());
+}
+
+try {
+    $this->beginBlock('twig-main-bottom');
+    echo TwigWidget::widget([
+        'position' => 'main-bottom',
+        'registerMenuItems' => true,
+        'queryParam' => false,
+        'renderEmpty' => false
+    ]);
+    $this->endBlock('twig-main-bottom');
+} catch (InvalidCallException $e) {
+    $this->blocks['twig-main-bottom'] = 'X';
+    Yii::$app->session->addFlash('error', $e->getMessage());
+}
+
+try {
+    $this->beginBlock('extra-content');
+    echo TwigWidget::widget([
+        'key' => 'backend.extra.content',
+        'position' => 'bottom',
+        'registerMenuItems' => true,
+        'queryParam' => false,
+        'renderEmpty' => false
+    ]);
+    $this->endBlock('extra-content');
+} catch (InvalidCallException $e) {
+    $this->blocks['extra-content'] = '';
+    Yii::$app->session->addFlash('error', $e->getMessage());
+}
+
+?>
 
 <div class="wrapper">
 
@@ -72,7 +113,7 @@ if (Yii::$app->settings) {
                     <?php if (!\Yii::$app->user->isGuest): ?>
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="">
-                            <?= \dmstr\modules\prototype\widgets\TwigWidget::widget(['key'=>'extra.menuItems', 'renderEmpty' => false]) ?>
+                            <?= \dmstr\modules\prototype\widgets\TwigWidget::widget(['key'=>'backend.extra.menuItems', 'renderEmpty' => false]) ?>
                         </li>
                         <?php if (isset(Yii::$app->params['context.menuItems']) && !empty(Yii::$app->params['context.menuItems'])): ?>
                         <li class="dropdown tasks-menu">
@@ -210,6 +251,9 @@ if (Yii::$app->settings) {
         </section>
         <!-- /.content -->
     </div>
+
+    <?= $this->blocks['extra-content'] ?>
+
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <strong>
