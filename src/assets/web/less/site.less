@@ -47,11 +47,6 @@ header {
   padding: 70px 15px 20px;
 }
 
-section.content {
-  @media (max-width: 768px) {
-    padding: 0;
-  }
-}
 
 .footer {
   height: 60px;
@@ -117,7 +112,14 @@ a.desc:after {
   content: "\e156";
 }
 
-.content {
+section.content {
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+  // hide h1 headlines in content, since it is displayed from pageTitle in layout
+  h1 {
+    display: none;
+  }
   .grid-view {
     .table-responsive;
     border: 0px solid white;

@@ -11,7 +11,7 @@ use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-$this->title = $this->title.' [Backend]';
+$this->title = $this->title;
 \dmstr\modules\backend\assets\BackendAsset::register($this);
 
 if (Yii::$app->settings) {
@@ -230,7 +230,8 @@ try {
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <small><?= $this->title ?></small>
+                <?= $this->title ?>
+                <small>Backend</small>
             </h1>
             <?=
             \yii\widgets\Breadcrumbs::widget(
