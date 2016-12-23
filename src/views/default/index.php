@@ -7,7 +7,7 @@ use insolita\wgadminlte\Box;
 use yii\helpers\Html;
 
 $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
-
+$this->title = "Dashboard";
 ?>
 
     <div class="row">

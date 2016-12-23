@@ -107,4 +107,37 @@ class DefaultController extends Controller
             ]
         );
     }
+
+    public function actionShowAuth()
+    {
+        $allPermissions = Yii::$app->authManager->getPermissions();
+        $allRoles = Yii::$app->authManager->getRoles();
+
+        foreach ($allPermissions AS $item) {
+            if (Yii::$app->user->can($item->name)) {
+                $permissions[] = ['name' => $item->name];
+            }
+        }
+        foreach ($allRoles AS $item) {
+            if (Yii::$app->user->can($item->name)) {
+                $roles[] = ['name' => $item->name];
+            }
+        }
+
+        return $this->render('show-auth',
+            [
+                'permissions' => new ArrayDataProvider([
+                    'allModels' => $permissions,
+                    'pagination' => [
+                        'pageSize' => 100,
+                    ],
+                ]),
+                'roles' => new ArrayDataProvider([
+                    'allModels' => $roles,
+                    'pagination' => [
+                        'pageSize' => 100,
+                    ],
+                ])
+            ]);
+    }
 }

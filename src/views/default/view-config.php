@@ -9,7 +9,7 @@ use yii\helpers\VarDumper;
 use yii\widgets\ListView;
 
 $this->params['breadcrumbs'][] = ['label' => 'Configuration'];
-
+$this->title = "Configuration";
 ?>
 
 <div class="row">
