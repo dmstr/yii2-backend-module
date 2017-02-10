@@ -124,7 +124,7 @@ section.content {
     .table-responsive;
     border: 0px solid white;
     table {
-      .table-condensed;
+      //.table-condensed;
 
       th {
         &.action-column {
@@ -135,16 +135,17 @@ section.content {
       }
 
       a {
-        &[title="View"],
-        &[title="Update"],
-        &[title="Delete"] {
+        &[data-pjax="0"] {
           .btn;
           border: 1px solid;
           &:hover {
             .btn-primary;
           }
         }
-        &[title="Delete"] {
+        &[data-method="post"],
+        &[data-method="POST"] {
+          .btn;
+          border: 1px solid;
           .text-danger;
           &:hover {
             .btn-danger;

@@ -15,12 +15,16 @@ $this->title = "Configuration";
 <div class="row">
     <div class="col-sm-6">
         <?php $this->beginBlock('controllers') ?>
-        <?= $this->render('_module', ['key' => null]) ?>
+
+        <div class="row">
+            <?= $this->render('_module', ['key' => null]) ?>
+        </div>
 
         <?= ListView::widget(
             [
                 'dataProvider' => $loadedModulesDataProvider,
                 'itemView' => '_module',
+                'layout' => '{summary}{pager}<div class="row">{items}</div>'
             ]
         )
         ?>
@@ -89,20 +93,20 @@ $this->title = "Configuration";
         'items' => [
             [
                 'label' => 'Params',
-                'content' => $this->blocks['params']
+                'content' => $this->blocks['params'],
             ],
             [
                 'label' => 'Components',
-                'content' => $this->blocks['components']
+                'content' => $this->blocks['components'],
             ],
             [
                 'label' => 'Modules',
-                'content' => $this->blocks['modules']
+                'content' => $this->blocks['modules'],
             ],
             [
                 'label' => 'Controllers',
-                'content' => $this->blocks['controllers']
+                'content' => $this->blocks['controllers'],
             ],
-        ]
+        ],
     ]) ?>
 </div>

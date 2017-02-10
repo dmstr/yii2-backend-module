@@ -91,6 +91,7 @@ class DefaultController extends Controller
     {
         $loadedModules = Metadata::getModules();
         $loadedModulesDataProvider = new ArrayDataProvider(['allModels' => $loadedModules]);
+        $loadedModulesDataProvider->pagination->pageSize = 100;
         
         $components = Yii::$app->getComponents();
         ksort($components);

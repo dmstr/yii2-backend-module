@@ -31,11 +31,13 @@ $controllerDataProvider = new ArrayDataProvider(
 
 <?php $this->endBlock() ?>
 
-
+<div class="col-sm-6 col-lg-4 height-50" style="height: 50vh; overflow: auto">
 <?php Box::begin([
     'title' => $key.' '.(isset($model) && is_object($model) ? '<span class="label label-info">loaded</span>' : ''),
-    'collapse' => true,
+    'collapse' => false,
     'collapse_remember' => false,
+    'type' => Box::TYPE_INFO
 ]) ?>
 <?= $this->blocks['routes'] ?>
 <?php Box::end() ?>
+</div>

@@ -21,7 +21,7 @@ class BackendAsset extends BaseBackendAssetBundle
     public $sourcePath = '@vendor/dmstr/yii2-backend-module/src/assets/web';
 
     public $css = [
-        'less/site.less',
+        'less/backend.less',
     ];
     public $js = [
     ];
