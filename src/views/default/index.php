@@ -118,12 +118,13 @@ $this->title = "Dashboard";
                 $url = \yii\helpers\Url::to($item['url']);
                 $colorSelect = explode('/', $url);
                 echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
-                echo \insolita\wgadminlte\InfoBox::widget(
+                $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
                     [
-                        'text' => '<h4 style="white-space: normal;">'.Html::a($item['label'], $item['url']).'</h4>',
+                        'text' => '<h4 style="white-space: normal;">'.$item['label'].'</h4>',
                         'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
                         'icon' => (!empty($item['icon']) ? $item['icon'] : 'circle-o'),
                     ]);
+                echo Html::a($infoBoxHtml, $item['url']);
                 echo '</div>';
             }
 
@@ -135,14 +136,14 @@ $this->title = "Dashboard";
                 if ($item['visible'] && $item['url']) {
                     $url = \yii\helpers\Url::to($item['url']);
                     $colorSelect = explode('/', $url);
-                    #var_dump($colorSelect);exit;
                     echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
-                    echo \insolita\wgadminlte\InfoBox::widget(
+                    $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
                         [
-                            'text' => '<h4 style="white-space: normal;">'.Html::a($item['label'], $item['url']).'</h4>',
+                            'text' => '<h4 style="white-space: normal;">'.$item['label'].'</h4>',
                             'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
-                            'icon' => (isset($item['icon']) ? $item['icon'] : ''),
+                            'icon' => (isset($item['icon']) && !empty($item['icon'])) ? $item['icon'] : 'fa fa-circle-o',
                         ]);
+                    echo Html::a($infoBoxHtml, $item['url']);
                     echo '</div>';
                 }
             }
