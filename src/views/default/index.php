@@ -122,7 +122,7 @@ $this->title = "Dashboard";
                     [
                         'text' => '<h4 style="white-space: normal;">'.$item['label'].'</h4>',
                         'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
-                        'icon' => (!empty($item['icon']) ? $item['icon'] : 'circle-o'),
+                        'icon' => (!empty($item['icon']) ? $item['icon'] : 'fa fa-circle-o'),
                     ]);
                 echo Html::a($infoBoxHtml, $item['url']);
                 echo '</div>';
