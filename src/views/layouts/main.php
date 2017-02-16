@@ -8,6 +8,7 @@ use rmrevin\yii\fontawesome\FA;
 use Yii;
 use yii\base\InvalidCallException;
 use yii\helpers\Html;
+use yii\widgets\Menu;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -15,7 +16,7 @@ $this->title = $this->title;
 \dmstr\modules\backend\assets\BackendAsset::register($this);
 
 if (Yii::$app->settings) {
-    $adminLteSkin = (Yii::$app->settings->get('skin', 'backend.adminlte'))?:'black-light';
+    $adminLteSkin = (Yii::$app->settings->get('skin', 'backend.adminlte')) ?: 'black-light';
 }
 
 ?>
@@ -41,7 +42,9 @@ if (Yii::$app->settings) {
     <![endif]-->
 </head>
 
-<body class="hold-transition skin-<?= $adminLteSkin ?> <?= Yii::$app->settings->get('sidebar','backend.adminlte','sidebar-mini sidebar-collapse') ?> ">
+<body class="hold-transition skin-<?= $adminLteSkin ?> <?= Yii::$app->settings->get('sidebar',
+    'backend.adminlte',
+    'sidebar-mini sidebar-collapse') ?> ">
 <?php $this->beginBody() ?>
 
 <?php
@@ -54,7 +57,7 @@ try {
         'position' => 'main-top',
         'registerMenuItems' => true,
         'queryParam' => false,
-        'renderEmpty' => false
+        'renderEmpty' => false,
     ]);
     $this->endBlock('twig-main-top');
 } catch (InvalidCallException $e) {
@@ -68,7 +71,7 @@ try {
         'position' => 'main-bottom',
         'registerMenuItems' => true,
         'queryParam' => false,
-        'renderEmpty' => false
+        'renderEmpty' => false,
     ]);
     $this->endBlock('twig-main-bottom');
 } catch (InvalidCallException $e) {
@@ -83,7 +86,7 @@ try {
         'position' => 'bottom',
         'registerMenuItems' => true,
         'queryParam' => false,
-        'renderEmpty' => false
+        'renderEmpty' => false,
     ]);
     $this->endBlock('extra-content');
 } catch (InvalidCallException $e) {
@@ -113,32 +116,35 @@ try {
                     <?php if (!\Yii::$app->user->isGuest): ?>
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="">
-                            <?= \dmstr\modules\prototype\widgets\TwigWidget::widget(['key'=>'backend.extra.menuItems', 'renderEmpty' => false]) ?>
+                            <?= \dmstr\modules\prototype\widgets\TwigWidget::widget([
+                                'key' => 'backend.extra.menuItems',
+                                'renderEmpty' => false,
+                            ]) ?>
                         </li>
                         <?php if (isset(Yii::$app->params['context.menuItems']) && !empty(Yii::$app->params['context.menuItems'])): ?>
-                        <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-pencil-square-o"></i>
-                                <span><i class="caret"></i></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">Context menu items</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
+                            <li class="dropdown tasks-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                    <span><i class="caret"></i></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">Context menu items</li>
+                                    <li>
+                                        <!-- inner menu: contains the actual data -->
+                                        <ul class="menu">
 
-                                        <?php foreach (Yii::$app->params['context.menuItems'] as $item): ?>
-                                            <li>
-                                                <?= Html::a(
-                                                    $item['label'],
-                                                    $item['url']
-                                                ) ?>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                                            <?php foreach (Yii::$app->params['context.menuItems'] as $item): ?>
+                                                <li>
+                                                    <?= Html::a(
+                                                        $item['label'],
+                                                        $item['url']
+                                                    ) ?>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
                         <?php endif; ?>
 
                         <li class="dropdown tasks-menu">
@@ -204,11 +210,27 @@ try {
                             </ul>
                         </li>
 
-                        <li class="">
+                        <li class="dropdown custom-menu">
 
-                            <a href="<?= Yii::$app->homeUrl ?>" >
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-home"></i>
+                                <span><i class="caret"></i></span>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <?php
+                                    // render root pages
+                                    echo Menu::widget(
+                                        [
+                                            'options' => ['class' => 'menu'],
+                                            'encodeLabels' => false,
+                                            'items' => \dmstr\modules\pages\models\Tree::getMenuItems('root'),
+                                        ]
+                                    );
+                                    ?>
+                                </li>
+                            </ul>
+
                         </li>
 
                     <?php endif; ?>
@@ -265,8 +287,8 @@ try {
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <strong>
-        <?= getenv('APP_NAME') ?>-<?= APP_VERSION ?></strong> 
-        built with 
+            <?= getenv('APP_NAME') ?>-<?= APP_VERSION ?></strong>
+        built with
         <a href="http://phundament.com" target="_blank">phd</a>
     </footer>
 </div>

@@ -79,7 +79,7 @@ class DefaultController extends Controller
             ];
         }
 
-        return $this->render('index', ['allModulesMenuItems'=>$developerMenuItems]);
+        return $this->render('index', ['allModulesMenuItems' => $developerMenuItems]);
     }
 
     /**
@@ -92,7 +92,7 @@ class DefaultController extends Controller
         $loadedModules = Metadata::getModules();
         $loadedModulesDataProvider = new ArrayDataProvider(['allModels' => $loadedModules]);
         $loadedModulesDataProvider->pagination->pageSize = 100;
-        
+
         $components = Yii::$app->getComponents();
         ksort($components);
         $modules = Yii::$app->getModules();
@@ -116,12 +116,17 @@ class DefaultController extends Controller
 
         foreach ($allPermissions AS $item) {
             if (Yii::$app->user->can($item->name)) {
-                $permissions[] = ['name' => $item->name];
+                $permissions[] = [
+                    'description' => $item->description,
+                    'name' => $item->name,
+                ];
             }
         }
         foreach ($allRoles AS $item) {
             if (Yii::$app->user->can($item->name)) {
-                $roles[] = ['name' => $item->name];
+                $roles[] = [
+                    'description' => $item->description,
+                    'name' => $item->name,];
             }
         }
 
@@ -138,7 +143,7 @@ class DefaultController extends Controller
                     'pagination' => [
                         'pageSize' => 100,
                     ],
-                ])
+                ]),
             ]);
     }
 }
