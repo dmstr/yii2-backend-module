@@ -14,6 +14,8 @@ The preferred way to install this extension is through [composer](http://getcomp
 composer require dmstr/yii2-backend-module
 ```
 
+- Requires `loveorigami/yii2-notification-wrapper`
+
 Usage
 -----
 

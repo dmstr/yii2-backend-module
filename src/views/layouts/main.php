@@ -3,7 +3,7 @@
 namespace _;
 
 use dmstr\modules\prototype\widgets\TwigWidget;
-use dmstr\widgets\Alert;
+use lo\modules\noty\Wrapper;
 use rmrevin\yii\fontawesome\FA;
 use Yii;
 use yii\base\InvalidCallException;
@@ -245,7 +245,14 @@ try {
         <!-- Main content -->
 
         <section class="content">
-            <?= Alert::widget(['isAjaxRemoveFlash'=>false]) ?>
+            <?= Wrapper::widget([
+                'layerClass' => 'lo\modules\noty\layers\Growl',
+                'options' => [
+                    'dismissQueue' => true,
+                    'location' => 'br',
+                    'timeout' => 4000,
+                ],
+            ]) ?>
             <?= $this->blocks['twig-main-top'] ?>
             <?= $content ?>
             <?= $this->blocks['twig-main-bottom'] ?>
