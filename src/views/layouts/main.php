@@ -219,6 +219,21 @@ try {
                             <ul class="dropdown-menu">
                                 <li>
                                     <?php
+                                    // render home
+                                    echo Menu::widget(
+                                        [
+                                            'options' => ['class' => 'menu'],
+                                            'encodeLabels' => false,
+                                            'items' => [
+                                                [
+                                                'label' => 'Home',
+                                                'url' => Yii::$app->homeUrl
+                                                ]
+                                            ],
+                                        ]
+                                    );
+                                    ?>
+                                    <?php
                                     // render root pages
                                     echo Menu::widget(
                                         [
