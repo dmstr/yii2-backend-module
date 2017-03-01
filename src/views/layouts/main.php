@@ -2,6 +2,7 @@
 
 namespace _;
 
+use dmstr\cookiebutton\CookieButton;
 use dmstr\modules\prototype\widgets\TwigWidget;
 use lo\modules\noty\Wrapper;
 use rmrevin\yii\fontawesome\FA;
@@ -42,9 +43,10 @@ if (Yii::$app->settings) {
     <![endif]-->
 </head>
 
-<body class="hold-transition skin-<?= $adminLteSkin ?> <?= Yii::$app->settings->get('sidebar',
+<body class="hold-transition skin-<?= $adminLteSkin ?> <?= Yii::$app->request->cookies['dmstr-backend_pin-navigation'] ?
+    '' : 'sidebar-collapse' ?> <?= Yii::$app->settings->get('sidebar',
     'backend.adminlte',
-    'sidebar-mini sidebar-collapse') ?> ">
+    'sidebar-mini ') ?> ">
 <?php $this->beginBody() ?>
 
 <?php
@@ -107,9 +109,21 @@ try {
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
+            <?= CookieButton::widget([
+                'label' => '',
+                'options' => [
+                    'class' => 'sidebar-toggle',
+                    'data-toggle' => 'offcanvas',
+                    'role' => 'button',
+                ],
+                'cookieName' => 'dmstr-backend_pin-navigation',
+                'cookieValue' => 'on',
+                'cookieOptions' => [
+                    'path' => '/',
+                    'http' => true,
+                    'expires' => 7,
+                ],
+            ]) ?>
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
@@ -226,9 +240,9 @@ try {
                                             'encodeLabels' => false,
                                             'items' => [
                                                 [
-                                                'label' => 'Home',
-                                                'url' => Yii::$app->homeUrl
-                                                ]
+                                                    'label' => 'Home',
+                                                    'url' => Yii::$app->homeUrl,
+                                                ],
                                             ],
                                         ]
                                     );
