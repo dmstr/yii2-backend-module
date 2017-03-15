@@ -116,12 +116,12 @@ $this->title = "Dashboard";
         foreach ($items as $item) {
             if ($item['visible'] && $item['url']) {
                 $url = \yii\helpers\Url::to($item['url']);
-                $colorSelect = explode('/', $url);
+                $colorSelect = $item['icon'];
                 echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
                 $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
                     [
                         'text' => '<h4 style="white-space: normal;">'.$item['label'].'</h4>',
-                        'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
+                        'boxBg' => Module::colorHash($colorSelect),
                         'icon' => (!empty($item['icon']) ? $item['icon'] : 'fa fa-circle-o'),
                     ]);
                 echo Html::a($infoBoxHtml, $item['url']);
@@ -132,18 +132,18 @@ $this->title = "Dashboard";
             if (empty($item['items'])) {
                 continue;
             }
-            foreach ($item['items'] as $item) {
-                if ($item['visible'] && $item['url']) {
-                    $url = \yii\helpers\Url::to($item['url']);
-                    $colorSelect = explode('/', $url);
+            foreach ($item['items'] as $subItem) {
+                if ($subItem['visible'] && $subItem['url']) {
+                    $url = \yii\helpers\Url::to($subItem['url']);
+                    $colorSelect = $item['icon'];
                     echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
                     $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
                         [
-                            'text' => '<h4 style="white-space: normal;">'.$item['label'].'</h4>',
-                            'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
-                            'icon' => (isset($item['icon']) && !empty($item['icon'])) ? $item['icon'] : 'fa fa-circle-o',
+                            'text' => '<h4 style="white-space: normal;">'.$subItem['label'].'</h4>',
+                            'boxBg' => Module::colorHash($colorSelect),
+                            'icon' => (isset($subItem['icon']) && !empty($subItem['icon'])) ? $subItem['icon'] : 'fa fa-circle-o',
                         ]);
-                    echo Html::a($infoBoxHtml, $item['url']);
+                    echo Html::a($infoBoxHtml, $subItem['url']);
                     echo '</div>';
                 }
             }
