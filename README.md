@@ -1,6 +1,11 @@
 Backend module for Yii 2.0 Framework
 ====================================
 
+[![Latest Stable Version](https://poser.pugx.org/dmstr/yii2-backend-module/v/stable.svg)](https://packagist.org/packages/dmstr/yii2-backend-module) 
+[![Total Downloads](https://poser.pugx.org/dmstr/yii2-backend-module/downloads.svg)](https://packagist.org/packages/dmstr/yii2-backend-module)
+[![License](https://poser.pugx.org/dmstr/yii2-backend-module/license.svg)](https://packagist.org/packages/dmstr/yii2-backend-module)
+
+
 ### AdminLTE Dashboard
 
 ![Screenshot](https://raw.githubusercontent.com/dmstr/gh-media/master/dmstr/yii2-backend-module/backend-default-index.png)
