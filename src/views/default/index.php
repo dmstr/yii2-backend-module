@@ -116,7 +116,6 @@ $this->title = "Dashboard";
         );
         foreach ($items as $item) {
             if ($item['visible'] && $item['url']) {
-                $url = \yii\helpers\Url::to($item['url']);
                 $colorSelect = $item['icon'];
                 echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
                 $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
@@ -137,12 +136,11 @@ $this->title = "Dashboard";
             }
             foreach ($item['items'] as $subItem) {
                 if ($subItem['visible'] && $subItem['url']) {
-                    $url = \yii\helpers\Url::to($subItem['url']);
                     $colorSelect = $item['icon'];
                     echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
                     $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
                         [
-                            'text' => '<h4 style="white-space: normal;">'.$item['label'].'</h4>',
+                            'text' => '<h4 style="white-space: normal;">'.$subItem['label'].'</h4>',
                             'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
                             'icon' => (isset($subItem['icon']) && !empty($subItem['icon']))
                                 ? Menu::$iconClassPrefix.$subItem['icon']
