@@ -1,8 +1,10 @@
 <?php
-
-namespace _;
+/**
+ * @var $allModulesMenuItems array
+ */
 
 use dmstr\modules\backend\Module;
+use dmstr\modules\pages\models\Tree;
 use dmstr\widgets\Menu;
 use insolita\wgadminlte\Box;
 use yii\helpers\Html;
@@ -109,11 +111,8 @@ $this->title = "Dashboard";
 
     <div class="row">
         <?php
-        $items = \dmstr\modules\pages\models\Tree::getMenuItems(
-            'backend',
-            true,
-            \dmstr\modules\pages\models\Tree::GLOBAL_ACCESS_DOMAIN
-        );
+        /** @var $items array */
+        $items = Tree::getMenuItems('backend',true);
         foreach ($items as $item) {
             if ($item['visible'] && $item['url']) {
                 $colorSelect = $item['icon'];
@@ -121,7 +120,7 @@ $this->title = "Dashboard";
                 $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
                     [
                         'text' => '<h4 style="white-space: normal;">'.$item['label'].'</h4>',
-                        'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
+                        'boxBg' => Module::colorHash('backend'),
                         'icon' => (isset($item['icon']) && !empty($item['icon']))
                             ? Menu::$iconClassPrefix.$item['icon']
                             : 'fa fa-circle-o',
@@ -134,55 +133,37 @@ $this->title = "Dashboard";
             if (empty($item['items'])) {
                 continue;
             }
-            foreach ($item['items'] as $subItem) {
-                if ($subItem['visible'] && $subItem['url']) {
-                    $colorSelect = $item['icon'];
-                    echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
-                    $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
-                        [
-                            'text' => '<h4 style="white-space: normal;">'.$subItem['label'].'</h4>',
-                            'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
-                            'icon' => (isset($subItem['icon']) && !empty($subItem['icon']))
-                                ? Menu::$iconClassPrefix.$subItem['icon']
-                                : 'fa fa-circle-o',
-                        ]);
-                    echo Html::a($infoBoxHtml, $subItem['url']);
-                    echo '</div>';
-                }
-            }
+
+            // render sub levels
+            echo $this->context->renderDashboardMenu($item);
         }
         ?>
     </div>
 
 
 <?php if (\Yii::$app->user->identity->isAdmin): ?>
-    <?php
-
-    \insolita\wgadminlte\Box::begin(
+    <?php Box::begin(
         [
             'title' => 'Auto-detected modules',
             'type' => Box::TYPE_WARNING,
 
         ]);
-
-?>
-    <div class="row">
-  <?php  foreach ($allModulesMenuItems as $item) {
-        if ($item['visible']) {
-            echo '<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 text-error">';
-            $url = \yii\helpers\Url::to($item['url']);
-            $colorSelect = explode('/', $url);
-
-            $linkText = '<span class="badge bg-'.Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0).'">&nbsp;</span><i class="fa fa-plug"></i>';
-            $linkText .= $item['label'];
-
-            echo Html::a($linkText, $item['url'], ['class' => 'btn btn-app btn-block']);
-            echo '</div>';
-        }
-    }
     ?>
+    <div class="row">
+      <?php  foreach ($allModulesMenuItems as $item) {
+            if ($item['visible']) {
+                echo '<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 text-error">';
+                $url = \yii\helpers\Url::to($item['url']);
+                $colorSelect = explode('/', $url);
 
+                $linkText = '<span class="badge bg-'.Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0).'">&nbsp;</span><i class="fa fa-plug"></i>';
+                $linkText .= $item['label'];
+
+                echo Html::a($linkText, $item['url'], ['class' => 'btn btn-app btn-block']);
+                echo '</div>';
+            }
+        }
+        ?>
     <div>
-
     <?php Box::end(); ?>
 <?php endif; ?>

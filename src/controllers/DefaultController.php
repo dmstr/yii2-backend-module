@@ -3,9 +3,12 @@
 namespace dmstr\modules\backend\controllers;
 
 use dmstr\helpers\Metadata;
+use dmstr\modules\backend\Module;
+use dmstr\widgets\Menu;
 use Yii;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\Html;
 use yii\web\Controller;
 
 /**
@@ -145,5 +148,43 @@ class DefaultController extends Controller
                     ],
                 ]),
             ]);
+    }
+
+    /**
+     * @param array $item \dmstr\modules\pages\models\Tree::getMenuItems()
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function renderDashboardMenu($item = [])
+    {
+        $menuItems = '';
+
+        if (! isset($item['items'])) {
+            return $menuItems;
+        }
+
+        foreach ($item['items'] as $subItem) {
+            if ($subItem['visible'] && $subItem['url']) {
+                $colorSelect = $item['icon'];
+                $menuItems .= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
+                $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
+                    [
+                        'text' => '<h4 style="white-space: normal;">'.$subItem['label'].'</h4>',
+                        'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
+                        'icon' => (isset($subItem['icon']) && !empty($subItem['icon']))
+                            ? Menu::$iconClassPrefix.$subItem['icon']
+                            : 'fa fa-circle-o',
+                    ]);
+                $menuItems .= Html::a($infoBoxHtml, $subItem['url']);
+                $menuItems .= '</div>';
+            }
+
+            if (!empty($subItem['items'])) {
+                $menuItems .= $this->renderDashboardMenu($subItem);
+            }
+        }
+
+        return $menuItems;
     }
 }
