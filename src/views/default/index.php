@@ -15,7 +15,7 @@ $this->title = "Dashboard";
 
     <div class="row">
 
-        <?php if (\Yii::$app->user->identity->isAdmin): ?>
+        <?php if (\Yii::$app->user->can('Admin')): ?>
 
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
@@ -141,7 +141,7 @@ $this->title = "Dashboard";
     </div>
 
 
-<?php if (\Yii::$app->user->identity->isAdmin): ?>
+<?php if (\Yii::$app->user->can('Admin')): ?>
     <?php Box::begin(
         [
             'title' => 'Auto-detected modules',

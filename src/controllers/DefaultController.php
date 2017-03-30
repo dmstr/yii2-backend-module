@@ -71,14 +71,13 @@ class DefaultController extends Controller
         }
 
         // create developer menu, when user is admin
-        if (Yii::$app->user->can('Developer')) {
+        if (Yii::$app->user->can('Admin')) {
             $adminMenuItems[] = [
                 'url' => '#',
                 'icon' => 'fa fa-cogs',
                 'label' => 'Modules',
                 'items' => $developerMenuItems,
                 'options' => ['class' => 'treeview'],
-                'visible' => Yii::$app->user->identity->isAdmin,
             ];
         }
 
