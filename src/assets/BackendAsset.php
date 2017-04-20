@@ -9,7 +9,7 @@ namespace dmstr\modules\backend\assets;
  * @license http://www.yiiframework.com/license/
  */
 
-use dmstr\web\AssetBundle as BaseBackendAssetBundle;
+use yii\web\AssetBundle as BaseBackendAssetBundle;
 
 /**
  * Configuration for `backend` client script files.
