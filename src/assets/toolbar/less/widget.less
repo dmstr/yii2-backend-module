@@ -1,0 +1,22 @@
+#sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 300px;
+  padding-right: 40px;
+  margin-left: -250px;
+  opacity: 0.4;
+  transition-property: margin-left, opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+  .sidebar-panel {
+    height: 100vh;
+    overflow: auto;
+  }
+  &:hover {
+    margin-left: 0px;
+    opacity: 1;
+    .sidebar-panel {
+    }
+  }
+}

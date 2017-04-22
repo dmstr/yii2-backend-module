@@ -1,0 +1,48 @@
+{{ use ('yii/widgets') }}
+{{ use ('dmstr/modules/prototype/widgets/TwigWidget') }}
+
+{% set backendItems = Tree.getMenuItems('backend', true) %}
+
+<div id="sidebar-wrapper">
+    <div class="sidebar-panel">
+        <div class="panel panel-info">
+            <div class="panel-heading"><b>{{ app.name }}</b></div>
+
+            <div class="panel-body">
+                {{ twig_widget_widget({
+                    'key': 'frontend.extra.menuItems',
+                    'renderEmpty': false,
+                }) }}
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">Context</div>
+
+            <div class="">
+                {{ nav_widget({
+                    'encodeLabels': false,
+                    'options': {
+                        'class': 'nav nav-pills nav-stacked',
+                    },
+                    'items': app.params['context.menuItems']
+                }) }}
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Backend Navigation</div>
+
+            <div class="">
+                {{ nav_widget({
+                    'options': {
+                        'class': 'nav nav-pills nav-stacked',
+                    },
+                    'items': backendItems
+                }) }}
+            </div>
+        </div>
+
+
+    </div>
+</div>
