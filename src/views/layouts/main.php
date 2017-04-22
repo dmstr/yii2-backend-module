@@ -9,6 +9,7 @@ use rmrevin\yii\fontawesome\FA;
 use Yii;
 use yii\base\InvalidCallException;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\Menu;
 
 /* @var $this \yii\web\View */
@@ -102,7 +103,7 @@ try {
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="<?= \yii\helpers\Url::to(['/backend']) ?>" class="logo">
+        <a href="<?= Yii::$app->homeUrl ?>" class="logo">
             <?= FA::icon(FA::_HEART) ?>
             <span class="title"></span><?= getenv('APP_TITLE') ?>
         </a>
@@ -128,6 +129,7 @@ try {
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <?php if (!\Yii::$app->user->isGuest): ?>
+
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="">
                             <?= \dmstr\modules\prototype\widgets\TwigWidget::widget([
@@ -160,6 +162,8 @@ try {
                                 </ul>
                             </li>
                         <?php endif; ?>
+
+
 
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -260,6 +264,11 @@ try {
 
                         </li>
 
+                        <li>
+                            <a href="<?= Url::to(['/backend']) ?>">
+                                <i class="fa fa-dashboard"></i>
+                            </a>
+                        </li>
                     <?php endif; ?>
                 </ul>
             </div>
