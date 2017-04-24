@@ -103,7 +103,7 @@ try {
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="<?= Yii::$app->homeUrl ?>" class="logo">
+        <a href="<?= Yii::$app->homeUrl ?>" class="logo" target="_top">
             <?= FA::icon(FA::_HEART) ?>
             <span class="title"></span><?= getenv('APP_TITLE') ?>
         </a>
@@ -265,7 +265,13 @@ try {
                         </li>
 
                         <li>
-                            <a href="<?= Url::to(['/backend']) ?>">
+                            <a href="<?= Url::to('') ?>" target="_top">
+                                <i class="fa fa-arrow-circle-up"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="<?= Url::to(['/backend']) ?>" target="_top">
                                 <i class="fa fa-dashboard"></i>
                             </a>
                         </li>

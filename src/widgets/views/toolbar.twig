@@ -1,48 +1,75 @@
 {{ use ('yii/widgets') }}
 {{ use ('dmstr/modules/prototype/widgets/TwigWidget') }}
+{{ use ('dmstr/cookiebutton/CookieButton') }}
 
 {% set backendItems = Tree.getMenuItems('backend', true) %}
 
-<div id="sidebar-wrapper">
+
+<div id="sidebar-wrapper" class="{{ app.request.cookies.get('hrzg-backend_toolbar') ? 'active' : '' }}">
+
+    <div id="sidebar-toggle">
+        {{ use ('dmstr/cookiebutton') }}
+        {{ cookie_button_widget(
+        {
+            'label': '=',
+            'cookieName': 'hrzg-backend_toolbar',
+            'cookieValue': 'on',
+            'cookieOptions': {
+            'path': '/',
+            'http': true,
+            'expires': 7
+        },
+            'options': {
+            'class': 'hide-iframe btn btn-primary navbar-btn navbar-right',
+            'onclick': 'toggleSidebar()'
+
+        }
+        }
+        ) }}
+    </div>
+
     <div class="sidebar-panel">
-        <div class="panel panel-info">
-            <div class="panel-heading"><b>{{ app.name }}</b></div>
 
-            <div class="panel-body">
-                {{ twig_widget_widget({
-                    'key': 'frontend.extra.menuItems',
-                    'renderEmpty': false,
-                }) }}
-            </div>
+        {{ nav_bar_begin(
+        {
+            'brandLabel': 'phd',
+            'renderInnerContainer': false,
+            'options': {
+                'class': 'navbar-inverse'
+            }
+        } ) }}
+
+        <div class="container-fluid">
+
+        {{ nav_widget({
+            'encodeLabels': false,
+            'options': {
+                'class': 'nav navbar-left',
+            },
+            'items': [{
+                'label': '<i class="fa fa-pencil"></i>',
+                'items': app.params['context.menuItems'],
+                'linkOptions': {
+                    'target': 'backend'
+                }
+            }]
+        }) }}
+
+        <div class="navbar-right">
+            {{ twig_widget_widget({
+                'key': 'frontend.extra.menuItems',
+                'renderEmpty': false,
+            }) }}
+
+            <a class="frontend-reload btn btn-default navbar-btn" href="{{ app.request.url }}">Reload</a>
+
         </div>
 
-        <div class="panel panel-success">
-            <div class="panel-heading">Context</div>
-
-            <div class="">
-                {{ nav_widget({
-                    'encodeLabels': false,
-                    'options': {
-                        'class': 'nav nav-pills nav-stacked',
-                    },
-                    'items': app.params['context.menuItems']
-                }) }}
-            </div>
         </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">Backend Navigation</div>
+        {{ nav_bar_end() }}
 
-            <div class="">
-                {{ nav_widget({
-                    'options': {
-                        'class': 'nav nav-pills nav-stacked',
-                    },
-                    'items': backendItems
-                }) }}
-            </div>
-        </div>
-
+        <iframe name="{{ app.params['backend.iframe.name'] }}" src="/backend"></iframe>
 
     </div>
 </div>

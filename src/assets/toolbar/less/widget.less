@@ -1,22 +1,42 @@
+#sidebar-toggle {
+  position: absolute;
+  top: 0px;
+  right: -30px;
+}
 #sidebar-wrapper {
   position: fixed;
   top: 0;
   z-index: 1000;
-  width: 300px;
-  padding-right: 40px;
-  margin-left: -250px;
-  opacity: 0.4;
-  transition-property: margin-left, opacity;
-  transition-duration: 0.5s;
+  width: 768px;
+  max-width: 80%;
+  margin-left: -768px;
+
+  transition-property: margin-left;
+  transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
+
+  nav {
+    margin-bottom: 0px;
+  }
+
+  iframe {
+    border: 0px solid white;
+
+    background: #eee;
+    height: 100vh;
+    width: 100%;
+  }
+
   .sidebar-panel {
+    //background: #fff;
     height: 100vh;
     overflow: auto;
   }
-  &:hover {
+  &.active {
     margin-left: 0px;
+    //opacity: 1;
+  }
+  &:hover {
     opacity: 1;
-    .sidebar-panel {
-    }
   }
 }

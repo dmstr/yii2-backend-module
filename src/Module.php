@@ -46,4 +46,5 @@ class Module extends \yii\base\Module
         $rand = array_rand($colors);
         return $colors[$rand];
     }
+
 }
