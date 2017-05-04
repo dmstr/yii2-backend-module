@@ -162,9 +162,9 @@ class DefaultController extends Controller
     public function actionCacheFlush()
     {
         if (Yii::$app->cache->flush()) {
-            Yii::$app->session->setFlash('success', 'Cache wurde geleert');
+            Yii::$app->session->addFlash('success', 'Cache wurde geleert');
         } else {
-            Yii::$app->session->setFlash('error', 'Cache konnte nicht geleert werden');
+            Yii::$app->session->addFlash('error', 'Cache konnte nicht geleert werden');
         }
         return $this->redirect(!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : \yii\helpers\Url::to(['/backend/']));
     }
