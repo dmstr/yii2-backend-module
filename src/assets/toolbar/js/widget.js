@@ -9,7 +9,6 @@ $(document).ready(function () {
         console.log('iframe load');
         if (!initialRequest) {
             $('#sidebar-wrapper').addClass('active');
-            $('.frontend-reload').click();
         }
         initialRequest = false;
     });
