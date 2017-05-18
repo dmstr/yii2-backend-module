@@ -41,29 +41,31 @@
 
         <div class="container-fluid">
 
-        {{ nav_widget({
-            'encodeLabels': false,
-            'options': {
-                'class': 'nav navbar-left',
+            <div class="navbar-right">
+                {{ twig_widget_widget({
+                    'key': 'frontend.extra.menuItems',
+                    'renderEmpty': false,
+                }) }}
+
+                <a class="frontend-reload btn btn-default navbar-btn" href="{{ app.request.url }}">Reload</a>
+
+            </div>
+
+            {{ nav_widget(
+            {
+                'encodeLabels': false,
+                'options': {
+                'class': 'nav navbar-nav navbar-right',
             },
-            'items': [{
+                'items': [{
                 'label': '<i class="fa fa-pencil"></i>',
                 'items': app.params['context.menuItems'],
                 'linkOptions': {
                     'target': 'backend'
                 }
             }]
-        }) }}
-
-        <div class="navbar-right">
-            {{ twig_widget_widget({
-                'key': 'frontend.extra.menuItems',
-                'renderEmpty': false,
-            }) }}
-
-            <a class="frontend-reload btn btn-default navbar-btn" href="{{ app.request.url }}">Reload</a>
-
-        </div>
+            }
+            ) }}
 
         </div>
 

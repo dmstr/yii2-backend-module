@@ -5,7 +5,6 @@
 
 use dmstr\modules\backend\Module;
 use dmstr\modules\pages\models\Tree;
-use dmstr\widgets\Menu;
 use insolita\wgadminlte\Box;
 use yii\helpers\Html;
 
@@ -112,31 +111,8 @@ $this->title = "Dashboard";
     <div class="row">
         <?php
         /** @var $items array */
-        $items = Tree::getMenuItems('backend',true);
-        foreach ($items as $item) {
-            if ($item['visible'] && $item['url']) {
-                $colorSelect = $item['icon'];
-                echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
-                $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
-                    [
-                        'text' => '<h4 style="white-space: normal;">'.$item['label'].'</h4>',
-                        'boxBg' => Module::colorHash('backend'),
-                        'icon' => (isset($item['icon']) && !empty($item['icon']))
-                            ? Menu::$iconClassPrefix.$item['icon']
-                            : 'fa fa-circle-o',
-                    ]);
-                echo Html::a($infoBoxHtml, $item['url']);
-                echo '</div>';
-            }
-
-            // TODO: DRY!
-            if (empty($item['items'])) {
-                continue;
-            }
-
-            // render sub levels
-            echo $this->context->renderDashboardMenu($item);
-        }
+        $items = Tree::getMenuItems('backend', true);
+        echo $this->context->renderDashboardMenu(['items' => $items]);
         ?>
     </div>
 

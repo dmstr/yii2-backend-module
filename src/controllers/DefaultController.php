@@ -8,6 +8,7 @@ use dmstr\widgets\Menu;
 use Yii;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\Controller;
 
@@ -128,7 +129,8 @@ class DefaultController extends Controller
             if (Yii::$app->user->can($item->name)) {
                 $roles[] = [
                     'description' => $item->description,
-                    'name' => $item->name,];
+                    'name' => $item->name,
+                ];
             }
         }
 
@@ -159,14 +161,14 @@ class DefaultController extends Controller
     {
         $menuItems = '';
 
-        if (! isset($item['items'])) {
+        if (!isset($item['items'])) {
             return $menuItems;
         }
 
         foreach ($item['items'] as $subItem) {
             if ($subItem['visible'] && $subItem['url']) {
-                $colorSelect = $item['icon'];
-                $menuItems .= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
+                $colorSelect = ArrayHelper::getValue($item, 'icon');
+                $menuItems .= '<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">';
                 $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
                     [
                         'text' => '<h4 style="white-space: normal;">'.$subItem['label'].'</h4>',
