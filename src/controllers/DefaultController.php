@@ -151,6 +151,27 @@ class DefaultController extends Controller
             ]);
     }
 
+
+
+    /**
+     * flush cache
+     *
+     * if APCu is used as cache we cannot flush cache from cli command
+     * see: https://github.com/yiisoft/yii2/issues/8647
+     *
+     * @return \yii\web\Response
+     */
+    public function actionCacheFlush()
+    {
+        if (Yii::$app->cache->flush()) {
+            Yii::$app->session->addFlash('success', 'Cache wurde geleert');
+        } else {
+            Yii::$app->session->addFlash('error', 'Cache konnte nicht geleert werden');
+        }
+        return $this->redirect(!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : \yii\helpers\Url::to(['/backend/']));
+    }
+
+
     /**
      * @param array $item \dmstr\modules\pages\models\Tree::getMenuItems()
      *
