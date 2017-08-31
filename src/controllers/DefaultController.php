@@ -116,10 +116,12 @@ class DefaultController extends Controller
     {
         $allPermissions = Yii::$app->authManager->getPermissions();
         $allRoles = Yii::$app->authManager->getRoles();
+        $userPermissions = [];
+        $userRoles = [];
 
         foreach ($allPermissions AS $item) {
             if (Yii::$app->user->can($item->name)) {
-                $permissions[] = [
+                $userPermissions[] = [
                     'description' => $item->description,
                     'name' => $item->name,
                 ];
@@ -127,7 +129,7 @@ class DefaultController extends Controller
         }
         foreach ($allRoles AS $item) {
             if (Yii::$app->user->can($item->name)) {
-                $roles[] = [
+                $userRoles[] = [
                     'description' => $item->description,
                     'name' => $item->name,
                 ];
@@ -137,13 +139,13 @@ class DefaultController extends Controller
         return $this->render('show-auth',
             [
                 'permissions' => new ArrayDataProvider([
-                    'allModels' => $permissions,
+                    'allModels' => $userPermissions,
                     'pagination' => [
                         'pageSize' => 100,
                     ],
                 ]),
                 'roles' => new ArrayDataProvider([
-                    'allModels' => $roles,
+                    'allModels' => $userRoles,
                     'pagination' => [
                         'pageSize' => 100,
                     ],
