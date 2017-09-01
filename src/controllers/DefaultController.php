@@ -58,6 +58,10 @@ class DefaultController extends Controller
         $developerMenuItems = [];
 
         foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
+            if (in_array($name, $this->module->modulesDashboardBlacklist)) {
+                continue;
+            }
+
             $role = $name;
 
             $defaultItem = [

@@ -19,6 +19,11 @@ use insolita\wgadminlte\InfoBox;
  */
 class Module extends \yii\base\Module
 {
+    /**
+     * @var array Names of (auto-detected) modules which should not be show on dashboard
+     */
+    public $modulesDashboardBlacklist = [];
+
     static function colorHash($label)
     {
         $colors = [
