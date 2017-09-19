@@ -18,7 +18,8 @@ $this->title = $this->title;
 \dmstr\modules\backend\assets\BackendAsset::register($this);
 
 if (Yii::$app->settings) {
-    $adminLteSkin = (Yii::$app->settings->get('skin', 'backend.adminlte')) ?: 'black-light';
+    $adminLteSkin = Yii::$app->settings->get('skin', 'backend.adminlte') ?: 'black-light';
+    $navBarIcon = Yii::$app->settings->get('navBarIcon', 'backend.adminlte') ?: FA::_HEART;
 }
 
 ?>
@@ -104,7 +105,7 @@ try {
     <header class="main-header">
         <!-- Logo -->
         <a href="<?= Yii::$app->homeUrl ?>" class="logo" target="_top">
-            <?= FA::icon(FA::_HEART) ?>
+            <?= FA::icon($navBarIcon) ?>
             <span class="title"></span><?= getenv('APP_TITLE') ?>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
