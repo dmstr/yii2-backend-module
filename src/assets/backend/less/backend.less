@@ -3,35 +3,12 @@
 html,
 body {
   height: 100%;
-  //font-size: 16px;
-}
-
-body,
-body > .header .logo,
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  //font-family: "Verdana", sans-serif;
-}
-
-a {
-  &:focus,
-  &:hover {
-    text-decoration: none;
-  }
 }
 
 header {
   .logo {
     .title {
       .hidden-md;
-    }
-  }
-}
-
-/** fix for select2 **/
-.select2-container {
-  .select2-selection--single {
-    .select2-selection__rendered {
-      margin-top: 0;
     }
   }
 }
@@ -54,14 +31,88 @@ header {
   padding-top: 20px;
 }
 
-.jumbotron {
-  text-align: center;
-  background-color: transparent;
+.main-header {
+  nav {
+    .sidebar-toggle {
+      padding: 10px;
+      margin: 4px;
+    }
+  }
 }
 
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+.user-menu .dropdown-toggle span {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+section.content-header, section.content {
+  @media (max-width: 768px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+section.content {
+  // hide h1 headlines in content, since it is displayed from pageTitle in layout
+  h1 {
+    display: none;
+  }
+  .grid-view {
+    @media (max-width: 768px) {
+      border: 0px solid #fff !important;
+    }
+    .table-responsive;
+    table {
+      //.table-condensed;
+
+      th {
+        &.action-column {
+          min-width: 150px;
+          width: 1%;
+        }
+        white-space: nowrap;
+      }
+
+      a {
+        &[data-pjax="0"] {
+          .btn;
+          border: 1px solid;
+          &:hover {
+            //.btn-primary;
+          }
+        }
+        &[data-method="post"],
+        &[data-method="POST"] {
+          .btn;
+          border: 1px solid;
+          //.text-danger;
+          &:hover {
+            //.btn-danger;
+          }
+        }
+
+      }
+    }
+
+  }
+}
+
+.table-responsive {
+  @media (max-width: 768px) {
+    border: 0px solid #fff !important;
+  }
+
+}
+
+.detail-view {
+  TD {
+    PRE {
+      overflow: auto;
+      word-wrap: normal;
+      white-space: pre-wrap;
+    }
+  }
 }
 
 div.alert p {
@@ -73,6 +124,22 @@ div.alert p {
 .not-set {
   color: #c55;
   font-style: italic;
+}
+
+a {
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/** fix for select2 **/
+.select2-container {
+  .select2-selection--single {
+    .select2-selection__rendered {
+      margin-top: 0;
+    }
+  }
 }
 
 /* add sorting icons to gridview sort links */
@@ -111,69 +178,14 @@ a.desc:after {
   content: "\e156";
 }
 
-.main-header {
-  nav {
-    .sidebar-toggle {
-      padding: 10px;
-      margin: 4px;
-    }
-  }
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
 }
 
-section.content {
-  @media (max-width: 768px) {
-    padding: 0;
-  }
-  // hide h1 headlines in content, since it is displayed from pageTitle in layout
-  h1 {
-    display: none;
-  }
-  .grid-view {
-    .table-responsive;
-    border: 0px solid white;
-    table {
-      //.table-condensed;
-
-      th {
-        &.action-column {
-          min-width: 150px;
-          width: 1%;
-        }
-        white-space: nowrap;
-      }
-
-      a {
-        &[data-pjax="0"] {
-          .btn;
-          border: 1px solid;
-          &:hover {
-            .btn-primary;
-          }
-        }
-        &[data-method="post"],
-        &[data-method="POST"] {
-          .btn;
-          border: 1px solid;
-          .text-danger;
-          &:hover {
-            .btn-danger;
-          }
-        }
-
-      }
-    }
-
-  }
-}
-
-.detail-view {
-  TD {
-    PRE {
-      overflow: auto;
-      word-wrap: normal;
-      white-space: pre-wrap;
-    }
-  }
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
 }
 
 .hint-block {
@@ -188,6 +200,19 @@ section.content {
   border-left: 3px solid #eed3d7;
   padding: 10px 20px;
   margin: 0 0 15px 0;
+}
+
+// Fix for cursor position bug (WebKit)
+// see https://github.com/ajaxorg/ace/issues/1078#issuecomment-12839690 and http://stackoverflow.com/a/20932217/291573
+.ace_editor {
+  font-family: monospace !important;
+  font-size: 16px !important;
+}
+
+.info-box {
+  A {
+    color: white;
+  }
 }
 
 .giiant-crud {
@@ -230,18 +255,5 @@ section.content {
     blockquote {
       background: lighten(@gray-lighter, 3%);
     }
-  }
-}
-
-// Fix for cursor position bug (WebKit)
-// see https://github.com/ajaxorg/ace/issues/1078#issuecomment-12839690 and http://stackoverflow.com/a/20932217/291573
-.ace_editor {
-  font-family: monospace !important;
-  font-size: 16px !important;
-}
-
-.info-box {
-  A {
-    color: white;
   }
 }
