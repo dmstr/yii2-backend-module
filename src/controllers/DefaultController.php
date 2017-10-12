@@ -195,7 +195,7 @@ class DefaultController extends Controller
         foreach ($item['items'] as $subItem) {
             if ($subItem['visible'] && $subItem['url']) {
                 $colorSelect = ArrayHelper::getValue($item, 'icon');
-                $menuItems .= '<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">';
+                $menuItems .= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
                 $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
                     [
                         'text' => '<h4 style="white-space: normal;">'.$subItem['label'].'</h4>',
