@@ -19,7 +19,7 @@
         "dmstr/yii2-prototype-module": "~0.4",
         "dmstr/yii2-helpers": "~0.4",
         "dmstr/yii2-web": "~0.3",
-        "dmstr/yii2-adminlte-asset": "^2.4.0",
+        "dmstr/yii2-adminlte-asset": "^2.5.0",
         "loveorigami/yii2-notification-wrapper": "^6.3"
     },
     "autoload": {

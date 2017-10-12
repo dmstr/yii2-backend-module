@@ -35,7 +35,7 @@ use Yii;
 
 echo \dmstr\widgets\Menu::widget(
     [
-        'options' => ['class' => 'sidebar-menu'],
+        'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
         'encodeLabels' => false,
         'items' => \yii\helpers\ArrayHelper::merge(
             ['items' => ['label' => 'Backend navigation', 'options' => ['class' => 'header']]],

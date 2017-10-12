@@ -115,7 +115,7 @@ try {
                 'label' => '',
                 'options' => [
                     'class' => 'sidebar-toggle',
-                    'data-toggle' => 'offcanvas',
+                    'data-toggle' => 'push-menu',
                     'role' => 'button',
                 ],
                 'cookieName' => 'dmstr-backend_pin-navigation',
