@@ -4,14 +4,33 @@
 
 {% set backendItems = Tree.getMenuItems('backend', true) %}
 
+<div class="container-fluid">
+
+    <div class="nav navbar-right">
+
+        {{ twig_widget_widget({
+            'key': 'frontend.extra.menuItems',
+            'renderEmpty': false,
+        }) }}
+
+    </div>
+
+</div>
+
+
+
 
 <div id="sidebar-wrapper" class="{{ app.request.cookies.get('hrzg-backend_toolbar') ? 'active' : '' }}">
 
     <div id="sidebar-toggle">
+
+        <div class="btn-group-vertical" role="group">
+
         {{ use ('dmstr/cookiebutton') }}
         {{ cookie_button_widget(
             {
-                'label': '=',
+                'label': '<i class="fa fa-heart-o"></i>',
+                'encodeLabel': false,
                 'cookieName': 'hrzg-backend_toolbar',
                 'cookieValue': 'on',
                 'cookieOptions': {
@@ -20,65 +39,41 @@
                     'expires': 7
                 },
                 'options': {
-                    'class': 'hide-iframe btn btn-primary navbar-btn navbar-right',
+                    'class': 'btn btn-primary btn-lg',
                     'onclick': 'toggleSidebar()'
                 }
             }
         ) }}
+
+        {{ button_dropdown_widget({
+            'label': '<i class="fa fa-cog"></i>',
+            'encodeLabel': false,
+            'dropdown': {
+                'encodeLabels': false,
+                'items': backendItems,
+            },
+        }) }}
+
+        {{ button_dropdown_widget(
+        {
+            'label': '<i class="fa fa-edit"></i>',
+            'encodeLabel': false,
+            'dropdown': {
+                'encodeLabels': false,
+                'items': app.params['context.menuItems'],
+            },
+        }) }}
+
+        <a class="frontend-reload btn btn-default navbar-btn hide-iframe" href="{{ app.request.url }}">
+            <i class="fa fa-refresh"></i>
+        </a>
+
+        </div>
+
     </div>
 
     <div class="sidebar-panel">
 
-        {{ nav_bar_begin(
-        {
-            'brandLabel': 'phd',
-            'renderInnerContainer': false,
-            'options': {
-            'class': 'navbar-inverse'
-        }
-        } ) }}
-
-        <div class="container-fluid">
-
-            <div class="navbar-right">
-                {{ twig_widget_widget({
-                    'key': 'frontend.extra.menuItems',
-                    'renderEmpty': false,
-                }) }}
-
-                <a class="frontend-reload btn btn-default navbar-btn" href="{{ app.request.url }}">Reload</a>
-
-            </div>
-
-            {{ nav_widget(
-            {
-                'encodeLabels': false,
-                'options': {
-                'class': 'nav navbar-nav navbar-right',
-            },
-                'items': [{
-                'label': '<i class="fa fa-pencil"></i>',
-                'items': app.params['context.menuItems'],
-                'linkOptions': {
-                    'target': 'backend'
-                }
-            }]
-            }) }}
-
-            <div class="nav navbar-right">
-
-                {{ twig_widget_widget({
-                    'key': 'frontend.extra.menuItems',
-                    'renderEmpty': false,
-                }) }}
-
-                <a class="frontend-reload btn btn-default navbar-btn" href="{{ app.request.url }}">Reload</a>
-
-            </div>
-
-        </div>
-
-        {{ nav_bar_end() }}
 
         <iframe name="{{ app.params['backend.iframe.name'] }}" src="/backend"></iframe>
 

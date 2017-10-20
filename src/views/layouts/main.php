@@ -229,6 +229,12 @@ try {
                             </ul>
                         </li>
 
+                        <li>
+                            <a href="<?= Url::to(['/backend']) ?>" target="_top">
+                                <i class="fa fa-dashboard"></i>
+                            </a>
+                        </li>
+
                         <li class="dropdown custom-menu">
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -269,15 +275,10 @@ try {
 
                         <li>
                             <a href="<?= Url::to('') ?>" target="_top">
-                                <i class="fa fa-arrow-circle-up"></i>
+                                <i class="fa fa-expand"></i>
                             </a>
                         </li>
 
-                        <li>
-                            <a href="<?= Url::to(['/backend']) ?>" target="_top">
-                                <i class="fa fa-dashboard"></i>
-                            </a>
-                        </li>
                     <?php endif; ?>
                 </ul>
             </div>
