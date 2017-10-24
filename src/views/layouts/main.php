@@ -107,7 +107,7 @@ try {
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="<?= Url::to(['/backend']) ?>" class="logo" target="_top">
+        <a href="<?= Url::to(['/backend']) ?>" class="logo">
             <?= FA::icon($navBarIcon) ?>
             <span class="title"></span><?= getenv('APP_TITLE') ?>
         </a>

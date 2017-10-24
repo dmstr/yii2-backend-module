@@ -12,12 +12,14 @@ namespace dmstr\modules\backend\widgets;
 
 use dmstr\modules\backend\assets\ToolbarAsset;
 use yii\base\Widget;
+use yii\web\View;
 
 class Toolbar extends Widget
 {
     public function init()
     {
-
+        $file = \Yii::$app->assetManager->publish(__DIR__.'/../assets/toolbar/js/check-frame.js');
+        $this->view->registerJsFile($file[1], ['position'=>View::POS_BEGIN]);
     }
 
     public function run()
