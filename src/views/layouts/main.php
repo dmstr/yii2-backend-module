@@ -16,6 +16,7 @@ use yii\widgets\Menu;
 /* @var $content string */
 $this->title = $this->title;
 \dmstr\modules\backend\assets\BackendAsset::register($this);
+\dmstr\modules\backend\assets\BackendJsAsset::register($this);
 
 if (Yii::$app->settings) {
     $adminLteSkin = Yii::$app->settings->get('skin', 'backend.adminlte') ?: 'black-light';
@@ -106,7 +107,7 @@ try {
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="<?= Yii::$app->homeUrl ?>" class="logo" target="_top">
+        <a href="<?= Url::to(['/backend']) ?>" class="logo" target="_top">
             <?= FA::icon($navBarIcon) ?>
             <span class="title"></span><?= getenv('APP_TITLE') ?>
         </a>
@@ -129,19 +130,26 @@ try {
                 ],
             ]) ?>
 
+
+            <ul class="nav navbar-nav">
+            </ul>
+
+
+
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+
                     <?php if (!\Yii::$app->user->isGuest): ?>
 
                         <!-- Messages: style can be found in dropdown.less-->
-                        <li class="">
+                        <li class="backend-extra-items-menu">
                             <?= \dmstr\modules\prototype\widgets\TwigWidget::widget([
                                 'key' => 'backend.extra.menuItems',
                                 'renderEmpty' => false,
                             ]) ?>
                         </li>
                         <?php if (isset(Yii::$app->params['context.menuItems']) && !empty(Yii::$app->params['context.menuItems'])): ?>
-                            <li class="dropdown tasks-menu">
+                            <li class="dropdown context-items-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-pencil-square-o"></i>
                                     <span><i class="caret"></i></span>
@@ -168,7 +176,8 @@ try {
 
 
 
-                        <li class="dropdown tasks-menu">
+
+                        <li class="dropdown languages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-flag"></i>
                                 <span class="label label-default"><?= Yii::$app->language ?></span>
@@ -229,16 +238,16 @@ try {
                             </ul>
                         </li>
 
-                        <li>
-                            <a href="<?= Url::to(['/backend']) ?>" target="_top">
-                                <i class="fa fa-dashboard"></i>
+                        <li class="expand-menu">
+                            <a href="<?= Url::to('') ?>" target="_top">
+                                <i class="fa fa-expand"></i>
                             </a>
                         </li>
 
-                        <li class="dropdown custom-menu">
+                        <li class="dropdown sitemap-menu">
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-home"></i>
+                                <i class="fa fa-compress"></i>
                                 <span><i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
@@ -271,12 +280,6 @@ try {
                                 </li>
                             </ul>
 
-                        </li>
-
-                        <li>
-                            <a href="<?= Url::to('') ?>" target="_top">
-                                <i class="fa fa-expand"></i>
-                            </a>
                         </li>
 
                     <?php endif; ?>

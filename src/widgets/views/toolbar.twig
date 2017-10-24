@@ -8,10 +8,6 @@
 
     <div class="nav navbar-right">
 
-        {{ twig_widget_widget({
-            'key': 'frontend.extra.menuItems',
-            'renderEmpty': false,
-        }) }}
 
     </div>
 
@@ -26,6 +22,7 @@
 
         <div class="btn-group-vertical" role="group">
 
+
         {{ use ('dmstr/cookiebutton') }}
         {{ cookie_button_widget(
             {
@@ -39,7 +36,7 @@
                     'expires': 7
                 },
                 'options': {
-                    'class': 'btn btn-primary btn-lg',
+                    'class': 'btn btn-primary btn-sm',
                     'onclick': 'toggleSidebar()'
                 }
             }
@@ -47,6 +44,9 @@
 
         {{ button_dropdown_widget({
             'label': '<i class="fa fa-cog"></i>',
+            'options':{
+                'class': 'btn-xs btn-primary '
+            },
             'encodeLabel': false,
             'dropdown': {
                 'encodeLabels': false,
@@ -57,6 +57,9 @@
         {{ button_dropdown_widget(
         {
             'label': '<i class="fa fa-edit"></i>',
+            'options':{
+                'class': 'btn-xs btn-default'
+            },
             'encodeLabel': false,
             'dropdown': {
                 'encodeLabels': false,
@@ -64,7 +67,12 @@
             },
         }) }}
 
-        <a class="frontend-reload btn btn-default navbar-btn hide-iframe" href="{{ app.request.url }}">
+        {{ twig_widget_widget({
+            'key': 'frontend.extra.menuItems',
+            'renderEmpty': false,
+        }) }}
+
+        <a class="frontend-reload btn btn-default btn-xs navbar-btn hide-iframe" href="{{ app.request.url }}">
             <i class="fa fa-refresh"></i>
         </a>
 

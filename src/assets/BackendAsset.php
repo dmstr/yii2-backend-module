@@ -10,6 +10,7 @@ namespace dmstr\modules\backend\assets;
  */
 
 use yii\web\AssetBundle as BaseBackendAssetBundle;
+use yii\web\View;
 
 /**
  * Configuration for `backend` client script files.
@@ -23,8 +24,7 @@ class BackendAsset extends BaseBackendAssetBundle
     public $css = [
         'less/backend.less',
     ];
-    public $js = [
-    ];
+
     public $depends = [
         'dmstr\web\AdminLteAsset',
     ];

@@ -11,18 +11,16 @@ namespace dmstr\modules\backend\assets;
 
 
 use yii\web\AssetBundle;
-use yii\web\JqueryAsset;
 use yii\web\View;
 
-class ToolbarAsset extends AssetBundle
+class BackendJsAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/dmstr/yii2-backend-module/src/assets/toolbar';
+    public $sourcePath = '@vendor/dmstr/yii2-backend-module/src/assets/backend';
 
-    public $js = ['js/widget.js'];
-
-    public $css = ['less/widget.less'];
-
-    public $depends = [
-        JqueryAsset::class
+    public $js = [
+        'js/is-framed.js',
+    ];
+    public $jsOptions = [
+        'position' => View::POS_BEGIN
     ];
 }
