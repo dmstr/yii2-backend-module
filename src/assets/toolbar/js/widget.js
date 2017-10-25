@@ -9,16 +9,18 @@ $(document).ready(function () {
         console.log('iframe load');
         if (!initialRequest) {
             $('#sidebar-wrapper').addClass('active');
+            $('#sidebar-wrapper').addClass('show-iframe');
         }
         initialRequest = false;
     });
 
     $('.hide-iframe')
         .on('mouseover', function () {
-            $('#sidebar-wrapper iframe').hide();
+            $('#sidebar-wrapper').addClass('hide-iframe');
         })
         .on('mouseout', function () {
-            $('#sidebar-wrapper iframe').show();
+            $('#sidebar-wrapper').removeClass('hide-iframe');
+            $('#sidebar-wrapper').removeClass('show-iframe');
         })
 
     console.log('Done');

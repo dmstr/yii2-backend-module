@@ -1,16 +1,22 @@
-#sidebar-toggle {
-  position: absolute;
-  top: 0px;
-  right: -150px;
-  width: 150px;
-}
 #sidebar-wrapper {
+
+  #sidebar-toggle {
+    position: absolute;
+    top: 0px;
+    right: -50px;
+    width: 50px;
+    opacity: 0.85;
+    &:hover {
+        opacity: 1;
+    }
+  }
+
   position: fixed;
   top: 0;
   z-index: 1100;
-  width: 800px;
+  width: 80vw;
   max-width: 80%;
-  margin-left: -800px;
+  margin-left: -80vw;
 
   transition-property: margin-left;
   transition-duration: 0.3s;
@@ -23,21 +29,39 @@
   iframe {
     border: 0px solid white;
 
-    background: #eee;
+    background: #ccc;
     height: 100vh;
     width: 100%;
   }
 
   .sidebar-panel {
-    //background: #fff;
     height: 100vh;
     overflow: auto;
+    opacity: 0.1;
+
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
   }
+
   &.active {
     margin-left: 0px;
-    //opacity: 1;
   }
   &:hover {
-    opacity: 1;
+    .sidebar-panel {
+      opacity: 1;
+    }
   }
+
+  &.show-iframe {
+    .sidebar-panel {
+      opacity: 1;
+    }
+  }
+  &.hide-iframe {
+    .sidebar-panel {
+      opacity: 0;
+    }
+  }
+
 }

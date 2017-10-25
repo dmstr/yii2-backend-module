@@ -131,11 +131,6 @@ try {
             ]) ?>
 
 
-            <ul class="nav navbar-nav">
-            </ul>
-
-
-
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
 
@@ -232,6 +227,7 @@ try {
                                     </div>
                                     <div class="pull-right">
                                         <a href="<?= \yii\helpers\Url::to(['/user/security/logout']) ?>"
+                                           target="_top"
                                            class="btn btn-default btn-flat" data-method="post">Sign out</a>
                                     </div>
                                 </li>
