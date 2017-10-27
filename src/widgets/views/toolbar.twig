@@ -2,19 +2,7 @@
 {{ use ('dmstr/modules/prototype/widgets/TwigWidget') }}
 {{ use ('dmstr/cookiebutton/CookieButton') }}
 
-{% set backendItems = Tree.getMenuItems('backend', true) %}
-
-<div class="container-fluid">
-
-    <div class="nav navbar-right">
-
-
-    </div>
-
-</div>
-
-
-
+{% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) %}
 
 <div id="sidebar-wrapper" class="{{ app.request.cookies.get('hrzg-backend_toolbar') ? 'active' : '' }}">
 
@@ -22,7 +10,7 @@
 
         <div class="btn-group-vertical" role="group">
 
-
+        {% if useIframe %}
         {{ use ('dmstr/cookiebutton') }}
         {{ cookie_button_widget(
             {
@@ -41,6 +29,7 @@
                 }
             }
         ) }}
+        {%  endif %}
 
         {{ button_dropdown_widget({
             'label': '<i class="fa fa-cog"></i>',
@@ -58,7 +47,7 @@
         {
             'label': '<i class="fa fa-edit"></i>',
             'options':{
-                'class': 'btn-xs btn-default'
+                'class': 'btn-xs btn-primary'
             },
             'encodeLabel': false,
             'dropdown': {
@@ -72,9 +61,11 @@
             'renderEmpty': false,
         }) }}
 
+        {% if useIframe %}
         <a class="frontend-reload btn btn-default btn-xs navbar-btn hide-iframe" href="{{ app.request.url }}">
             <i class="fa fa-refresh"></i>
         </a>
+        {% endif %}
 
         </div>
 
@@ -82,8 +73,9 @@
 
     <div class="sidebar-panel">
 
-
+        {% if useIframe %}
         <iframe name="{{ app.params['backend.iframe.name'] }}" src="/backend"></iframe>
+        {% endif %}
 
     </div>
 </div>

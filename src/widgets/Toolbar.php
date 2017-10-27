@@ -16,6 +16,8 @@ use yii\web\View;
 
 class Toolbar extends Widget
 {
+    public $useIframe = true;
+
     public function init()
     {
         $file = \Yii::$app->assetManager->publish(__DIR__.'/../assets/toolbar/js/check-frame.js');
@@ -25,6 +27,6 @@ class Toolbar extends Widget
     public function run()
     {
         ToolbarAsset::register($this->view);
-        return $this->render('toolbar.twig');
+        return $this->render('toolbar.twig', ['useIframe'=>$this->useIframe]);
     }
 }

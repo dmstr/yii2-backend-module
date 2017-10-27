@@ -24,7 +24,13 @@ class Module extends \yii\base\Module
      */
     public $modulesDashboardBlacklist = [];
 
-    static function colorHash($label)
+    public function init()
+    {
+        parent::init();
+        \Yii::$app->settings->getOrSet('useIframe', false, 'backend.toolbar', 'boolean');
+    }
+
+    public static function colorHash($label)
     {
         $colors = [
             InfoBox::TYPE_NAVY,
