@@ -39,7 +39,7 @@ echo \dmstr\widgets\Menu::widget(
         'encodeLabels' => false,
         'items' => \yii\helpers\ArrayHelper::merge(
             ['items' => ['label' => 'Backend navigation', 'options' => ['class' => 'header']]],
-            \dmstr\modules\pages\models\Tree::getMenuItems('backend', true, \dmstr\modules\pages\models\Tree::GLOBAL_ACCESS_DOMAIN)
+            \dmstr\modules\pages\models\Tree::getMenuItems('backend', true)
         ),
     ]
 );
