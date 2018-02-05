@@ -212,6 +212,7 @@ try {
                                                 'alt' => \Yii::$app->user->identity->username,
                                             ],
                                             'size' => 128,
+                                            'secure' => true,
                                         ]
                                     ); ?>
                                     <p>
