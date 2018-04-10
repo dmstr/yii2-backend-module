@@ -18,6 +18,7 @@ use Yii;
                         'alt' => \Yii::$app->user->identity->username,
                     ],
                     'size' => 64,
+                    'secure' => true,
                 ]
             ); ?>
         </div>
