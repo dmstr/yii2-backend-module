@@ -23,6 +23,15 @@ if (Yii::$app->settings) {
     $navBarIcon = Yii::$app->settings->get('navBarIcon', 'backend.adminlte') ?: FA::_HEART;
 }
 
+$js = <<<JS
+$(document).on('click', '.sidebar-toggle', function () {
+    if ($('body').hasClass("sidebar-collapse") && $('body').hasClass("sidebar-open")) {
+       $('body').removeClass("sidebar-collapse");
+    }
+});
+JS;
+$this->registerJs($js);
+
 ?>
 
 <?php $this->beginPage() ?>
@@ -35,7 +44,8 @@ if (Yii::$app->settings) {
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Ionicons -->
     <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <!-- Theme style -->
     <?php $this->head() ?>
@@ -48,10 +58,9 @@ if (Yii::$app->settings) {
     <![endif]-->
 </head>
 
-<body class="hold-transition skin-<?= $adminLteSkin ?> <?= Yii::$app->request->cookies['dmstr-backend_pin-navigation'] ?
-    '' : 'sidebar-collapse' ?> <?= Yii::$app->settings->get('sidebar',
-    'backend.adminlte',
-    'sidebar-mini ') ?> ">
+<body class="hold-transition skin-<?= $adminLteSkin ?>
+        <?= Yii::$app->request->cookies['dmstr-backend_pin-navigation'] ? '' : 'sidebar-collapse' ?>
+        <?= Yii::$app->settings->get('sidebar', 'backend.adminlte', 'sidebar-mini ') ?> ">
 <?php $this->beginBody() ?>
 
 <?php

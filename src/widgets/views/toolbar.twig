@@ -31,7 +31,7 @@
             }
         ) }}
         {% else %}
-            <a class="btn btn-default btn-xs" href="{{ Url.to(['/backend']) }}" target="{{ app.params['backend.iframe.name'] }}">
+            <a class="btn btn-default btn-xs btn-primary" href="{{ Url.to(['/backend']) }}" target="{{ app.params['backend.iframe.name'] }}">
                 <i class="fa fa-heart"></i>
             </a>
         {%  endif %}
@@ -39,7 +39,7 @@
         {{ button_dropdown_widget({
             'label': '<i class="fa fa-cog"></i>',
             'options':{
-                'class': 'btn-xs btn-primary '
+                'class': 'btn btn-xs btn-primary '
             },
             'encodeLabel': false,
             'dropdown': {
@@ -52,7 +52,7 @@
         {
             'label': '<i class="fa fa-edit"></i>',
             'options':{
-                'class': 'btn-xs btn-primary'
+                'class': 'btn btn-xs btn-default'
             },
             'encodeLabel': false,
             'dropdown': {
@@ -83,4 +83,5 @@
         {% endif %}
 
     </div>
+
 </div>
