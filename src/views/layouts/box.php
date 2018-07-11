@@ -11,7 +11,7 @@
 
 <?php $this->beginContent('@vendor/dmstr/yii2-backend-module/src/views/layouts/main.php'); ?>
 
-    <div class="box box-default">
+    <div class="box box-solid">
         <div class="box-body">
 
             <?= $content ?>

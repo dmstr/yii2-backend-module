@@ -7,28 +7,7 @@ use Yii;
 
 ?>
 
-<!-- Sidebar user panel -->
-<?php if (!\Yii::$app->user->isGuest): ?>
-    <div class="user-panel">
-        <div class="pull-left image">
-            <?php echo \cebe\gravatar\Gravatar::widget(
-                [
-                    'email' => \Yii::$app->user->identity->email,
-                    'options' => [
-                        'alt' => \Yii::$app->user->identity->username,
-                    ],
-                    'size' => 64,
-                    'secure' => true,
-                ]
-            ); ?>
-        </div>
-        <div class="pull-left info">
-            <p><?= \Yii::$app->user->identity->username ?></p>
 
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-    </div>
-<?php endif; ?>
 
 
 <?php
