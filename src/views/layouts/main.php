@@ -184,7 +184,7 @@ try {
                                             <li>
                                                 <?= Html::a(
                                                     $language,
-                                                    ['', Yii::$app->urlManager->languageParam => $language]
+                                                    Url::current([Yii::$app->urlManager->languageParam => $language])
                                                 ) ?>
                                             </li>
                                         <?php endforeach; ?>
