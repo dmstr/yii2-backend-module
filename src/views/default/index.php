@@ -125,8 +125,9 @@ $this->title = "Dashboard";
 
         ]);
     ?>
-    <div class="row">
-      <?php  foreach ($allModulesMenuItems as $item) {
+    <div class="container-fluid">
+        <div class="row">
+        <?php  foreach ($allModulesMenuItems as $item) {
             if ($item['visible']) {
                 echo '<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 text-error">';
                 $url = \yii\helpers\Url::to($item['url']);
@@ -140,6 +141,7 @@ $this->title = "Dashboard";
             }
         }
         ?>
-    <div>
+        <div>
+    </div>
     <?php Box::end(); ?>
 <?php endif; ?>
