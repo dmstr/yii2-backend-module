@@ -92,7 +92,7 @@ $this->title = "Dashboard";
                         </h3>
 
                         <p>
-                            <?= APP_VERSION ?>
+                            <?= defined('PROJECT_VERSION') ? PROJECT_VERSION : '-' ?>
                         </p>
                     </div>
                     <div class="icon">
