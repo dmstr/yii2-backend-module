@@ -5,7 +5,6 @@ namespace _;
 use dmstr\helpers\Metadata;
 use Yii;
 use yii\helpers\Html;
-use yii\helpers\VarDumper;
 
 // TODO: improve/handle detection in Metadata module
 if ($model['module'] === Yii::$app->id) {
