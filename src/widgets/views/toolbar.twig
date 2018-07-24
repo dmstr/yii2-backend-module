@@ -61,6 +61,24 @@
             },
         }) }}
 
+        {{ use ('dmstr/cookiebutton') }}
+        {{ cookie_button_widget(
+            {
+                'label': '<i class="fa fa-eye-slash"></i>',
+                'encodeLabel': false,
+                'cookieName': 'app-frontend-view-mode',
+                'cookieValue': 'on',
+                'cookieOptions': {
+                'path': '/',
+                'http': true,
+                'expires': 7
+            },
+                'options': {
+                'class': 'btn-xs btn-default',
+            }
+            }
+        ) }}
+
         {{ twig_widget_widget({
             'key': 'frontend.extra.menuItems',
             'renderEmpty': false,
