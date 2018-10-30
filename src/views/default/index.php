@@ -43,7 +43,14 @@ $this->title = "Dashboard";
                 <div class="small-box bg-gray">
                     <div class="inner">
                         <h3>
-                            <?= \Yii::$app->user->identityClass::find()->count() ?>
+                            <?php
+                            if (method_exists(\Yii::$app->user->identityClass, 'find')
+                                && method_exists(\Yii::$app->user->identityClass::find(), 'count')) {
+                                echo \Yii::$app->user->identityClass::find()->count();
+                            } else {
+                                echo '-';
+                            }
+                            ?>
                         </h3>
 
                         <p>
