@@ -35,7 +35,10 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
             <a href="#control-sidebar-home-tab" data-toggle="tab" aria-expanded="true"><i
                         class="fa fa-home"></i></a></li>
         <li class="">
-            <a href="#control-sidebar-theme-demo-options-tab" data-toggle="tab" aria-expanded="false"><i
+            <a href="#control-sidebar-languages-tab" data-toggle="tab" aria-expanded="false"><i
+                        class="fa fa-flag"></i></a></li>
+        <li class="">
+            <a href="#control-sidebar-modules-tab" data-toggle="tab" aria-expanded="false"><i
                         class="fa fa-wrench"></i></a></li>
         <li class="">
             <a href="#control-sidebar-settings-tab" data-toggle="tab" aria-expanded="false"><i
@@ -81,7 +84,7 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
 
 
         </div>
-        <div id="control-sidebar-theme-demo-options-tab" class="tab-pane">
+        <div id="control-sidebar-languages-tab" class="tab-pane">
             <h3 class="control-sidebar-heading">Languages</h3>
 
 
@@ -97,6 +100,9 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
                 <?php endforeach; ?>
             </ul>
 
+
+        </div>
+        <div id="control-sidebar-modules-tab" class="tab-pane">
             <?php if (\Yii::$app->user->can('Admin')): ?>
                 <h3 class="control-sidebar-heading">Application Modules</h3>
                 <ul  class="control-sidebar-menu">

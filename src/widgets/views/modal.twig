@@ -2,27 +2,7 @@
 {{ use ('yii/widgets') }}
 {% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) %}
 
-{% set js %}
-    // assign keyboard-action for modal and view mode
-    // - only when focus is on <body>, to avoid unwanted keyboard actions
-    $(document).on("keypress", function(e){
-        if ($(document.activeElement).is('body')) {
-            // open menu (m)
-            if (e.charCode === 109) {
-                $('#phd-info-button a').click()
-            }
-            // toggle view-mode (v)
-            if (e.charCode === 118) {
-                $('#app-frontend-view-mode-button').click()
-            }
-            // toggle button (h)
-            if (e.charCode === 104) {
-                $('#phd-info-button').toggle()
-            }
-        }
-    })
-{% endset %}
-{{ this.registerJs(js) }}
+
 
 <div id="phd-info-button"
      style="display: {{ app.user.isGuest ? 'none' : 'inherit' }}; position: fixed; z-index: 1200; top: 10px; left: 10px; opacity: .3">
@@ -55,24 +35,24 @@
                 </a>
 
                 {% if (app.user.can('frontend.toggle-view-mode')) %}
-                {{ cookie_button_widget(
-                    {
-                        'id': 'app-frontend-view-mode-button',
-                        'label': '<i class="fa fa-eye-slash"></i>',
-                        'encodeLabel': false,
-                        'cookieName': 'app-frontend-view-mode',
-                        'cookieValue': 'on',
-                        'cookieOptions': {
-                        'path': '/',
-                        'http': true,
-                        'expires': 7
-                    },
-                        'options': {
-                        'class': 'btn btn-default',
-                        'title': 'Toggle frontend view-mode (v)'
-                    }
-                    }
-                ) }}
+                    {{ cookie_button_widget(
+                        {
+                            'id': 'app-frontend-view-mode-button',
+                            'label': '<i class="fa fa-eye-slash"></i>',
+                            'encodeLabel': false,
+                            'cookieName': 'app-frontend-view-mode',
+                            'cookieValue': 'on',
+                            'cookieOptions': {
+                            'path': '/',
+                            'http': true,
+                            'expires': 7
+                        },
+                            'options': {
+                            'class': 'btn btn-default',
+                            'title': 'Toggle frontend view-mode (v)'
+                        }
+                        }
+                    ) }}
                 {% endif %}
 
                 <p>
@@ -84,13 +64,17 @@
                 </p>
 
                 {% if (app.user.can('backend_default_index')) %}
-                <h4>Backend</h4>
-                {{ nav_widget({'items': backendItems}) }}
-
-                <h4>Context</h4>
-                {{ nav_widget({'items': app.params['context.menuItems'], 'encodeLabels': false,}) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Backend</h4>
+                            {{ nav_widget({'items': backendItems, 'encodeLabels': false}) }}
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Context</h4>
+                            {{ nav_widget({'items': app.params['context.menuItems'], 'encodeLabels': false,}) }}
+                        </div>
+                    </div>
                 {% endif %}
-
 
                 <h4>Info</h4>
                 <table class="table">
@@ -99,8 +83,12 @@
                         <td><code>{{ name }}</code></td>
                     </tr>
                     <tr>
-                        <th>Version</th>
-                        <td><code>{{ version }}</code></td>
+                        <th>App Version</th>
+                        <td><code>{{ appVersion }}</code></td>
+                    </tr>
+                    <tr>
+                        <th>Project Version</th>
+                        <td><code>{{ projectVersion }}</code></td>
                     </tr>
                     <tr>
                         <th>Virtual Host</th>
