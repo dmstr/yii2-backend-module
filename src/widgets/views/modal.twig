@@ -1,0 +1,132 @@
+{{ use ('dmstr/cookiebutton') }}
+{{ use ('yii/widgets') }}
+{% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) %}
+
+{% set js %}
+    // assign keyboard-action for modal and view mode
+    // - only when focus is on <body>, to avoid unwanted keyboard actions
+    $(document).on("keypress", function(e){
+        if ($(document.activeElement).is('body')) {
+            // open menu (m)
+            if (e.charCode === 109) {
+                $('#phd-info-button a').click()
+            }
+            // toggle view-mode (v)
+            if (e.charCode === 118) {
+                $('#app-frontend-view-mode-button').click()
+            }
+            // toggle button (h)
+            if (e.charCode === 104) {
+                $('#phd-info-button').toggle()
+            }
+        }
+    })
+{% endset %}
+{{ this.registerJs(js) }}
+
+<div id="phd-info-button"
+     style="display: {{ app.user.isGuest ? 'none' : 'inherit' }}; position: fixed; z-index: 1200; top: 10px; left: 10px; opacity: .3">
+    {{ Html.a(
+        '<i class="fa fa-cog"></i>',
+        '#',
+        {
+            'data-toggle': 'modal',
+            'data-target': '#phd-info-modal',
+            'class': 'btn btn-default',
+            'title': 'Open menu (m)'
+        }
+    ) | raw }}
+</div>
+
+
+<div class="modal fade" style="z-index: 1200" id="phd-info-modal" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only"><?= Yii::t('default', 'Close') ?></span></button>
+
+                <a class="btn btn-default btn-primary"
+                   href="{{ Url.to(['/backend']) }}"
+                   target="{{ app.params['backend.iframe.name'] }}"
+                   title="Application backend">
+                    <i class="fa fa-heart"></i>
+                </a>
+
+                {% if (app.user.can('frontend.toggle-view-mode')) %}
+                {{ cookie_button_widget(
+                    {
+                        'id': 'app-frontend-view-mode-button',
+                        'label': '<i class="fa fa-eye-slash"></i>',
+                        'encodeLabel': false,
+                        'cookieName': 'app-frontend-view-mode',
+                        'cookieValue': 'on',
+                        'cookieOptions': {
+                        'path': '/',
+                        'http': true,
+                        'expires': 7
+                    },
+                        'options': {
+                        'class': 'btn btn-default',
+                        'title': 'Toggle frontend view-mode (v)'
+                    }
+                    }
+                ) }}
+                {% endif %}
+
+                <p>
+                <h3>{{ app.name }}</h3>
+                <small>
+                    <span class="label <?= YII_ENV_PROD ? 'label-success' : 'label-danger' ?>"><?= YII_ENV ?></span>
+                    <span class="label label-warning <?= YII_DEBUG ? '' : 'hidden' ?>">debug</span>
+                </small>
+                </p>
+
+                {% if (app.user.can('backend_default_index')) %}
+                <h4>Backend</h4>
+                {{ nav_widget({'items': backendItems}) }}
+
+                <h4>Context</h4>
+                {{ nav_widget({'items': app.params['context.menuItems'], 'encodeLabels': false,}) }}
+                {% endif %}
+
+
+                <h4>Info</h4>
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <td><code>{{ name }}</code></td>
+                    </tr>
+                    <tr>
+                        <th>Version</th>
+                        <td><code>{{ version }}</code></td>
+                    </tr>
+                    <tr>
+                        <th>Virtual Host</th>
+                        <td><code>{{ virtualHost }}</code></td>
+                    </tr>
+                    <tr>
+                        <th>Hostname</th>
+                        <td><code>{{ hostname }}<?= getenv('HOSTNAME') ?: 'local' ?></code></td>
+                    </tr>
+                </table>
+
+
+                <div class="pull-left">
+                    <p class="small">
+                        Built with {{ Html.a('phd', 'http://phd.dmstr.io') | raw }}
+                        from {{ Html.a('dmstr', 'http://www.diemeisterei.de') | raw }}
+                    </p>
+                </div>
+
+                <div class="pull-right">
+
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

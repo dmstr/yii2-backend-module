@@ -124,31 +124,3 @@ $this->title = "Dashboard";
     </div>
 
 
-<?php if (\Yii::$app->user->can('Admin')): ?>
-    <?php Box::begin(
-        [
-            'title' => 'Auto-detected modules',
-            'type' => Box::TYPE_WARNING,
-
-        ]);
-    ?>
-    <div class="container-fluid">
-        <div class="row">
-        <?php  foreach ($allModulesMenuItems as $item) {
-            if ($item['visible']) {
-                echo '<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 text-error">';
-                $url = \yii\helpers\Url::to($item['url']);
-                $colorSelect = explode('/', $url);
-
-                $linkText = '<span class="badge bg-'.Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0).'">&nbsp;</span><i class="fa fa-plug"></i>';
-                $linkText .= $item['label'];
-
-                echo Html::a($linkText, $item['url'], ['class' => 'btn btn-app btn-block']);
-                echo '</div>';
-            }
-        }
-        ?>
-        <div>
-    </div>
-    <?php Box::end(); ?>
-<?php endif; ?>

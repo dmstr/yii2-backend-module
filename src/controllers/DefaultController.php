@@ -57,23 +57,7 @@ class DefaultController extends Controller
         $adminMenuItems = [];
         $developerMenuItems = [];
 
-        foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
-            if (in_array($name, $this->module->modulesDashboardBlacklist)) {
-                continue;
-            }
 
-            $role = $name;
-
-            $defaultItem = [
-                'icon' => 'fa fa-cube',
-                'label' => $name,
-                'url' => ['/'.$name],
-                'visible' => Yii::$app->user->can($role),
-                'items' => [],
-            ];
-
-            $developerMenuItems[] = $defaultItem;
-        }
 
         // create developer menu, when user is admin
         if (Yii::$app->user->can('Admin')) {

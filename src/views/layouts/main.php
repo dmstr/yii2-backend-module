@@ -140,58 +140,12 @@ try {
                                 'renderEmpty' => false,
                             ]) ?>
                         </li>
-                        <?php if (isset(Yii::$app->params['context.menuItems']) && !empty(Yii::$app->params['context.menuItems'])): ?>
-                            <li class="dropdown context-items-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-pencil-square-o"></i>
-                                    <span><i class="caret"></i></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">Context menu items</li>
-                                    <li>
-                                        <!-- inner menu: contains the actual data -->
-                                        <ul class="menu">
-
-                                            <?php foreach (Yii::$app->params['context.menuItems'] as $item): ?>
-                                                <li>
-                                                    <?= Html::a(
-                                                        $item['label'],
-                                                        $item['url']
-                                                    ) ?>
-                                                </li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        <?php endif; ?>
 
 
 
 
-                        <li class="dropdown languages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-flag"></i>
-                                <span class="label label-default"><?= Yii::$app->language ?></span>
-                                <span><i class="caret"></i></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">Languages</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <?php foreach (Yii::$app->urlManager->languages as $language): ?>
-                                            <li>
-                                                <?= Html::a(
-                                                    $language,
-                                                    Url::current([Yii::$app->urlManager->languageParam => $language])
-                                                ) ?>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+
+
 
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
@@ -228,44 +182,10 @@ try {
                             </a>
                         </li>
 
-                        <li class="dropdown sitemap-menu">
 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-compress"></i>
-                                <span><i class="caret"></i></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <?php
-                                    // render home
-                                    echo Menu::widget(
-                                        [
-                                            'options' => ['class' => 'menu'],
-                                            'encodeLabels' => false,
-                                            'items' => [
-                                                [
-                                                    'label' => 'Home',
-                                                    'url' => Yii::$app->homeUrl,
-                                                ],
-                                            ],
-                                        ]
-                                    );
-                                    ?>
-                                    <?php
-                                    // render root pages
-                                    echo Menu::widget(
-                                        [
-                                            'options' => ['class' => 'menu'],
-                                            'encodeLabels' => false,
-                                            'items' => \dmstr\modules\pages\models\Tree::getMenuItems('root'),
-                                        ]
-                                    );
-                                    ?>
-                                </li>
-                            </ul>
-
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                         </li>
-
                     <?php endif; ?>
                 </ul>
             </div>
@@ -324,6 +244,8 @@ try {
         built with
         <a href="http://phundament.com" target="_blank">phd</a>
     </footer>
+
+    <?= $this->render('_control-sidebar') ?>
 </div>
 <!-- ./wrapper -->
 

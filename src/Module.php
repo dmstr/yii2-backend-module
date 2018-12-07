@@ -11,6 +11,7 @@ namespace dmstr\modules\backend;
  * file that was distributed with this source code.
  */
 use insolita\wgadminlte\InfoBox;
+use Yii;
 
 /**
  * Class Module.
@@ -50,6 +51,15 @@ class Module extends \yii\base\Module
         srand(crc32($label));
         $rand = array_rand($colors);
         return $colors[$rand];
+    }
+
+    /**
+     * Initialize module settings
+     */
+    public function init()
+    {
+        Yii::$app->settings->getOrSet('backendWidget', 'modal', 'frontend', 'string');
+        parent::init();
     }
 
 }
