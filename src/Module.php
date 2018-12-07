@@ -53,13 +53,4 @@ class Module extends \yii\base\Module
         return $colors[$rand];
     }
 
-    /**
-     * Initialize module settings
-     */
-    public function init()
-    {
-        Yii::$app->settings->getOrSet('backendWidget', 'modal', 'frontend', 'string');
-        parent::init();
-    }
-
 }
