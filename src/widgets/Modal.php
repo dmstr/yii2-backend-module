@@ -14,8 +14,8 @@ class Modal extends \yii\bootstrap\Widget
         $this->view->registerJsFile($js[1], ['depends' => JqueryAsset::class]);
 
         $data['name'] = Yii::$app->name;
-        $data['appVersion'] = getenv('APP_VERSION');
-        $data['projectVersion'] = getenv('PROJECT_VERSION');
+        $data['appVersion'] = defined('APP_VERSION') ? APP_VERSION : '-';
+        $data['projectVersion'] = defined('PROJECT_VERSION') ? PROJECT_VERSION : '-';
         $data['virtualHost'] = getenv('VIRTUAL_HOST');
         $data['hostname'] = getenv('HOSTNAME') ?: 'local';
         return $this->render('modal.twig', $data);
