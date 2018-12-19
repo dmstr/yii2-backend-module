@@ -39,7 +39,7 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
                         class="fa fa-flag"></i></a></li>
         <li class="">
             <a href="#control-sidebar-modules-tab" data-toggle="tab" aria-expanded="false"><i
-                        class="fa fa-wrench"></i></a></li>
+                        class="fa fa-plug"></i></a></li>
         <li class="">
             <a href="#control-sidebar-settings-tab" data-toggle="tab" aria-expanded="false"><i
                         class="fa fa-edit"></i></a></li>
@@ -114,10 +114,7 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
 
                             echo '<li>';
                             echo '<a href="'.$url.'">';
-                            echo '<i class="menu-icon fa fa-plug bg-gray"></i>';
-                            echo '<div class="menu-info">';
                             echo $item['label'];
-                            echo '</div>';
                             echo '</a>';
                             echo '</li>';
                         }

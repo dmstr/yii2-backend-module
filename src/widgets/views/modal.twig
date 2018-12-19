@@ -5,17 +5,54 @@
 
 
 <div id="phd-info-button"
-     style="display: {{ app.user.isGuest ? 'none' : 'inherit' }}; position: fixed; z-index: 1200; top: 10px; left: 10px; opacity: .3">
-    {{ Html.a(
-        '<i class="fa fa-cog"></i>',
-        '#',
-        {
-            'data-toggle': 'modal',
-            'data-target': '#phd-info-modal',
-            'class': 'btn btn-default',
-            'title': 'Open menu (m)'
-        }
-    ) | raw }}
+     style="display: {{ app.user.isGuest ? 'none' : 'inherit' }}; position: fixed; z-index: 1200; top: 70px; left: 0px; opacity: .5">
+
+    <div class="btn-group-vertical">
+
+        {{ Html.a(
+            '<i class="fa fa-wrench"></i>',
+            '#',
+            {
+                'data-toggle': 'modal',
+                'data-target': '#phd-info-modal',
+                'class': 'btn btn-default',
+                'title': 'Open menu (m)'
+            }
+        ) | raw }}
+
+        {% if not app.settings.get('backendButtonsInModal', 'frontend') %}
+
+            <a class="btn btn-default btn-primary"
+               href="{{ Url.to(['/backend']) }}"
+               target="{{ app.params['backend.iframe.name'] }}"
+               title="Application backend">
+                <i class="fa fa-arrow-circle-left"></i>
+            </a>
+
+            {% if (app.user.can('frontend.toggle-view-mode')) %}
+                {{ cookie_button_widget(
+                    {
+                        'id': 'app-frontend-view-mode-button',
+                        'label': '<i class="fa fa-eye-slash"></i>',
+                        'encodeLabel': false,
+                        'cookieName': 'app-frontend-view-mode',
+                        'cookieValue': 'on',
+                        'cookieOptions': {
+                        'path': '/',
+                        'http': true,
+                        'expires': 7
+                    },
+                        'options': {
+                        'class': 'btn btn-default',
+                        'title': 'Toggle frontend view-mode (v)'
+                    }
+                    }
+                ) }}
+            {% endif %}
+
+        {% endif %}
+    </div>
+
 </div>
 
 
@@ -27,11 +64,13 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
                             class="sr-only"><?= Yii::t('default', 'Close') ?></span></button>
 
+                {% if app.settings.get('backendButtonsInModal', 'frontend') %}
+
                 <a class="btn btn-default btn-primary"
                    href="{{ Url.to(['/backend']) }}"
                    target="{{ app.params['backend.iframe.name'] }}"
                    title="Application backend">
-                    <i class="fa fa-heart"></i>
+                    <i class="fa fa-arrow-circle-left"></i>
                 </a>
 
                 {% if (app.user.can('frontend.toggle-view-mode')) %}
@@ -53,6 +92,8 @@
                         }
                         }
                     ) }}
+                {% endif %}
+
                 {% endif %}
 
                 <p>

@@ -44,7 +44,8 @@ Add module to application configuration
 - `backend.adminlte.skin` default `black-light`
 - `backend.adminlte.sidebar` default `sidebar-mini`
 - `backend.adminlte.navBarIcon` default `heart`
-
+- `frontend.backendWidget` default `modal`
+- `frontend.backendButtonsInModal` (experimental)
 
 
 ---
