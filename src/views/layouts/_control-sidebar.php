@@ -94,7 +94,8 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
                     <li>
                         <?= Html::a(
                             $language,
-                            Url::current([Yii::$app->urlManager->languageParam => $language])
+                            Url::current([Yii::$app->urlManager->languageParam => $language]),
+                            ['class' => (Yii::$app->language == $language) ? 'active' : '']
                         ) ?>
                     </li>
                 <?php endforeach; ?>
