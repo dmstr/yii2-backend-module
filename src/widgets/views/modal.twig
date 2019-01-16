@@ -1,108 +1,129 @@
 {{ use ('dmstr/cookiebutton') }}
 {{ use ('yii/widgets') }}
+{{ use ('rmrevin/yii/fontawesome/FA') }}
+
 {% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) %}
 
 
+{% if not app.user.isGuest %}
+            <div id="phd-info-button">
 
-<div id="phd-info-button"
-     style="display: {{ app.user.isGuest ? 'none' : 'inherit' }}; position: fixed; z-index: 1200; top: 70px; left: 0px; opacity: .5">
+                <div class="btn-group-vertical">
 
-    <div class="btn-group-vertical">
+                    {{ Html.a(
+                        FA.icon(FA._WRENCH),
+                        '#',
+                        {
+                            'data-toggle': 'modal',
+                            'data-target': '#phd-info-modal',
+                            'class': 'btn btn-xs btn-default',
+                            'title': 'Open menu (m)'
+                        }
+                    ) | raw }}
 
-        {{ Html.a(
-            '<i class="fa fa-wrench"></i>',
-            '#',
-            {
-                'data-toggle': 'modal',
-                'data-target': '#phd-info-modal',
-                'class': 'btn btn-default',
-                'title': 'Open menu (m)'
-            }
-        ) | raw }}
+                    {% if not app.settings.get('backendButtonsInModal', 'frontend') %}
 
-        {% if not app.settings.get('backendButtonsInModal', 'frontend') %}
+                        {{ Html.a(
+                            FA.icon(FA._ARROW_CIRCLE_LEFT),
+                            Url.to(['/backend']),
+                            {
+                                'target': app.params['backend.iframe.name'],
+                                'class': 'btn btn-xs btn-default btn-primary',
+                                'title': 'Application backend'
+                            }
+                        ) | raw }}
 
-            <a class="btn btn-default btn-primary"
-               href="{{ Url.to(['/backend']) }}"
-               target="{{ app.params['backend.iframe.name'] }}"
-               title="Application backend">
-                <i class="fa fa-arrow-circle-left"></i>
-            </a>
+                        {% set pageId = app.request.get('pageId') %}
+                        {% if app.getModule('pages') and pageId %}
+                            {{ Html.a(
+                                FA.icon(FA._BAR_CHART),
+                                {0: '/pages/default/index','pageId': pageId},
+                                {'class': 'btn btn-xs btn-default'}
+                            )|raw }}
+                        {% endif %}
 
-            {% if (app.user.can('frontend.toggle-view-mode')) %}
-                {{ cookie_button_widget(
-                    {
-                        'id': 'app-frontend-view-mode-button',
-                        'label': '<i class="fa fa-eye-slash"></i>',
-                        'encodeLabel': false,
-                        'cookieName': 'app-frontend-view-mode',
-                        'cookieValue': 'on',
-                        'cookieOptions': {
-                        'path': '/',
-                        'http': true,
-                        'expires': 7
-                    },
-                        'options': {
-                        'class': 'btn btn-default',
-                        'title': 'Toggle frontend view-mode (v)'
-                    }
-                    }
-                ) }}
-            {% endif %}
+                        {% if (app.user.can('frontend.toggle-view-mode')) %}
+                            {{ cookie_button_widget(
+                                {
+                                    'id': 'app-frontend-view-mode-button',
+                                    'label': FA.icon(FA._EYE_SLASH),
+                                    'encodeLabel': false,
+                                    'cookieName': 'app-frontend-view-mode',
+                                    'cookieValue': 'on',
+                                    'cookieOptions': {
+                                    'path': '/',
+                                    'http': true,
+                                    'expires': 7
+                                },
+                                    'options': {
+                                    'class': 'btn btn-xs btn-default',
+                                    'title': 'Toggle frontend view-mode (v)'
+                                }
+                                }
+                            ) }}
+                        {% endif %}
 
-        {% endif %}
-    </div>
+                    {% endif %}
+                </div>
 
-</div>
+            </div>
+
+{% endif %}
 
 
-<div class="modal fade" style="z-index: 1200" id="phd-info-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="phd-info-modal" tabindex="-1" role="dialog" aria-hidden="true">
 
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                            class="sr-only"><?= Yii::t('default', 'Close') ?></span></button>
+                            class="sr-only">Close</span></button>
 
-                {% if app.settings.get('backendButtonsInModal', 'frontend') %}
+                {% if app.settings.get('backendButtonsInModal', 'frontend') and not app.user.isGuest %}
 
-                <a class="btn btn-default btn-primary"
-                   href="{{ Url.to(['/backend']) }}"
-                   target="{{ app.params['backend.iframe.name'] }}"
-                   title="Application backend">
-                    <i class="fa fa-arrow-circle-left"></i>
-                </a>
-
-                {% if (app.user.can('frontend.toggle-view-mode')) %}
-                    {{ cookie_button_widget(
+                    {{ Html.a(
+                        FA.icon(FA._ARROW_CIRCLE_LEFT),
+                        Url.to(['/backend']),
                         {
-                            'id': 'app-frontend-view-mode-button',
-                            'label': '<i class="fa fa-eye-slash"></i>',
-                            'encodeLabel': false,
-                            'cookieName': 'app-frontend-view-mode',
-                            'cookieValue': 'on',
-                            'cookieOptions': {
-                            'path': '/',
-                            'http': true,
-                            'expires': 7
-                        },
-                            'options': {
-                            'class': 'btn btn-default',
-                            'title': 'Toggle frontend view-mode (v)'
+                            'target': app.params['backend.iframe.name'],
+                            'class': 'btn btn-default btn-primary',
+                            'title': 'Application backend'
                         }
-                        }
-                    ) }}
-                {% endif %}
+                    ) | raw }}
+
+                    {% if (app.user.can('frontend.toggle-view-mode')) %}
+                        {{ cookie_button_widget(
+                            {
+                                'id': 'app-frontend-view-mode-button',
+                                'label': FA.icon(FA._EYE_SLASH),
+                                'encodeLabel': false,
+                                'cookieName': 'app-frontend-view-mode',
+                                'cookieValue': 'on',
+                                'cookieOptions': {
+                                'path': '/',
+                                'http': true,
+                                'expires': 7
+                            },
+                                'options': {
+                                'class': 'btn btn-default',
+                                'title': 'Toggle frontend view-mode (v)'
+                            }
+                            }
+                        ) }}
+                    {% endif %}
 
                 {% endif %}
 
-                <p>
-                <h3>{{ app.name }}</h3>
-                <small>
-                    <span class="label <?= YII_ENV_PROD ? 'label-success' : 'label-danger' ?>"><?= YII_ENV ?></span>
-                    <span class="label label-warning <?= YII_DEBUG ? '' : 'hidden' ?>">debug</span>
-                </small>
-                </p>
+                <div>
+                    <h3>{{ app.name }}</h3>
+                    <small>
+                        <span class="label {{ constant('YII_ENV_PROD') ? 'label-success' : 'label-danger' }}">{{ constant('YII_ENV') }}</span>
+                        {% if constant('YII_DEBUG') %}
+                            <span class="label label-warning">debug</span>
+                        {% endif %}
+                    </small>
+                </div>
+
 
                 {% if (app.user.can('backend_default_index')) %}
                     <div class="row">
@@ -131,28 +152,27 @@
                         <th>Project Version</th>
                         <td><code>{{ projectVersion }}</code></td>
                     </tr>
-                    <tr>
-                        <th>Virtual Host</th>
-                        <td><code>{{ virtualHost }}</code></td>
-                    </tr>
+                    {% if virtualHost %}
+                        <tr>
+                            <th>Virtual Host</th>
+                            <td><code>{{ virtualHost }}</code></td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <th>Hostname</th>
-                        <td><code>{{ hostname }}<?= getenv('HOSTNAME') ?: 'local' ?></code></td>
+                        <td><code>{{ hostname }}</code></td>
                     </tr>
                 </table>
 
 
                 <div class="pull-left">
                     <p class="small">
-                        Built with {{ Html.a('phd', 'http://phd.dmstr.io') | raw }}
-                        from {{ Html.a('dmstr', 'http://www.diemeisterei.de') | raw }}
+                        Built with {{ Html.a('phd', 'https://phd.dmstr.io',{'target': '_blank'}) | raw }}
+                        from {{ Html.a('dmstr', 'https://www.diemeisterei.de',{'target': '_blank'}) | raw }}
                     </p>
                 </div>
 
-                <div class="pull-right">
-
-                </div>
-                <div class="clearfix"></div>
+                <span class="clearfix"></span>
 
             </div>
         </div>

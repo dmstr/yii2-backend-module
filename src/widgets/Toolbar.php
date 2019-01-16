@@ -11,46 +11,38 @@ namespace dmstr\modules\backend\widgets;
 
 
 use dmstr\modules\backend\assets\ToolbarAsset;
-use pheme\settings\models\Setting;
 use yii\base\Widget;
-use yii\helpers\Url;
 use yii\web\View;
 
+/**
+ * Class Toolbar
+ * @package dmstr\modules\backend\widgets
+ *
+ * @property bool useIframe
+ */
 class Toolbar extends Widget
 {
+
     public $useIframe = true;
 
     public function init()
     {
-        $file = \Yii::$app->assetManager->publish(dirname(__DIR__).'/assets/toolbar/js/check-frame.js');
-        $this->view->registerJsFile($file[1], ['position'=>View::POS_BEGIN]);
-    }
-
-    public function run()
-    {
-        ToolbarAsset::register($this->view);
-        return $this->render('toolbar.twig', ['useIframe'=>$this->useIframe]);
+        $this->registerAssets();
+        parent::init();
     }
 
     /**
-     * @param $section
      * @return string
-     * @throws \yii\base\InvalidConfigException
      */
-    public function seoSettingUrl($section) {
+    public function run()
+    {
+        return $this->render('toolbar.twig', ['useIframe' => $this->useIframe]);
+    }
 
-        $route = Url::toRoute('');
-        /** @var Setting|null $setting */
-        $setting = Setting::find()->andWhere(['key' => $route,'section' => $section])->one();
-
-        if ($setting === null) {
-            return Url::to(['/settings/default/create','Setting' => [
-                'key' => $route,
-                'section' => $section
-            ]]);
-        }
-
-        return  Url::to(['/settings/default/update','id' => $setting->id]);
-
+    public function registerAssets()
+    {
+        $file = \Yii::$app->assetManager->publish(dirname(__DIR__) . '/assets/toolbar/js/check-frame.js');
+        $this->view->registerJsFile($file[1], ['position' => View::POS_BEGIN]);
+        ToolbarAsset::register($this->view);
     }
 }

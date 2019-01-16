@@ -10,7 +10,6 @@ use Yii;
 use yii\base\InvalidCallException;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\Menu;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
