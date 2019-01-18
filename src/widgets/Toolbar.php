@@ -14,19 +14,35 @@ use dmstr\modules\backend\assets\ToolbarAsset;
 use yii\base\Widget;
 use yii\web\View;
 
+/**
+ * Class Toolbar
+ * @package dmstr\modules\backend\widgets
+ *
+ * @property bool useIframe
+ */
 class Toolbar extends Widget
 {
+
     public $useIframe = true;
 
     public function init()
     {
-        $file = \Yii::$app->assetManager->publish(__DIR__.'/../assets/toolbar/js/check-frame.js');
-        $this->view->registerJsFile($file[1], ['position'=>View::POS_BEGIN]);
+        $this->registerAssets();
+        parent::init();
     }
 
+    /**
+     * @return string
+     */
     public function run()
     {
+        return $this->render('toolbar.twig', ['useIframe' => $this->useIframe]);
+    }
+
+    public function registerAssets()
+    {
+        $file = \Yii::$app->assetManager->publish(dirname(__DIR__) . '/assets/toolbar/js/check-frame.js');
+        $this->view->registerJsFile($file[1], ['position' => View::POS_BEGIN]);
         ToolbarAsset::register($this->view);
-        return $this->render('toolbar.twig', ['useIframe'=>$this->useIframe]);
     }
 }

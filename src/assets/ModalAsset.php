@@ -15,14 +15,14 @@ use yii\web\JqueryAsset;
 use yii\web\View;
 
 /**
- * Class ToolbarAsset
+ * Class ModalAsset
  * @author Elias Luhr <e.luhr@herzogkommunikation.de>
  */
-class ToolbarAsset extends AssetBundle
+class ModalAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/dmstr/yii2-backend-module/src/assets/toolbar';
+    public $sourcePath = '@vendor/dmstr/yii2-backend-module/src/assets/modal';
 
-    public $js = ['js/widget.js'];
+    public $js = ['js/modal.js'];
 
     public $css = ['less/widget.less'];
 

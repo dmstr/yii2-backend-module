@@ -1,105 +1,110 @@
 {{ use ('yii/widgets') }}
+{{ use ('pheme/settings/models/Setting') }}
 {{ use ('yii/helpers/Url') }}
 {{ use ('dmstr/modules/prototype/widgets/TwigWidget') }}
 {{ use ('dmstr/cookiebutton/CookieButton') }}
+{{ use ('rmrevin/yii/fontawesome/FA') }}
 
-{% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) %}
+{% if not app.user.isGuest %}
+    {% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) %}
 
-<div id="sidebar-wrapper" class="{{ (useIframe and app.request.cookies.get('hrzg-backend_toolbar')) ? 'active' : '' }}">
+    <div id="sidebar-wrapper"
+         class="{{ (useIframe and app.request.cookies.get('hrzg-backend_toolbar')) ? 'active' : '' }}">
 
-    <div id="sidebar-toggle">
+        <div id="sidebar-toggle">
 
-        <div class="btn-group-vertical" role="group">
+            <div class="btn-group-vertical" role="group">
 
-        {% if useIframe %}
-        {{ use ('dmstr/cookiebutton') }}
-        {{ cookie_button_widget(
-            {
-                'label': '<i class="fa fa-heart-o"></i>',
-                'encodeLabel': false,
-                'cookieName': 'hrzg-backend_toolbar',
-                'cookieValue': 'on',
-                'cookieOptions': {
-                    'path': '/',
-                    'http': true,
-                    'expires': 7
-                },
-                'options': {
-                    'class': 'btn btn-primary btn-sm',
-                    'onclick': 'toggleSidebar()'
-                }
-            }
-        ) }}
-        {% else %}
-            <a class="btn btn-default btn-xs btn-primary" href="{{ Url.to(['/backend']) }}" target="{{ app.params['backend.iframe.name'] }}">
-                <i class="fa fa-heart"></i>
-            </a>
-        {%  endif %}
+                {% if useIframe %}
+                    {{ use ('dmstr/cookiebutton') }}
+                    {{ cookie_button_widget(
+                        {
+                            'label': FA.icon(FA._HEART_O),
+                            'encodeLabel': false,
+                            'cookieName': 'hrzg-backend_toolbar',
+                            'cookieValue': 'on',
+                            'cookieOptions': {
+                            'path': '/',
+                            'http': true,
+                            'expires': 7
+                        },
+                            'options': {
+                            'class': 'btn btn-primary btn-sm',
+                            'onclick': 'toggleSidebar()'
+                        }
+                        }
+                    ) }}
+                {% else %}
+                    <a class="btn btn-default btn-xs btn-primary" href="{{ Url.to(['/backend']) }}"
+                       target="{{ app.params['backend.iframe.name'] }}">
+                        {{ FA.icon(FA._HEART)|raw }}
+                    </a>
+                {% endif %}
 
-        {{ button_dropdown_widget({
-            'label': '<i class="fa fa-cog"></i>',
-            'options':{
-                'class': 'btn btn-xs btn-primary '
-            },
-            'encodeLabel': false,
-            'dropdown': {
-                'encodeLabels': false,
-                'items': backendItems,
-            },
-        }) }}
+                {{ button_dropdown_widget({
+                    'label': FA.icon(FA._COG),
+                    'options':{
+                        'class': 'btn btn-xs btn-primary '
+                    },
+                    'encodeLabel': false,
+                    'dropdown': {
+                        'encodeLabels': false,
+                        'items': backendItems,
+                    },
+                }) }}
 
-        {{ button_dropdown_widget(
-        {
-            'label': '<i class="fa fa-edit"></i>',
-            'options':{
-                'class': 'btn btn-xs btn-default'
-            },
-            'encodeLabel': false,
-            'dropdown': {
-                'encodeLabels': false,
-                'items': app.params['context.menuItems'],
-            },
-        }) }}
+                {{ button_dropdown_widget(
+                    {
+                        'label': FA.icon(FA._EDIT),
+                        'options':{
+                        'class': 'btn btn-xs btn-default'
+                    },
+                        'encodeLabel': false,
+                        'dropdown': {
+                        'encodeLabels': false,
+                        'items': app.params['context.menuItems'],
+                    },
+                    }) }}
+                {{ use ('dmstr/cookiebutton') }}
+                {{ cookie_button_widget(
+                    {
+                        'label': FA.icon(FA._EYE_SLASH),
+                        'encodeLabel': false,
+                        'cookieName': 'app-frontend-view-mode',
+                        'cookieValue': 'on',
+                        'cookieOptions': {
+                        'path': '/',
+                        'http': true,
+                        'expires': 7
+                    },
+                        'options': {
+                        'class': 'btn-xs btn-default',
+                    }
+                    }
+                ) }}
 
-        {{ use ('dmstr/cookiebutton') }}
-        {{ cookie_button_widget(
-            {
-                'label': '<i class="fa fa-eye-slash"></i>',
-                'encodeLabel': false,
-                'cookieName': 'app-frontend-view-mode',
-                'cookieValue': 'on',
-                'cookieOptions': {
-                'path': '/',
-                'http': true,
-                'expires': 7
-            },
-                'options': {
-                'class': 'btn-xs btn-default',
-            }
-            }
-        ) }}
+                {{ twig_widget_widget({
+                    'key': 'frontend.extra.menuItems',
+                    'renderEmpty': false,
+                }) }}
 
-        {{ twig_widget_widget({
-            'key': 'frontend.extra.menuItems',
-            'renderEmpty': false,
-        }) }}
+                {% if useIframe %}
+                    <a class="frontend-reload btn btn-default btn-xs navbar-btn hide-iframe"
+                       href="{{ app.request.url }}">
+                        {{ FA.icon(FA._REFRESH)|raw }}
+                    </a>
+                {% endif %}
 
-        {% if useIframe %}
-        <a class="frontend-reload btn btn-default btn-xs navbar-btn hide-iframe" href="{{ app.request.url }}">
-            <i class="fa fa-refresh"></i>
-        </a>
-        {% endif %}
+            </div>
 
         </div>
 
+        <div class="sidebar-panel">
+
+            {% if useIframe %}
+                <iframe name="{{ app.params['backend.iframe.name'] }}" src="{{ Url.to(['/backend']) }}"></iframe>
+            {% endif %}
+
+        </div>
     </div>
-
-    <div class="sidebar-panel">
-
-        {% if useIframe %}
-        <iframe name="{{ app.params['backend.iframe.name'] }}" src="/backend"></iframe>
-        {% endif %}
-
-    </div>
-
-</div>
+{% endif %}
