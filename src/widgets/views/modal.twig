@@ -6,67 +6,58 @@
 
 
 {% if not app.user.isGuest %}
-            <div id="phd-info-button">
+    <div id="phd-info-button">
 
-                <div class="btn-group-vertical">
+        <div class="btn-group-vertical">
 
-                    {{ Html.a(
-                        FA.icon(FA._WRENCH),
-                        '#',
+            {{ Html.a(
+                FA.icon(FA._WRENCH),
+                '#',
+                {
+                    'data-toggle': 'modal',
+                    'data-target': '#phd-info-modal',
+                    'class': 'btn btn-xs btn-default',
+                    'title': 'Open menu (m)'
+                }
+            ) | raw }}
+
+            {% if not app.settings.get('backendButtonsInModal', 'frontend') %}
+
+                {{ Html.a(
+                    FA.icon(FA._ARROW_CIRCLE_LEFT),
+                    Url.to(['/backend']),
+                    {
+                        'target': app.params['backend.iframe.name'],
+                        'class': 'btn btn-xs btn-default btn-primary',
+                        'title': 'Application backend'
+                    }
+                ) | raw }}
+
+                {% if (app.user.can('frontend.toggle-view-mode')) %}
+                    {{ cookie_button_widget(
                         {
-                            'data-toggle': 'modal',
-                            'data-target': '#phd-info-modal',
+                            'id': 'app-frontend-view-mode-button',
+                            'label': FA.icon(FA._EYE_SLASH),
+                            'encodeLabel': false,
+                            'cookieName': 'app-frontend-view-mode',
+                            'cookieValue': 'on',
+                            'cookieOptions': {
+                            'path': '/',
+                            'http': true,
+                            'expires': 7
+                        },
+                            'options': {
                             'class': 'btn btn-xs btn-default',
-                            'title': 'Open menu (m)'
+                            'title': 'Toggle frontend view-mode (v)'
                         }
-                    ) | raw }}
+                        }
+                    ) }}
+                {% endif %}
 
-                    {% if not app.settings.get('backendButtonsInModal', 'frontend') %}
+            {% endif %}
+        </div>
 
-                        {{ Html.a(
-                            FA.icon(FA._ARROW_CIRCLE_LEFT),
-                            Url.to(['/backend']),
-                            {
-                                'target': app.params['backend.iframe.name'],
-                                'class': 'btn btn-xs btn-default btn-primary',
-                                'title': 'Application backend'
-                            }
-                        ) | raw }}
-
-                        {% set pageId = app.request.get('pageId') %}
-                        {% if app.getModule('pages') and pageId %}
-                            {{ Html.a(
-                                FA.icon(FA._BAR_CHART),
-                                {0: '/pages/default/index','pageId': pageId},
-                                {'class': 'btn btn-xs btn-default'}
-                            )|raw }}
-                        {% endif %}
-
-                        {% if (app.user.can('frontend.toggle-view-mode')) %}
-                            {{ cookie_button_widget(
-                                {
-                                    'id': 'app-frontend-view-mode-button',
-                                    'label': FA.icon(FA._EYE_SLASH),
-                                    'encodeLabel': false,
-                                    'cookieName': 'app-frontend-view-mode',
-                                    'cookieValue': 'on',
-                                    'cookieOptions': {
-                                    'path': '/',
-                                    'http': true,
-                                    'expires': 7
-                                },
-                                    'options': {
-                                    'class': 'btn btn-xs btn-default',
-                                    'title': 'Toggle frontend view-mode (v)'
-                                }
-                                }
-                            ) }}
-                        {% endif %}
-
-                    {% endif %}
-                </div>
-
-            </div>
+    </div>
 
 {% endif %}
 
