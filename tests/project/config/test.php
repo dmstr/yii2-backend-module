@@ -6,8 +6,17 @@ Yii::$classMap['app\components\AdminIdentity'] = '/repo/tests/project/src/compon
 return [
     'aliases' => [
         'backend' => '/repo/src',
+        'vendor/dmstr/yii2-backend-module' => '/repo'
     ],
     'components' => [
+        'assetManager' => [
+            'converter' => [
+                'class' => 'yii\web\AssetConverter',
+                'commands' => [
+                    'less' => ['css', 'lessc {from} {to} --no-color --modify-var="bowerAssetPath=/app/vendor/bower-asset"'],
+                ],
+            ],
+        ],
         'user' => [
             'class' => 'dmstr\web\User',
             'identityClass' => 'app\components\AdminIdentity',
