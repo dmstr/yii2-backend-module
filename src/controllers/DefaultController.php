@@ -71,7 +71,8 @@ class DefaultController extends Controller
         }
 
         if (Yii::$app->hasModule('pages')) {
-            $items = Tree::getMenuItems('backend', true);
+            // no `use` statement, since module is optional
+            $items = \dmstr\modules\pages\models\Tree::getMenuItems('backend', true);
         } else {
             $items = [];
         }
