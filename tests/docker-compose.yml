@@ -1,0 +1,25 @@
+version: '2'
+services:
+
+  php:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    working_dir: /repo/tests
+    ports:
+      - 80
+    environment:
+      - YII_ENV=test
+      - YII_DEBUG=1
+      - APP_CONFIG_FILE=/repo/tests/project/config/test.php
+    volumes:
+      # mount this repository read-only
+      - ./..:/repo:ro
+      # mount tests
+      - ./:/repo/tests
+      # composer cache
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+    networks:
+      default:
+        aliases:
+          - web
