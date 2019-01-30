@@ -14,14 +14,19 @@ use yii\helpers\Url;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-\dmstr\modules\backend\assets\BackendAsset::register($this);
-\dmstr\modules\backend\assets\BackendJsAsset::register($this);
-
-if (Yii::$app->settings) {
+// use values from settings, if available
+$adminLteSkin = '';
+$navBarIcon = '';
+$sidebarClass = '';
+if (Yii::$app->has('settings')) {
     $adminLteSkin = Yii::$app->settings->get('skin', 'backend.adminlte') ?: 'black-light';
     $navBarIcon = Yii::$app->settings->get('navBarIcon', 'backend.adminlte') ?: FA::_HEART;
+    $sidebarClass = Yii::$app->settings->get('sidebar', 'backend.adminlte', 'sidebar-mini ');
 }
 
+// prepare assets
+\dmstr\modules\backend\assets\BackendAsset::register($this);
+\dmstr\modules\backend\assets\BackendJsAsset::register($this);
 $js = <<<JS
 $(document).on('click', '.sidebar-toggle', function () {
     if ($('body').hasClass("sidebar-collapse") && $('body').hasClass("sidebar-open")) {
@@ -47,56 +52,57 @@ $this->registerJs($js);
 
 <body class="hold-transition skin-<?= $adminLteSkin ?>
         <?= Yii::$app->request->cookies['dmstr-backend_pin-navigation'] ? '' : 'sidebar-collapse' ?>
-        <?= Yii::$app->settings->get('sidebar', 'backend.adminlte', 'sidebar-mini ') ?> ">
+        <?= $sidebarClass ?> ">
 <?php $this->beginBody() ?>
 
-<?php
 
+<?php
 // Dynamic blocks need to be rendered before `context.menuItems`, otherwise the events are fired too late.
 // TODO: try catch is for open begin/end detection, move to TwigWidget
-try {
-    $this->beginBlock('twig-main-top');
-    echo TwigWidget::widget([
-        'position' => 'main-top',
-        'registerMenuItems' => true,
-        'queryParam' => false,
-        'renderEmpty' => false,
-    ]);
-    $this->endBlock('twig-main-top');
-} catch (InvalidCallException $e) {
-    $this->blocks['twig-main-top'] = 'X';
-    Yii::$app->session->addFlash('error', $e->getMessage());
-}
+if (Yii::$app->hasModule('prototype')) {
+    try {
+        $this->beginBlock('twig-main-top');
+        echo TwigWidget::widget([
+                                    'position' => 'main-top',
+                                    'registerMenuItems' => true,
+                                    'queryParam' => false,
+                                    'renderEmpty' => false,
+                                ]);
+        $this->endBlock('twig-main-top');
+    } catch (InvalidCallException $e) {
+        $this->blocks['twig-main-top'] = 'X';
+        Yii::$app->session->addFlash('error', $e->getMessage());
+    }
 
-try {
-    $this->beginBlock('twig-main-bottom');
-    echo TwigWidget::widget([
-        'position' => 'main-bottom',
-        'registerMenuItems' => true,
-        'queryParam' => false,
-        'renderEmpty' => false,
-    ]);
-    $this->endBlock('twig-main-bottom');
-} catch (InvalidCallException $e) {
-    $this->blocks['twig-main-bottom'] = 'X';
-    Yii::$app->session->addFlash('error', $e->getMessage());
-}
+    try {
+        $this->beginBlock('twig-main-bottom');
+        echo TwigWidget::widget([
+                                    'position' => 'main-bottom',
+                                    'registerMenuItems' => true,
+                                    'queryParam' => false,
+                                    'renderEmpty' => false,
+                                ]);
+        $this->endBlock('twig-main-bottom');
+    } catch (InvalidCallException $e) {
+        $this->blocks['twig-main-bottom'] = 'X';
+        Yii::$app->session->addFlash('error', $e->getMessage());
+    }
 
-try {
-    $this->beginBlock('extra-content');
-    echo TwigWidget::widget([
-        'key' => 'backend.extra.content',
-        'position' => 'bottom',
-        'registerMenuItems' => true,
-        'queryParam' => false,
-        'renderEmpty' => false,
-    ]);
-    $this->endBlock('extra-content');
-} catch (InvalidCallException $e) {
-    $this->blocks['extra-content'] = '';
-    Yii::$app->session->addFlash('error', $e->getMessage());
+    try {
+        $this->beginBlock('extra-content');
+        echo TwigWidget::widget([
+                                    'key' => 'backend.extra.content',
+                                    'position' => 'bottom',
+                                    'registerMenuItems' => true,
+                                    'queryParam' => false,
+                                    'renderEmpty' => false,
+                                ]);
+        $this->endBlock('extra-content');
+    } catch (InvalidCallException $e) {
+        $this->blocks['extra-content'] = '';
+        Yii::$app->session->addFlash('error', $e->getMessage());
+    }
 }
-
 ?>
 
 <div class="wrapper">

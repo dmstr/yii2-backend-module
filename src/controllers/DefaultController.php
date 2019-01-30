@@ -70,7 +70,13 @@ class DefaultController extends Controller
             ];
         }
 
-        return $this->render('index', ['allModulesMenuItems' => $developerMenuItems]);
+        if (Yii::$app->hasModule('pages')) {
+            $items = Tree::getMenuItems('backend', true);
+        } else {
+            $items = [];
+        }
+
+        return $this->render('index', ['items' => $items]);
     }
 
     /**

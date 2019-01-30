@@ -21,6 +21,11 @@
         "insolita/yii2-adminlte-widgets": "^1.1.4",
         "loveorigami/yii2-notification-wrapper": "^6.3"
     },
+    "suggest": {
+        "codemix/yii2-localeurls": "Extended URL manager",
+        "dmstr/yii2-pages-module": "Menu manager",
+        "dmstr/yii2-prototype-module": "Content prototyping"
+    },
     "autoload": {
         "psr-4": {
             "dmstr\\modules\\backend\\": "src"

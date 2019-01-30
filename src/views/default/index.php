@@ -1,16 +1,9 @@
 <?php
-/**
- * @var $allModulesMenuItems array
- */
-
-use dmstr\modules\backend\Module;
-use dmstr\modules\pages\models\Tree;
-use insolita\wgadminlte\Box;
-use yii\helpers\Html;
-
 $this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
 $this->title = "Dashboard";
 ?>
+
+    <h1>Backend</h1>
 
     <div class="row">
 
@@ -117,8 +110,6 @@ $this->title = "Dashboard";
 
     <div class="row">
         <?php
-        /** @var $items array */
-        $items = Tree::getMenuItems('backend', true);
         echo $this->context->renderDashboardMenu(['items' => $items]);
         ?>
     </div>

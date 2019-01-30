@@ -19,13 +19,26 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
     $defaultItem = [
         'icon' => 'fa fa-cube',
         'label' => $name,
-        'url' => ['/'.$name],
+        'url' => ['/' . $name],
         'visible' => Yii::$app->user->can($role),
         'items' => [],
     ];
 
     $developerMenuItems[] = $defaultItem;
 }
+
+if (Yii::$app->hasModule('pages')) {
+    $rootItems = \dmstr\modules\pages\models\Tree::getMenuItems('root');
+} else {
+    $rootItems = [];
+}
+
+if (Yii::$app->urlManager->hasProperty('language')) {
+    $languages = Yii::$app->urlManager->language;
+} else {
+    $languages = [];
+}
+
 ?>
 
 <aside class="control-sidebar control-sidebar-dark">
@@ -72,7 +85,7 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
                         [
                             'options' => ['class' => 'menu'],
                             'encodeLabels' => false,
-                            'items' => \dmstr\modules\pages\models\Tree::getMenuItems('root'),
+                            'items' => $rootItems,
                         ]
                     );
                     ?>
@@ -90,7 +103,7 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
 
             <!-- inner menu: contains the actual data -->
             <ul class="control-sidebar-menu">
-                <?php foreach (Yii::$app->urlManager->languages as $language): ?>
+                <?php foreach ($languages as $language): ?>
                     <li>
                         <?= Html::a(
                             $language,
@@ -106,15 +119,15 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
         <div id="control-sidebar-modules-tab" class="tab-pane">
             <?php if (\Yii::$app->user->can('Admin')): ?>
                 <h3 class="control-sidebar-heading">Application Modules</h3>
-                <ul  class="control-sidebar-menu">
+                <ul class="control-sidebar-menu">
 
 
-                    <?php  foreach ($developerMenuItems as $item) {
+                    <?php foreach ($developerMenuItems as $item) {
                         if ($item['visible']) {
                             $url = \yii\helpers\Url::to($item['url']);
 
                             echo '<li>';
-                            echo '<a href="'.$url.'">';
+                            echo '<a href="' . $url . '">';
                             echo $item['label'];
                             echo '</a>';
                             echo '</li>';
@@ -125,14 +138,14 @@ foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
                     </div>
 
                 </ul>
-                <?php endif; ?>
+            <?php endif; ?>
         </div>
         <!-- /.tab-pane -->
 
         <!-- Settings tab content -->
         <div class="tab-pane" id="control-sidebar-settings-tab">
             <?php if (isset(Yii::$app->params['context.menuItems']) && !empty(Yii::$app->params['context.menuItems'])): ?>
-                <h3  class="control-sidebar-heading">Context Menu</h3>
+                <h3 class="control-sidebar-heading">Context Menu</h3>
                 <ul class="control-sidebar-menu">
 
                     <?php foreach (Yii::$app->params['context.menuItems'] as $item): ?>
