@@ -8,8 +8,8 @@ use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\widgets\ListView;
 
-$this->params['breadcrumbs'][] = ['label' => 'Configuration'];
-$this->title = "Configuration";
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend-module', 'Configuration')];
+$this->title = Yii::t('backend-module', 'Configuration');
 ?>
 
 <div class="row">
@@ -92,19 +92,19 @@ $this->title = "Configuration";
     <?= Tabs::widget([
         'items' => [
             [
-                'label' => 'Params',
+                'label' => Yii::t('backend-module', 'Params'),
                 'content' => $this->blocks['params'],
             ],
             [
-                'label' => 'Components',
+                'label' => Yii::t('backend-module', 'Components'),
                 'content' => $this->blocks['components'],
             ],
             [
-                'label' => 'Modules',
+                'label' => Yii::t('backend-module', 'Modules'),
                 'content' => $this->blocks['modules'],
             ],
             [
-                'label' => 'Controllers',
+                'label' => Yii::t('backend-module', 'Controllers'),
                 'content' => $this->blocks['controllers'],
             ],
         ],

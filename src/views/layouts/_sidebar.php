@@ -2,12 +2,13 @@
 
 namespace _;
 
-use tests\models\Tree;
+use dmstr\widgets\Menu;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 // get menu items from pages, if available
 if (Yii::$app->hasModule('pages')) {
-    $menuItems = \dmstr\modules\pages\models\Tree::getMenuItems('backend', true);
+    $menuItems = dmstr\modules\pages\models\Tree::getMenuItems('backend', true);
 } else {
     $menuItems = [];
 }
@@ -17,11 +18,11 @@ if (Yii::$app->hasModule('pages')) {
 
 <?php
 
-echo \dmstr\widgets\Menu::widget(
+echo Menu::widget(
     [
         'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
         'encodeLabels' => false,
-        'items' => \yii\helpers\ArrayHelper::merge(
+        'items' => ArrayHelper::merge(
             ['items' => ['label' => 'Backend navigation', 'options' => ['class' => 'header']]],
             $menuItems
         ),

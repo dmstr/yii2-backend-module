@@ -10,8 +10,9 @@ namespace dmstr\modules\backend;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+use dmstr\web\traits\AccessBehaviorTrait;
 use insolita\wgadminlte\InfoBox;
-use Yii;
 
 /**
  * Class Module.
@@ -20,11 +21,18 @@ use Yii;
  */
 class Module extends \yii\base\Module
 {
+    use AccessBehaviorTrait;
+
     /**
      * @var array Names of (auto-detected) modules which should not be show on dashboard
      */
     public $modulesDashboardBlacklist = [];
 
+    /**
+     * @param $label
+     *
+     * @return mixed
+     */
     public static function colorHash($label)
     {
         $colors = [

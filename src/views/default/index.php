@@ -1,6 +1,6 @@
 <?php
-$this->params['breadcrumbs'][] = ['label' => 'Dashboard'];
-$this->title = "Dashboard";
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend-module', 'Dashboard')];
+$this->title = Yii::t('backend-module', 'Dashboard');
 ?>
 
     <h1>Backend</h1>
@@ -14,7 +14,7 @@ $this->title = "Dashboard";
                 <div class="small-box bg-gray">
                     <div class="inner">
                         <h3>
-                            ID
+                            <?=Yii::t('backend-module', 'ID')?>
                         </h3>
 
                         <p>
@@ -25,7 +25,7 @@ $this->title = "Dashboard";
                         <i class="ion ion-home"></i>
                     </div>
                     <a href="<?= \yii\helpers\Url::to(['/']) ?>" class="small-box-footer">
-                        Homepage <i class="fa fa-arrow-circle-right"></i>
+                        <?=Yii::t('backend-module', 'Homepage')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
@@ -47,14 +47,14 @@ $this->title = "Dashboard";
                         </h3>
 
                         <p>
-                            Users
+                            <?=Yii::t('backend-module', 'Users')?>
                         </p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person"></i>
                     </div>
                     <a href="<?= \yii\helpers\Url::to(['/user/admin']) ?>" class="small-box-footer">
-                        Manage <i class="fa fa-arrow-circle-right"></i>
+                        <?=Yii::t('backend-module', 'Manage')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
@@ -69,14 +69,14 @@ $this->title = "Dashboard";
                         </h3>
 
                         <p>
-                            Modules
+                            <?=Yii::t('backend-module', 'Modules')?>
                         </p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
                     <a href="<?= \yii\helpers\Url::to(['/backend/default/view-config']) ?>" class="small-box-footer">
-                        Configuration <i class="fa fa-arrow-circle-right"></i>
+                        <?=Yii::t('backend-module', 'Configuration')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
 
@@ -99,7 +99,7 @@ $this->title = "Dashboard";
                         <i class="ion ion-grid"></i>
                     </div>
                     <a href="<?= \yii\helpers\Url::to(['/audit']) ?>" class="small-box-footer">
-                        Audit <i class="fa fa-arrow-circle-right"></i>
+                        <?=Yii::t('backend-module', 'Audit')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
