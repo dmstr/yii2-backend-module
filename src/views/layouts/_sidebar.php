@@ -2,14 +2,13 @@
 
 namespace _;
 
-use dmstr\modules\pages\models\Tree;
 use dmstr\widgets\Menu;
 use Yii;
 use yii\helpers\ArrayHelper;
 
 // get menu items from pages, if available
 if (Yii::$app->hasModule('pages')) {
-    $menuItems = Tree::getMenuItems('backend', true);
+    $menuItems = dmstr\modules\pages\models\Tree::getMenuItems('backend', true);
 } else {
     $menuItems = [];
 }
