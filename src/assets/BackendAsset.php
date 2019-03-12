@@ -11,6 +11,7 @@ namespace dmstr\modules\backend\assets;
 
 use yii\web\AssetBundle as BaseBackendAssetBundle;
 use yii\web\View;
+use dmstr\web\AdminLteAsset;
 
 /**
  * Configuration for `backend` client script files.
@@ -26,6 +27,6 @@ class BackendAsset extends BaseBackendAssetBundle
     ];
 
     public $depends = [
-        'dmstr\web\AdminLteAsset',
+        AdminLteAsset::class,
     ];
 }

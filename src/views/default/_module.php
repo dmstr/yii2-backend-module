@@ -2,11 +2,13 @@
 
 namespace _;
 
+use dmstr\helpers\Metadata;
 use insolita\wgadminlte\Box;
 use yii\data\ArrayDataProvider;
 use yii\widgets\ListView;
 
 /* @var $this \yii\web\View */
+/* @var $key string */
 
 ?>
 
@@ -15,7 +17,7 @@ use yii\widgets\ListView;
 <?php
 $controllerDataProvider = new ArrayDataProvider(
     [
-        'allModels' => \dmstr\helpers\Metadata::getModuleControllers($key),
+        'allModels' => Metadata::getModuleControllers($key),
     ]
 );
 ?>

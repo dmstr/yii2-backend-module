@@ -3,13 +3,18 @@
 namespace _;
 
 use dmstr\cookiebutton\CookieButton;
+use dmstr\modules\backend\assets\BackendAsset;
+use dmstr\modules\backend\assets\BackendJsAsset;
 use dmstr\modules\prototype\widgets\TwigWidget;
 use lo\modules\noty\Wrapper;
 use rmrevin\yii\fontawesome\FA;
 use Yii;
 use yii\base\InvalidCallException;
 use yii\helpers\Html;
+use yii\helpers\Inflector;
 use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
+use lo\modules\noty\layers\Growl;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -25,12 +30,13 @@ if (Yii::$app->has('settings')) {
 }
 
 // prepare assets
-\dmstr\modules\backend\assets\BackendAsset::register($this);
-\dmstr\modules\backend\assets\BackendJsAsset::register($this);
+BackendAsset::register($this);
+BackendJsAsset::register($this);
 $js = <<<JS
+var bodyEl = $('body');
 $(document).on('click', '.sidebar-toggle', function () {
-    if ($('body').hasClass("sidebar-collapse") && $('body').hasClass("sidebar-open")) {
-       $('body').removeClass("sidebar-collapse");
+    if (bodyEl.hasClass("sidebar-collapse") && bodyEl.hasClass("sidebar-open")) {
+       bodyEl.removeClass("sidebar-collapse");
     }
 });
 JS;
@@ -40,7 +46,7 @@ $this->registerJs($js);
 
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html>
+<html lang="<?=Yii::$app->language?>">
 <head>
     <meta charset="UTF-8">
     <?= Html::csrfMetaTags() ?>
@@ -140,7 +146,7 @@ if (Yii::$app->hasModule('prototype')) {
 
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="backend-extra-items-menu">
-                            <?= \dmstr\modules\prototype\widgets\TwigWidget::widget([
+                            <?= TwigWidget::widget([
                                 'key' => 'backend.extra.menuItems',
                                 'renderEmpty' => false,
                             ]) ?>
@@ -169,11 +175,11 @@ if (Yii::$app->hasModule('prototype')) {
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="<?= \yii\helpers\Url::to(['/user/settings/profile']) ?>"
+                                        <a href="<?= Url::to(['/user/settings/profile']) ?>"
                                            class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="<?= \yii\helpers\Url::to(['/user/security/logout']) ?>"
+                                        <a href="<?= Url::to(['/user/security/logout']) ?>"
                                            target="_top"
                                            class="btn btn-default btn-flat" data-method="post">Sign out</a>
                                     </div>
@@ -182,7 +188,7 @@ if (Yii::$app->hasModule('prototype')) {
                         </li>
 
                         <li class="expand-menu">
-                            <a href="<?= Url::to('') ?>" target="_top">
+                            <a href="<?= Url::to() ?>" target="_top">
                                 <i class="fa fa-expand"></i>
                             </a>
                         </li>
@@ -211,13 +217,13 @@ if (Yii::$app->hasModule('prototype')) {
         <section class="content-header">
             <h1>
                 <?= $this->title ?>
-                <small><?= \yii\helpers\Inflector::id2camel($this->context->module->id) ?></small>
+                <small><?= Inflector::id2camel($this->context->module->id) ?></small>
             </h1>
             <?=
-            \yii\widgets\Breadcrumbs::widget(
+            Breadcrumbs::widget(
                 [
                     'homeLink' => ['label' => 'Backend', 'url' => ['/backend']],
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    'links' => $this->params['breadcrumbs'] ?? [],
                 ]
             ) ?>
         </section>
@@ -226,7 +232,7 @@ if (Yii::$app->hasModule('prototype')) {
 
         <section class="content">
             <?= Wrapper::widget([
-                'layerClass' => 'lo\modules\noty\layers\Growl',
+                'layerClass' => Growl::class,
                 'options' => [
                     'dismissQueue' => true,
                     'location' => 'br',

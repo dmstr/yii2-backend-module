@@ -3,14 +3,13 @@
 use yii\bootstrap\Nav as Menu;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use dmstr\modules\backend\Module;
 
 ?>
 
 <?php
 $backendModule = Yii::$app->getModule('backend');
 foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
-    if (in_array($name, $backendModule->modulesDashboardBlacklist)) {
+    if (in_array($name, $backendModule->modulesDashboardBlacklist,true)) {
         continue;
     }
 
@@ -36,7 +35,7 @@ if (Yii::$app->hasModule('pages')) {
 if (Yii::$app->urlManager->hasProperty('language')) {
     $languages = Yii::$app->urlManager->language;
 } else {
-    $languages = [];
+    $languages = explode(',', getenv('APP_LANGUAGES'));
 }
 
 ?>
@@ -61,7 +60,7 @@ if (Yii::$app->urlManager->hasProperty('language')) {
     <div class="tab-content">
         <!-- Home tab content -->
         <div class="tab-pane active" id="control-sidebar-home-tab">
-            <h3 class="control-sidebar-heading">Frontend Menu</h3>
+            <h3 class="control-sidebar-heading"><?=Yii::t('backend-module','Frontend Menu')?></h3>
             <ul class="control-sidebar-menu">
                 <li>
                     <?php
@@ -98,7 +97,7 @@ if (Yii::$app->urlManager->hasProperty('language')) {
 
         </div>
         <div id="control-sidebar-languages-tab" class="tab-pane">
-            <h3 class="control-sidebar-heading">Languages</h3>
+            <h3 class="control-sidebar-heading"><?=Yii::t('backend-module','Languages')?></h3>
 
 
             <!-- inner menu: contains the actual data -->
@@ -108,7 +107,7 @@ if (Yii::$app->urlManager->hasProperty('language')) {
                         <?= Html::a(
                             $language,
                             Url::current([Yii::$app->urlManager->languageParam => $language]),
-                            ['class' => (Yii::$app->language == $language) ? 'active' : '']
+                            ['class' => (Yii::$app->language === $language) ? 'active' : '']
                         ) ?>
                     </li>
                 <?php endforeach; ?>
@@ -118,7 +117,7 @@ if (Yii::$app->urlManager->hasProperty('language')) {
         </div>
         <div id="control-sidebar-modules-tab" class="tab-pane">
             <?php if (\Yii::$app->user->can('Admin')): ?>
-                <h3 class="control-sidebar-heading">Application Modules</h3>
+                <h3 class="control-sidebar-heading"><?=Yii::t('backend-module','Application Modules')?></h3>
                 <ul class="control-sidebar-menu">
 
 
@@ -145,7 +144,7 @@ if (Yii::$app->urlManager->hasProperty('language')) {
         <!-- Settings tab content -->
         <div class="tab-pane" id="control-sidebar-settings-tab">
             <?php if (isset(Yii::$app->params['context.menuItems']) && !empty(Yii::$app->params['context.menuItems'])): ?>
-                <h3 class="control-sidebar-heading">Context Menu</h3>
+                <h3 class="control-sidebar-heading"><?=Yii::t('backend-module','Context Menu')?></h3>
                 <ul class="control-sidebar-menu">
 
                     <?php foreach (Yii::$app->params['context.menuItems'] as $item): ?>
@@ -153,7 +152,7 @@ if (Yii::$app->urlManager->hasProperty('language')) {
                             <?= Html::a(
                                 $item['label'],
                                 $item['url']
-                            ) ?></h4>
+                            ) ?>
 
                         </li>
                     <?php endforeach; ?>

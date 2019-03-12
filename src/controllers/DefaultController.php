@@ -5,11 +5,12 @@ namespace dmstr\modules\backend\controllers;
 use dmstr\helpers\Metadata;
 use dmstr\modules\backend\Module;
 use dmstr\widgets\Menu;
+use insolita\wgadminlte\InfoBox;
 use Yii;
 use yii\data\ArrayDataProvider;
-use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 /**
@@ -19,32 +20,6 @@ use yii\web\Controller;
  */
 class DefaultController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['error'],
-                    ],
-                    [
-                        'allow' => true,
-                        'matchCallback' => function ($rule, $action) {
-                            return \Yii::$app->user->can(
-                                $this->module->id.'_'.$this->id.'_'.$action->id,
-                                ['route' => true]
-                            );
-                        },
-                    ],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Application dashboard.
@@ -53,23 +28,6 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        // prepare menu items, get all modules
-        $adminMenuItems = [];
-        $developerMenuItems = [];
-
-
-
-        // create developer menu, when user is admin
-        if (Yii::$app->user->can('Admin')) {
-            $adminMenuItems[] = [
-                'url' => '#',
-                'icon' => 'fa fa-cogs',
-                'label' => 'Modules',
-                'items' => $developerMenuItems,
-                'options' => ['class' => 'treeview'],
-            ];
-        }
-
         if (Yii::$app->hasModule('pages')) {
             // no `use` statement, since module is optional
             $items = \dmstr\modules\pages\models\Tree::getMenuItems('backend', true);
@@ -107,6 +65,9 @@ class DefaultController extends Controller
         );
     }
 
+    /**
+     * @return string
+     */
     public function actionShowAuth()
     {
         $allPermissions = Yii::$app->authManager->getPermissions();
@@ -161,11 +122,11 @@ class DefaultController extends Controller
     public function actionCacheFlush()
     {
         if (Yii::$app->cache->flush()) {
-            Yii::$app->session->addFlash('success', 'Cache wurde geleert');
+            Yii::$app->session->addFlash('success', Yii::t('backend-module','Cache cleared'));
         } else {
-            Yii::$app->session->addFlash('error', 'Cache konnte nicht geleert werden');
+            Yii::$app->session->addFlash('error', Yii::t('backend-module','Cannot clear cache'));
         }
-        return $this->redirect(!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : \yii\helpers\Url::to(['/backend/']));
+        return $this->redirect(!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Url::to(['index']));
     }
 
 
@@ -184,13 +145,13 @@ class DefaultController extends Controller
         }
 
         foreach ($item['items'] as $subItem) {
-            if ($subItem['visible'] && $subItem['url'] && $subItem['url'] != '#') {
+            if ($subItem['visible'] && $subItem['url'] && $subItem['url'] !== '#') {
                 $colorSelect = ArrayHelper::getValue($item, 'icon');
                 $menuItems .= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
-                $infoBoxHtml = \insolita\wgadminlte\InfoBox::widget(
+                $infoBoxHtml = InfoBox::widget(
                     [
                         'text' => '<h4 style="white-space: normal;">'.$subItem['label'].'</h4>',
-                        'boxBg' => Module::colorHash(isset($colorSelect[2]) ? $colorSelect[2] : 0),
+                        'boxBg' => Module::colorHash($colorSelect[2] ?? 0),
                         'icon' => (isset($subItem['icon']) && !empty($subItem['icon']))
                             ? Menu::$iconClassPrefix.$subItem['icon']
                             : 'fa fa-circle-o',

@@ -1,14 +1,16 @@
 <?php
 
 use insolita\wgadminlte\Box;
-$this->title = "Authorizations";
+use yii\grid\GridView;
+
+$this->title = Yii::t('backend-module', 'Authorizations');
 
 ?>
 <div class="row">
     <div class="col-sm-6">
         <?php
         Box::begin(['title'=>'Roles']);
-        echo \yii\grid\GridView::widget([
+        echo GridView::widget([
             'dataProvider' => $roles,
 
         ]);
@@ -19,7 +21,7 @@ $this->title = "Authorizations";
     <div class="col-sm-6">
         <?php
         Box::begin(['title'=>'Permissions']);
-        echo \yii\grid\GridView::widget([
+        echo GridView::widget([
             'dataProvider' => $permissions
         ]);
         Box::end();
