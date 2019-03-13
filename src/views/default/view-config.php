@@ -7,6 +7,7 @@ use yii\bootstrap\Tabs;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\widgets\ListView;
+use \Yii;
 
 $this->params['breadcrumbs'][] = ['label' => Yii::t('backend-module', 'Configuration')];
 $this->title = Yii::t('backend-module', 'Configuration');
