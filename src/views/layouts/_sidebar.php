@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 
 // get menu items from pages, if available
 if (Yii::$app->hasModule('pages')) {
-    $menuItems = dmstr\modules\pages\models\Tree::getMenuItems('backend', true);
+    $menuItems = \dmstr\modules\pages\models\Tree::getMenuItems('backend', true);
 } else {
     $menuItems = [];
 }
