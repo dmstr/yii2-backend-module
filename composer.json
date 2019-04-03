@@ -19,7 +19,8 @@
         "dmstr/yii2-web": "~0.3",
         "dmstr/yii2-adminlte-asset": "^2.5.0",
         "insolita/yii2-adminlte-widgets": "^1.1.4",
-        "loveorigami/yii2-notification-wrapper": "^6.3"
+        "loveorigami/yii2-notification-wrapper": "^6.3",
+        "urosg/yii2-outdated-browser-rework": "^1.0"
     },
     "suggest": {
         "codemix/yii2-localeurls": "Extended URL manager",
