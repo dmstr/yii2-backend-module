@@ -61,26 +61,16 @@ $this->registerJs($js);
         <?= Yii::$app->request->cookies['dmstr-backend_pin-navigation'] ? '' : 'sidebar-collapse' ?>
         <?= $sidebarClass ?> ">
 <?= OutdatedBrowserReworkWidget::widget([
-
     'messages' => [
         'outOfDate' => Yii::t('backend-module', 'Your browser is not fully supported by this website.'),
-        'updateWeb' => Yii::t('backend-module', 'We recommend to upgrading to the latest {chrome-link}',['chrome-link' => Html::a('Chrome','https://www.google.de/chrome'),['target' => '_blank']]),
+        'updateWeb' => Yii::t('backend-module', 'We recommend to upgrading to the latest {chrome-link}', ['chrome-link' => Html::a('Chrome', 'https://www.google.de/chrome'), ['target' => '_blank']]),
         'updateGooglePlay' => Yii::t('backend-module', 'Please install Chrome from Google Play'),
         'updateAppStore' => Yii::t('backend-module', 'Please update iOS from the Settings'),
         'webUpdateUrl' => null,
         'callToAction' => null,
         'close' => Yii::t('backend-module', 'Close')
     ],
-    'browserSupport' => [
-        'Chrome' => 72,
-        'Edge' => false,
-        'Safari' => false,
-        'MobileSafari' => false,
-        'Firefox' => 65,
-        'Opera' => false,
-        'Vivaldi' => false,
-        'IE' => false
-    ]
+    'browserSupport' => Yii::$app->params['backendBrowserSupport'] ?? []
 ]) ?>
 <?php $this->beginBody() ?>
 

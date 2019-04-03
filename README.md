@@ -33,6 +33,9 @@ Add module to application configuration
 ],
 ```
 
+By adding `backendBrowserSupport` to your app params you can specify which browser versions are supported in your backend configuration.
+Examples see at [urosg80/yii2-outdatedbrowser-rework](https://github.com/urosg80/yii2-outdatedbrowser-rework)
+
 ### Params
 
 - `context.menuItems` menu items to be shown, i.e. used by `dmstr/yii2-prototype-module`
