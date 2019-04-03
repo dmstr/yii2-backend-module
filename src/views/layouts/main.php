@@ -6,15 +6,16 @@ use dmstr\cookiebutton\CookieButton;
 use dmstr\modules\backend\assets\BackendAsset;
 use dmstr\modules\backend\assets\BackendJsAsset;
 use dmstr\modules\prototype\widgets\TwigWidget;
+use lo\modules\noty\layers\Growl;
 use lo\modules\noty\Wrapper;
 use rmrevin\yii\fontawesome\FA;
+use urosg\widgets\OutdatedBrowserRework\OutdatedBrowserReworkWidget;
 use Yii;
 use yii\base\InvalidCallException;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
-use lo\modules\noty\layers\Growl;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -46,11 +47,11 @@ $this->registerJs($js);
 
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?=Yii::$app->language?>">
+<html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="UTF-8">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) .' - '.Yii::$app->name ?></title>
+    <title><?= Html::encode($this->title) . ' - ' . Yii::$app->name ?></title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Theme style -->
     <?php $this->head() ?>
@@ -59,6 +60,28 @@ $this->registerJs($js);
 <body class="hold-transition skin-<?= $adminLteSkin ?>
         <?= Yii::$app->request->cookies['dmstr-backend_pin-navigation'] ? '' : 'sidebar-collapse' ?>
         <?= $sidebarClass ?> ">
+<?= OutdatedBrowserReworkWidget::widget([
+
+    'messages' => [
+        'outOfDate' => Yii::t('backend-module', 'Your browser is not fully supported by this website.'),
+        'updateWeb' => Yii::t('backend-module', 'We recommend to upgrading to the latest {chrome-link}',['chrome-link' => Html::a('Chrome','https://www.google.de/chrome'),['target' => '_blank']]),
+        'updateGooglePlay' => Yii::t('backend-module', 'Please install Chrome from Google Play'),
+        'updateAppStore' => Yii::t('backend-module', 'Please update iOS from the Settings'),
+        'webUpdateUrl' => null,
+        'callToAction' => null,
+        'close' => Yii::t('backend-module', 'Close')
+    ],
+    'browserSupport' => [
+        'Chrome' => 72,
+        'Edge' => false,
+        'Safari' => false,
+        'MobileSafari' => false,
+        'Firefox' => 65,
+        'Opera' => false,
+        'Vivaldi' => false,
+        'IE' => false
+    ]
+]) ?>
 <?php $this->beginBody() ?>
 
 
@@ -69,11 +92,11 @@ if (Yii::$app->hasModule('prototype')) {
     try {
         $this->beginBlock('twig-main-top');
         echo TwigWidget::widget([
-                                    'position' => 'main-top',
-                                    'registerMenuItems' => true,
-                                    'queryParam' => false,
-                                    'renderEmpty' => false,
-                                ]);
+            'position' => 'main-top',
+            'registerMenuItems' => true,
+            'queryParam' => false,
+            'renderEmpty' => false,
+        ]);
         $this->endBlock('twig-main-top');
     } catch (InvalidCallException $e) {
         $this->blocks['twig-main-top'] = 'X';
@@ -83,11 +106,11 @@ if (Yii::$app->hasModule('prototype')) {
     try {
         $this->beginBlock('twig-main-bottom');
         echo TwigWidget::widget([
-                                    'position' => 'main-bottom',
-                                    'registerMenuItems' => true,
-                                    'queryParam' => false,
-                                    'renderEmpty' => false,
-                                ]);
+            'position' => 'main-bottom',
+            'registerMenuItems' => true,
+            'queryParam' => false,
+            'renderEmpty' => false,
+        ]);
         $this->endBlock('twig-main-bottom');
     } catch (InvalidCallException $e) {
         $this->blocks['twig-main-bottom'] = 'X';
@@ -97,12 +120,12 @@ if (Yii::$app->hasModule('prototype')) {
     try {
         $this->beginBlock('extra-content');
         echo TwigWidget::widget([
-                                    'key' => 'backend.extra.content',
-                                    'position' => 'bottom',
-                                    'registerMenuItems' => true,
-                                    'queryParam' => false,
-                                    'renderEmpty' => false,
-                                ]);
+            'key' => 'backend.extra.content',
+            'position' => 'bottom',
+            'registerMenuItems' => true,
+            'queryParam' => false,
+            'renderEmpty' => false,
+        ]);
         $this->endBlock('extra-content');
     } catch (InvalidCallException $e) {
         $this->blocks['extra-content'] = '';
@@ -151,11 +174,6 @@ if (Yii::$app->hasModule('prototype')) {
                                 'renderEmpty' => false,
                             ]) ?>
                         </li>
-
-
-
-
-
 
 
                         <!-- User Account: style can be found in dropdown.less -->

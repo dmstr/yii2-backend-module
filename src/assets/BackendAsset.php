@@ -1,16 +1,15 @@
 <?php
-
-namespace dmstr\modules\backend\assets;
-
-/*
+/**
  * @link http://www.yiiframework.com/
  *
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license http://www.yiiframework.com/license/
  */
 
+namespace dmstr\modules\backend\assets;
+
+use urosg\widgets\OutdatedBrowserRework\OutdatedBrowserReworkWidgetAsset;
 use yii\web\AssetBundle as BaseBackendAssetBundle;
-use yii\web\View;
 use dmstr\web\AdminLteAsset;
 
 /**
@@ -28,5 +27,6 @@ class BackendAsset extends BaseBackendAssetBundle
 
     public $depends = [
         AdminLteAsset::class,
+        OutdatedBrowserReworkWidgetAsset::class
     ];
 }
