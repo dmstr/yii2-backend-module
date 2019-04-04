@@ -70,7 +70,7 @@ $this->registerJs($js);
         'callToAction' => null,
         'close' => Yii::t('backend-module', 'Close')
     ],
-    'browserSupport' => Yii::$app->params['backendBrowserSupport'] ?? []
+    'browserSupport' => Yii::$app->params['backend.browserSupport'] ?? []
 ]) ?>
 <?php $this->beginBody() ?>
 
