@@ -60,7 +60,7 @@ $this->registerJs($js);
 <body class="hold-transition skin-<?= $adminLteSkin ?>
         <?= Yii::$app->request->cookies['dmstr-backend_pin-navigation'] ? '' : 'sidebar-collapse' ?>
         <?= $sidebarClass ?> ">
-<?= OutdatedBrowserReworkWidget::widget([
+<?= !YII_ENV_TEST ? OutdatedBrowserReworkWidget::widget([
     'messages' => [
         'outOfDate' => Yii::t('backend-module', 'Your browser is not fully supported by this website.'),
         'updateWeb' => Yii::t('backend-module', 'We recommend to upgrading to the latest {chrome-link}', ['chrome-link' => Html::a('Chrome', 'https://www.google.de/chrome'), ['target' => '_blank']]),
@@ -71,7 +71,7 @@ $this->registerJs($js);
         'close' => Yii::t('backend-module', 'Close')
     ],
     'browserSupport' => Yii::$app->params['backend.browserSupport'] ?? []
-]) ?>
+]) : '' ?>
 <?php $this->beginBody() ?>
 
 
