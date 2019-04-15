@@ -32,8 +32,8 @@ if (Yii::$app->hasModule('pages')) {
     $rootItems = [];
 }
 
-if (Yii::$app->urlManager->hasProperty('language')) {
-    $languages = Yii::$app->urlManager->language;
+if (Yii::$app->urlManager->hasProperty('languages')) {
+    $languages = Yii::$app->urlManager->languages;
 } else {
     $languages = explode(',', getenv('APP_LANGUAGES'));
 }
