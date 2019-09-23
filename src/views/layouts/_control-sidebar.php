@@ -1,10 +1,12 @@
 <?php
 
+use yii\bootstrap\Nav;
 use yii\bootstrap\Nav as Menu;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 ?>
+
 
 <?php
 $backendModule = Yii::$app->getModule('backend');
@@ -144,18 +146,10 @@ if (Yii::$app->urlManager->hasProperty('languages')) {
         <!-- Settings tab content -->
         <div class="tab-pane" id="control-sidebar-settings-tab">
             <?php if (isset(Yii::$app->params['context.menuItems']) && !empty(Yii::$app->params['context.menuItems'])): ?>
+
                 <h3 class="control-sidebar-heading"><?=Yii::t('backend-module','Context Menu')?></h3>
                 <ul class="control-sidebar-menu">
-
-                    <?php foreach (Yii::$app->params['context.menuItems'] as $item): ?>
-                        <li>
-                            <?= Html::a(
-                                $item['label'],
-                                $item['url']
-                            ) ?>
-
-                        </li>
-                    <?php endforeach; ?>
+                    <?= Nav::widget(['items' => Yii::$app->params['context.menuItems'], 'encodeLabels' => false]) ?>
                 </ul>
 
             <?php endif; ?>
