@@ -174,7 +174,7 @@ if (Yii::$app->hasModule('prototype')) {
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <li class="user-header bg-light-blue">
+                                <li class="user-header bg-<?= $adminLteSkin ?: 'light-blue'?>">
                                     <p>
                                         <?= \Yii::$app->user->identity->username ?>
                                         <small><?= \Yii::$app->user->identity->email ?></small>
