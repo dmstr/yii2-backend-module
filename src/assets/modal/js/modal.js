@@ -2,7 +2,7 @@
 // - only when focus is on <body>, to avoid unwanted keyboard actions
 
 $(document).on("keypress", function (e) {
-  if ($(document.activeElement).is('body')) {
+  if ($(document.activeElement).is('body') && e.originalEvent.repeat !== true) {
 // open menu (m)
     if (e.charCode === 109) {
       $('#phd-info-button a').click();
