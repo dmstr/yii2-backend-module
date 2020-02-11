@@ -24,10 +24,12 @@ use yii\widgets\Breadcrumbs;
 $adminLteSkin = '';
 $navBarIcon = '';
 $sidebarClass = '';
+$growlLocation = 'br';
 if (Yii::$app->has('settings')) {
     $adminLteSkin = Yii::$app->settings->get('skin', 'backend.adminlte') ?: 'black-light';
     $navBarIcon = Yii::$app->settings->get('navBarIcon', 'backend.adminlte') ?: FA::_HEART;
     $sidebarClass = Yii::$app->settings->get('sidebar', 'backend.adminlte', 'sidebar-mini ');
+    $growlLocation = Yii::$app->settings->getOrSet('growl.location', 'br', 'backend', 'string');
 }
 
 // prepare assets
@@ -243,7 +245,7 @@ if (Yii::$app->hasModule('prototype')) {
                 'layerClass' => Growl::class,
                 'options' => [
                     'dismissQueue' => true,
-                    'location' => 'br',
+                    'location' => $growlLocation,
                     'timeout' => 4000,
                 ],
             ]) ?>
