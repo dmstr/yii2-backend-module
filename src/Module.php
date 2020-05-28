@@ -28,6 +28,8 @@ class Module extends \yii\base\Module
      */
     public $modulesDashboardBlacklist = [];
 
+    public $rbacDiagramExcludeRoles = ['Master'];
+
     /**
      * @param $label
      *

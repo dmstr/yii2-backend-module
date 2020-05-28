@@ -11,14 +11,15 @@ $this->title = Yii::t('backend-module', 'Dashboard');
 
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-gray">
+                <div class="small-box bg-aqua">
                     <div class="inner">
                         <h3>
-                            <?=Yii::t('backend-module', 'ID')?>
+                            <?= getenv('APP_NAME') ?>
                         </h3>
 
                         <p>
-                            <?= getenv('APP_NAME') ?>
+                            <?=Yii::t('backend-module', 'Application ID')?>
+
                         </p>
                     </div>
                     <div class="icon">
@@ -33,7 +34,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
 
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-gray">
+                <div class="small-box bg-navy">
                     <div class="inner">
                         <h3>
                             <?php
@@ -62,7 +63,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
 
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-gray">
+                <div class="small-box bg-olive">
                     <div class="inner">
                         <h3>
                             <?= count(\Yii::$app->getModules()) ?>
@@ -100,6 +101,72 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                     </div>
                     <a href="<?= \yii\helpers\Url::to(['/audit']) ?>" class="small-box-footer">
                         <?=Yii::t('backend-module', 'Audit')?> <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="col-md-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-olive">
+                    <div class="inner">
+                        <h3>
+                            Diagram
+                        </h3>
+                            RBAC Hierarchy
+                        <p>
+
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-grid"></i>
+                    </div>
+                    <a href="<?= \yii\helpers\Url::to(['rbac/diagram']) ?>" class="small-box-footer">
+                        <?=Yii::t('backend-module', 'Diagram')?> <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="col-md-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-olive">
+                    <div class="inner">
+                        <h3>
+                            Your Permissions
+                        </h3>
+
+                        <p>
+                           RBAC
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-grid"></i>
+                    </div>
+                    <a href="<?= \yii\helpers\Url::to(['rbac/assignments']) ?>" class="small-box-footer">
+                        <?=Yii::t('backend-module', 'Assignments')?> <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="col-md-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-gray">
+                    <div class="inner">
+                        <h3>
+                            Cache
+                        </h3>
+
+                        <p>
+                            Flush
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-grid"></i>
+                    </div>
+                    <a onclick="return confirm('Are you sure?')" href="<?= \yii\helpers\Url::to(['cache/flush']) ?>" class="small-box-footer">
+                        <?=Yii::t('backend-module', 'Flush')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
