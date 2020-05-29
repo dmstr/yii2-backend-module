@@ -38,32 +38,7 @@ class DefaultController extends Controller
         return $this->render('index', ['items' => $items]);
     }
 
-    /**
-     * Application configuration.
-     *
-     * @return string
-     */
-    public function actionViewConfig()
-    {
-        $loadedModules = Metadata::getModules();
-        $loadedModulesDataProvider = new ArrayDataProvider(['allModels' => $loadedModules]);
-        $loadedModulesDataProvider->pagination->pageSize = 100;
 
-        $components = Yii::$app->getComponents();
-        ksort($components);
-        $modules = Yii::$app->getModules();
-        ksort($modules);
-
-        return $this->render(
-            'view-config',
-            [
-                'params' => Yii::$app->params,
-                'components' => $components,
-                'modules' => $modules,
-                'loadedModulesDataProvider' => $loadedModulesDataProvider,
-            ]
-        );
-    }
 
     /**
      * @param array $item \dmstr\modules\pages\models\Tree::getMenuItems()

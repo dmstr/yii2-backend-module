@@ -76,7 +76,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="<?= \yii\helpers\Url::to(['/backend/default/view-config']) ?>" class="small-box-footer">
+                    <a href="<?= \yii\helpers\Url::to(['/backend/config/view']) ?>" class="small-box-footer">
                         <?=Yii::t('backend-module', 'Configuration')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -133,11 +133,11 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                 <div class="small-box bg-olive">
                     <div class="inner">
                         <h3>
-                            Your Permissions
+                            Auth
                         </h3>
 
                         <p>
-                           RBAC
+                           Roles & Permissions
                         </p>
                     </div>
                     <div class="icon">
