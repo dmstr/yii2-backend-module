@@ -3,7 +3,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('backend-module', 'Dashboard
 $this->title = Yii::t('backend-module', 'Dashboard');
 ?>
 
-    <h1>Backend</h1>
+    <h1><?=Yii::t('backend-module', 'Backend')?></h1>
 
     <div class="row">
 
@@ -111,11 +111,10 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                 <div class="small-box bg-olive">
                     <div class="inner">
                         <h3>
-                            Diagram
+                            <?=Yii::t('backend-module', 'Diagram')?>
                         </h3>
-                            RBAC Hierarchy
                         <p>
-
+                            <?=Yii::t('backend-module', 'RBAC Hierarchy')?>
                         </p>
                     </div>
                     <div class="icon">
@@ -133,11 +132,11 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                 <div class="small-box bg-olive">
                     <div class="inner">
                         <h3>
-                            Auth
+                            <?=Yii::t('backend-module', 'Auth')?>
                         </h3>
 
                         <p>
-                           Roles & Permissions
+                            <?=Yii::t('backend-module', 'Roles & Permissions')?>
                         </p>
                     </div>
                     <div class="icon">
@@ -155,11 +154,11 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                 <div class="small-box bg-gray">
                     <div class="inner">
                         <h3>
-                            Cache
+                            <?=Yii::t('backend-module', 'Cache')?>
                         </h3>
 
                         <p>
-                            Flush
+                            <?=Yii::t('backend-module', 'Flush')?>
                         </p>
                     </div>
                     <div class="icon">
