@@ -2,15 +2,12 @@
 
 namespace dmstr\modules\backend\controllers;
 
-use dmstr\helpers\Metadata;
 use dmstr\modules\backend\Module;
 use dmstr\widgets\Menu;
 use insolita\wgadminlte\InfoBox;
 use Yii;
-use yii\data\ArrayDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\web\Controller;
 
 /**
@@ -77,4 +74,23 @@ class DefaultController extends Controller
 
         return $menuItems;
     }
+
+    /**
+     * flush cache
+     *
+     * if APCu is used as cache we cannot flush cache from cli command
+     * see: https://github.com/yiisoft/yii2/issues/8647
+     *
+     * @return \yii\web\Response
+     */
+    public function actionCacheFlush()
+    {
+        if (Yii::$app->cache->flush()) {
+            Yii::$app->session->addFlash('success', Yii::t('backend-module','Cache cleared'));
+        } else {
+            Yii::$app->session->addFlash('error', Yii::t('backend-module','Cannot clear cache'));
+        }
+        return $this->goBack(['index']);
+    }
+
 }
