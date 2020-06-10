@@ -89,6 +89,14 @@ $this->title = Yii::t('backend-module', 'Configuration');
 <?php $this->endBlock('modules') ?>
 
 
+<?php $this->beginBlock('env') ?>
+<pre>
+<?= VarDumper::dumpAsString($env) ?>
+</pre>
+<?php $this->endBlock('env') ?>
+
+
+
 <div class="nav-tabs-custom">
     <?= Tabs::widget([
         'items' => [
@@ -107,6 +115,10 @@ $this->title = Yii::t('backend-module', 'Configuration');
             [
                 'label' => Yii::t('backend-module', 'Controllers'),
                 'content' => $this->blocks['controllers'],
+            ],
+            [
+                'label' => Yii::t('backend-module', 'Environment'),
+                'content' => $this->blocks['env'],
             ],
         ],
     ]) ?>
