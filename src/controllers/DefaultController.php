@@ -75,22 +75,4 @@ class DefaultController extends Controller
         return $menuItems;
     }
 
-    /**
-     * flush cache
-     *
-     * if APCu is used as cache we cannot flush cache from cli command
-     * see: https://github.com/yiisoft/yii2/issues/8647
-     *
-     * @return \yii\web\Response
-     */
-    public function actionCacheFlush()
-    {
-        if (Yii::$app->cache->flush()) {
-            Yii::$app->session->addFlash('success', Yii::t('backend-module','Cache cleared'));
-        } else {
-            Yii::$app->session->addFlash('error', Yii::t('backend-module','Cannot clear cache'));
-        }
-        return $this->goBack(['index']);
-    }
-
 }

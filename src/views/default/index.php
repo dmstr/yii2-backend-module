@@ -164,7 +164,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                     <div class="icon">
                         <i class="ion ion-grid"></i>
                     </div>
-                    <a data-confirm="<?=Yii::t('backend-module', 'Are you sure?')?>" href="<?= \yii\helpers\Url::to(['default/cache-flush']) ?>" class="small-box-footer">
+                    <a data-confirm="<?=Yii::t('backend-module', 'Are you sure?')?>" href="<?= \yii\helpers\Url::to(['cache/flush']) ?>" class="small-box-footer">
                         <?=Yii::t('backend-module', 'Flush')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
