@@ -59,7 +59,7 @@ $this->registerJs($js);
     <?php $this->head() ?>
 </head>
 
-<body class="hold-transition skin-<?= $adminLteSkin ?>
+<body class="dmstr-backend hold-transition skin-<?= $adminLteSkin ?>
         <?= Yii::$app->request->cookies['dmstr-backend_pin-navigation'] ? '' : 'sidebar-collapse' ?>
         <?= $sidebarClass ?> ">
 <?= !YII_ENV_TEST ? OutdatedBrowserReworkWidget::widget([
