@@ -4,7 +4,22 @@
 }
 
 // json-editor Bootstrap 3 fix
-div[id$="-container"] div[data-schemaid] .form-group {
-  margin-right: 0px;
-  margin-left: 0px;
+div[id$="-container"] div[data-schemaid] {
+  .form-group {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  h3 {
+    font-size: 1em;
+    margin-top: 0.5em;
+  }
 }
+
+div[data-schematype="object"] {
+  .well;
+  .well-small;
+}
+
+
+
