@@ -4,6 +4,7 @@
 {{ use ('dmstr/modules/prototype/widgets/TwigWidget') }}
 {{ use ('dmstr/cookiebutton/CookieButton') }}
 {{ use ('rmrevin/yii/fontawesome/FA') }}
+{{ use ('dmstr/lajax/translatemanager/widgets/ToggleTranslateLink') }}
 
 {% if not app.user.isGuest %}
     {% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) %}
@@ -82,6 +83,15 @@
                     }
                     }
                 ) }}
+
+                {% if app.components['translatemanager'] is defined %}
+                    {{ ToggleTranslateLink_widget({
+                        'options': {
+                            'class': 'btn btn-xs btn-default',
+                            'title': 'Toggle translate'
+                        }
+                    }) }}
+                {% endif %}
 
                 {{ twig_widget_widget({
                     'key': 'frontend.extra.menuItems',

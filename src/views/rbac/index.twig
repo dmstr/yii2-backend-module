@@ -1,0 +1,19 @@
+{# register_asset_bundle('dmstr/web/MermaidAsset') #}
+
+<script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
+
+<div class="box" style="">
+    <div class="box-header with-border">
+        Roles and Permissions
+    </div>
+    <div class="mermaid" style="overflow: scroll">
+        {{ mmd }}
+    </div>
+</div>
+
+{#
+<h3>Debug</h3>
+<pre><code>
+ {{ mmd }}
+</code></pre>
+#}

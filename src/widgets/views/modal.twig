@@ -1,8 +1,10 @@
 {{ use ('dmstr/cookiebutton') }}
 {{ use ('yii/widgets') }}
 {{ use ('rmrevin/yii/fontawesome/FA') }}
+{{ use ('dmstr/lajax/translatemanager/widgets/ToggleTranslateLink') }}
 
 {% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) %}
+
 
 
 {% if not app.user.isGuest %}
@@ -57,6 +59,14 @@
                 }
             ) | raw }}
 
+            {% if app.components['translatemanager'] is defined %}
+                {{ ToggleTranslateLink_widget({
+                    'options': {
+                        'class': 'btn btn-xs btn-default',
+                        'title': 'Toggle translate'
+                    }
+                }) }}
+            {% endif %}
         </div>
 
     </div>
