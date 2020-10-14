@@ -226,8 +226,8 @@ if (Yii::$app->hasModule('prototype')) {
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <?= $this->title ?>
-                <small><?= Inflector::id2camel($this->context->module->id) ?></small>
+                <?= Inflector::id2camel($this->context->module->id) ?>
+                <small><?= Yii::t('backend-module', 'Module') ?></small>
             </h1>
             <?=
             Breadcrumbs::widget(
