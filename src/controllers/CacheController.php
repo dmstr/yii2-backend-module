@@ -15,6 +15,17 @@ use Yii;
 
 class CacheController extends Controller
 {
+
+    /**
+     * @event when cache flush failed
+    */
+    const EVENT_CACHE_FLUSH_ERROR = 'cacheFlushError';
+
+    /**
+     * @event when cache flush was successful
+     */
+    const EVENT_CACHE_FLUSH_SUCCESS = 'cacheFlushSuccess';
+
     /**
      * flush cache
      *
@@ -27,8 +38,10 @@ class CacheController extends Controller
     {
         if (\Yii::$app->cache->flush()) {
             \Yii::$app->session->addFlash('success', Yii::t('backend-module','Cache cleared'));
+            $this->trigger(static::EVENT_CACHE_FLUSH_SUCCESS);
         } else {
             \Yii::$app->session->addFlash('error', Yii::t('backend-module','Cannot clear cache'));
+            $this->trigger(static::EVENT_CACHE_FLUSH_ERROR);
         }
         return $this->redirect(['default/index']);
     }
