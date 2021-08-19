@@ -16,7 +16,7 @@
         "bower-asset/noty": "^2.3",
         "dmstr/yii2-cookie-button": "~0.2",
         "dmstr/yii2-helpers": "~0.4",
-        "dmstr/yii2-web": "~0.3",
+        "dmstr/yii2-web": "~0.3 || ^0.4.0 || ^1.0.0",
         "dmstr/yii2-adminlte-asset": "^2.5.0",
         "insolita/yii2-adminlte-widgets": "^1.1.4",
         "loveorigami/yii2-notification-wrapper": "^6.3",
