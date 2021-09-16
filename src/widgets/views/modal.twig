@@ -3,9 +3,7 @@
 {{ use ('rmrevin/yii/fontawesome/FA') }}
 {{ use ('dmstr/lajax/translatemanager/widgets/ToggleTranslateLink') }}
 
-{% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) %}
-
-
+{% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) ?: [] %}
 
 {% if not app.user.isGuest %}
 
