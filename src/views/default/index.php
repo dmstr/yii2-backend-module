@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @var array $items
+*/
+
+use yii\helpers\Url;
+
 $this->params['breadcrumbs'][] = ['label' => Yii::t('backend-module', 'Dashboard')];
 $this->title = Yii::t('backend-module', 'Dashboard');
 ?>
@@ -25,7 +32,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                     <div class="icon">
                         <i class="ion ion-home"></i>
                     </div>
-                    <a href="<?= \yii\helpers\Url::to(['/']) ?>" class="small-box-footer">
+                    <a href="<?= Yii::$app->getHomeUrl() ?>" class="small-box-footer">
                         <?=Yii::t('backend-module', 'Homepage')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -54,7 +61,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                     <div class="icon">
                         <i class="ion ion-person"></i>
                     </div>
-                    <a href="<?= \yii\helpers\Url::to(['/user/admin']) ?>" class="small-box-footer">
+                    <a href="<?= Url::to(['/user/admin/index']) ?>" class="small-box-footer">
                         <?=Yii::t('backend-module', 'Manage')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -76,7 +83,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="<?= \yii\helpers\Url::to(['/backend/config/view']) ?>" class="small-box-footer">
+                    <a href="<?= Url::to(['/backend/config/view']) ?>" class="small-box-footer">
                         <?=Yii::t('backend-module', 'Configuration')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -99,7 +106,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                     <div class="icon">
                         <i class="ion ion-grid"></i>
                     </div>
-                    <a href="<?= \yii\helpers\Url::to(['/audit']) ?>" class="small-box-footer">
+                    <a href="<?= Url::to(['/audit']) ?>" class="small-box-footer">
                         <?=Yii::t('backend-module', 'Audit')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -120,7 +127,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                     <div class="icon">
                         <i class="ion ion-grid"></i>
                     </div>
-                    <a href="<?= \yii\helpers\Url::to(['rbac/diagram']) ?>" class="small-box-footer">
+                    <a href="<?= Url::to(['rbac/diagram']) ?>" class="small-box-footer">
                         <?=Yii::t('backend-module', 'Diagram')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -142,7 +149,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                     <div class="icon">
                         <i class="ion ion-grid"></i>
                     </div>
-                    <a href="<?= \yii\helpers\Url::to(['rbac/assignments']) ?>" class="small-box-footer">
+                    <a href="<?= Url::to(['rbac/assignments']) ?>" class="small-box-footer">
                         <?=Yii::t('backend-module', 'Assignments')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -164,7 +171,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                     <div class="icon">
                         <i class="ion ion-grid"></i>
                     </div>
-                    <a data-confirm="<?=Yii::t('backend-module', 'Are you sure?')?>" href="<?= \yii\helpers\Url::to(['cache/flush']) ?>" class="small-box-footer">
+                    <a data-confirm="<?=Yii::t('backend-module', 'Are you sure?')?>" href="<?= Url::to(['cache/flush']) ?>" class="small-box-footer">
                         <?=Yii::t('backend-module', 'Flush')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>

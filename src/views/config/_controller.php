@@ -29,7 +29,6 @@ if ($controller[0]):
                 <br/>
                 <?php
                 foreach (Metadata::getControllerActions($controller[0]) as $action) {
-
                     echo Html::a($action['route'], $action['route']).'<br/>';
                 }
                 ?>
@@ -38,6 +37,8 @@ if ($controller[0]):
     </div>
 <?php else: ?>
     <div class="alert alert-warning">
-        Unable to detect controllers for <b><?= $model['name'] ?></b>
+        <?php echo Yii::t('backend-module', 'Unable to detect controllers for <b>{moduleName}</b>', [
+                'moduleName' => $model['name']
+        ])?>
     </div>
 <?php endif; ?>

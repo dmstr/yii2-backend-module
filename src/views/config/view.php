@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @var \yii\data\DataProviderInterface $loadedModulesDataProvider
+ * @var array $params
+ * @var array $components
+ * @var array $modules
+ * @var array $env
+*/
+
 namespace _;
 
 use insolita\wgadminlte\Box;

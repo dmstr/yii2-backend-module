@@ -130,7 +130,7 @@ if (Yii::$app->hasModule('prototype')) {
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="<?= Url::to(['/backend']) ?>" class="logo">
+        <a href="<?= Url::to(['/backend/default/index']) ?>" class="logo">
             <?= FA::icon($navBarIcon) ?>
             <span class="title"></span><?= getenv('APP_TITLE') ?>
         </a>
@@ -186,12 +186,12 @@ if (Yii::$app->hasModule('prototype')) {
                                 <li class="user-footer">
                                     <div class="pull-left">
                                         <a href="<?= Url::to(['/user/settings/profile']) ?>"
-                                           class="btn btn-default btn-flat">Profile</a>
+                                           class="btn btn-default btn-flat"><?php echo Yii::t('backend-module', 'Profile') ?></a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="<?= Url::to(['/user/security/logout']) ?>"
                                            target="_top"
-                                           class="btn btn-default btn-flat" data-method="post">Sign out</a>
+                                           class="btn btn-default btn-flat" data-method="post"><?php echo Yii::t('backend-module', 'Sign out') ?></a>
                                     </div>
                                 </li>
                             </ul>
@@ -259,12 +259,11 @@ if (Yii::$app->hasModule('prototype')) {
     <?= $this->blocks['extra-content'] ?>
 
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <strong>
-            <?= getenv('APP_NAME') ?>-<?= APP_VERSION ?></strong>
-        built with
-        <a href="http://phundament.com" target="_blank">phd</a>
-    </footer>
+    <footer class="main-footer"><?php echo Yii::t('backend-module', '<strong>{appName}-{appVersion}</strong> build with {phdLink}', [
+                'appName' => getenv('APP_NAME'),
+            'appVersion' => APP_VERSION,
+            'phdLink' => '<a href="https://phundament.com" target="_blank">phd</a>'
+        ]) ?></footer>
 
     <?= $this->render('_control-sidebar') ?>
 </div>

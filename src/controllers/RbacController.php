@@ -134,7 +134,7 @@ class RbacController extends Controller
 
         foreach ($_gs as $groupName => $g) {
             $groupMmd = implode("\n", $g);
-            if ($groupName != '__NONE__') {
+            if ($groupName !== '__NONE__') {
                 $rolesMmd .= $this->renderAsSubgraph($groupName, $groupMmd);
             } else {
                 $rolesMmd .= $groupMmd;
@@ -148,7 +148,9 @@ class RbacController extends Controller
 
     private function renderAssignments($item)
     {
-        if (in_array($item->name, $this->module->rbacDiagramExcludeRoles)) return;
+        if (in_array($item->name, $this->module->rbacDiagramExcludeRoles, true)) {
+            return;
+        }
 
         $assignmentsMmd = '';
         foreach ($this->_manager->getChildren($item->name) as $child) {

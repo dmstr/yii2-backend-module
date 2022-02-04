@@ -17,13 +17,12 @@ if (Yii::$app->hasModule('pages')) {
 
 
 <?php
-
 echo Menu::widget(
     [
         'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
         'encodeLabels' => false,
         'items' => ArrayHelper::merge(
-            ['items' => ['label' => 'Backend navigation', 'options' => ['class' => 'header']]],
+            ['items' => ['label' => Yii::t('backend-module', 'Backend navigation') , 'options' => ['class' => 'header']]],
             $menuItems
         ),
     ]
