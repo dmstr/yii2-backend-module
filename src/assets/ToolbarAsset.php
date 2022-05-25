@@ -27,6 +27,7 @@ class ToolbarAsset extends AssetBundle
     public $css = ['less/widget.less'];
 
     public $depends = [
-        JqueryAsset::class
+        JqueryAsset::class,
+        \rmrevin\yii\fontawesome\AssetBundle::class
     ];
 }
