@@ -36,6 +36,29 @@ Add module to application configuration
 By adding `backendBrowserSupport` to your app params you can specify which browser versions are supported in your backend configuration.
 Examples see at [urosg80/yii2-outdatedbrowser-rework](https://github.com/urosg80/yii2-outdatedbrowser-rework)
 
+### Minimalistic Login view from AdminLTE 2
+
+```
+'modules' => [
+    'user' => [
+        'controllerMap' => [
+            'security' => [
+                'class' => Da\User\Controller\SecurityController::class,
+                'layout' => '@backend/views/layouts/login'
+            ],
+            'recovery' => [
+                'class' => Da\User\Controller\RecoveryController::class,
+                'layout' => '@backend/views/layouts/login'
+            ],
+            'registration' => [
+                'class' => Da\User\Controller\RegistrationController::class,
+                'layout' => '@backend/views/layouts/login'
+            ]
+        ]
+    ]
+]
+```
+
 ### Params
 
 - `context.menuItems` menu items to be shown, i.e. used by `dmstr/yii2-prototype-module`
