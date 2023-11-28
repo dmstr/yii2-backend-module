@@ -3,9 +3,9 @@
 {{ use ('rmrevin/yii/fontawesome/FA') }}
 {{ use ('dmstr/lajax/translatemanager/widgets/ToggleTranslateLink') }}
 
-{% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) ?: [] %}
 
 {% if not app.user.isGuest %}
+    {% set backendItems = Tree.getMenuItems('backend', true, {'target': app.params['backend.iframe.name']} ) ?: [] %}
 
     <div id="phd-info-button">
 
