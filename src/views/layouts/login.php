@@ -24,13 +24,13 @@ BackendJsAsset::register($this);
 <?php $this->beginBody() ?>
 <div class="login-box">
   <div class="login-logo">
-    <a href="/"><b><?= getenv('APP_TITLE') ?></b></a>
+    <a href="<?= Yii::$app->homeUrl ?>"><b><?= getenv('APP_TITLE') ?></b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <div class="row">
       <div class="col-md-offset-3 col-md-6">
-          <?= \dmstr\widgets\Alert::widget() ?>
+          <?= \dmstr\widgets\Alert::widget(['closeButton'=>false]) ?>
       </div>
     </div>
 
