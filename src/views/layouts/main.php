@@ -258,13 +258,15 @@ if (Yii::$app->hasModule('prototype')) {
 
     <?= $this->blocks['extra-content'] ?>
 
-    <!-- /.content-wrapper -->
-    <footer class="main-footer"><?php echo Yii::t('backend-module', '<strong>{appName}-{appVersion}-{projectVersion}</strong> build with {phdLink}', [
-                'appName' => getenv('APP_NAME'),
-            'appVersion' => APP_VERSION,
-            'projectVersion' => PROJECT_VERSION,
-            'phdLink' => '<a href="https://phundament.com" target="_blank">phd</a>'
-        ]) ?></footer>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer"><?php echo Yii::t('backend-module',
+          '<strong>{appName}-{projectVersion}</strong> build with {phdLink} {appVersion}',
+          [
+              'appName' => getenv('APP_NAME'),
+              'appVersion' => APP_VERSION,
+              'projectVersion' => PROJECT_VERSION,
+              'phdLink' => '<a href="https://phundament.com" target="_blank">phd</a>'
+          ]) ?></footer>
 
     <?= $this->render('_control-sidebar') ?>
 </div>
