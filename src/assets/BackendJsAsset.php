@@ -17,11 +17,10 @@ use yii\web\View;
  */
 class BackendJsAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/dmstr/yii2-backend-module/src/assets/backend';
+    public $sourcePath = __DIR__ . '/backend-js';
 
     public $js = [
-        'js/is-framed.js',
-        'js/outdated-browser.js',
+        'is-framed.js'
     ];
     public $jsOptions = [
         'position' => View::POS_BEGIN

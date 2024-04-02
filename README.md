@@ -33,9 +33,6 @@ Add module to application configuration
 ],
 ```
 
-By adding `backendBrowserSupport` to your app params you can specify which browser versions are supported in your backend configuration.
-Examples see at [urosg80/yii2-outdatedbrowser-rework](https://github.com/urosg80/yii2-outdatedbrowser-rework)
-
 ### Minimalistic Login view from AdminLTE 2
 
 ```

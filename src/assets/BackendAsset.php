@@ -8,7 +8,6 @@
 
 namespace dmstr\modules\backend\assets;
 
-use urosg\widgets\OutdatedBrowserRework\OutdatedBrowserReworkWidgetAsset;
 use yii\web\AssetBundle as BaseBackendAssetBundle;
 use dmstr\web\AdminLteAsset;
 
@@ -19,14 +18,13 @@ use dmstr\web\AdminLteAsset;
  */
 class BackendAsset extends BaseBackendAssetBundle
 {
-    public $sourcePath = '@vendor/dmstr/yii2-backend-module/src/assets/backend';
+    public $sourcePath = __DIR__ . '/backend';
 
     public $css = [
         'less/backend.less',
     ];
 
     public $depends = [
-        AdminLteAsset::class,
-        OutdatedBrowserReworkWidgetAsset::class
+        AdminLteAsset::class
     ];
 }
