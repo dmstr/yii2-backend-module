@@ -123,6 +123,10 @@ if (Yii::$app->hasModule('prototype')) {
         $this->blocks['extra-content'] = '';
         Yii::$app->session->addFlash('error', $e->getMessage());
     }
+} else {
+    $this->blocks['twig-main-top'] = '';
+    $this->blocks['twig-main-bottom'] = '';
+    $this->blocks['extra-content'] = '';
 }
 ?>
 
