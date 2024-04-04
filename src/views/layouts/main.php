@@ -9,7 +9,6 @@ use dmstr\modules\prototype\widgets\TwigWidget;
 use lo\modules\noty\layers\Growl;
 use lo\modules\noty\Wrapper;
 use rmrevin\yii\fontawesome\FA;
-use urosg\widgets\OutdatedBrowserRework\OutdatedBrowserReworkWidget;
 use Yii;
 use yii\base\InvalidCallException;
 use yii\helpers\Html;
@@ -62,18 +61,6 @@ $this->registerJs($js);
 <body class="dmstr-backend hold-transition skin-<?= $adminLteSkin ?>
         <?= Yii::$app->request->cookies['dmstr-backend_pin-navigation'] ? '' : 'sidebar-collapse' ?>
         <?= $sidebarClass ?> ">
-<?= !YII_ENV_TEST ? OutdatedBrowserReworkWidget::widget([
-    'messages' => [
-        'outOfDate' => Yii::t('backend-module', 'Your browser is not fully supported by this website.'),
-        'updateWeb' => Yii::t('backend-module', 'We recommend to upgrading to the latest {chrome-link}', ['chrome-link' => Html::a('Chrome', 'https://www.google.de/chrome'), ['target' => '_blank']]),
-        'updateGooglePlay' => Yii::t('backend-module', 'Please install Chrome from Google Play'),
-        'updateAppStore' => Yii::t('backend-module', 'Please update iOS from the Settings'),
-        'webUpdateUrl' => null,
-        'callToAction' => null,
-        'close' => Yii::t('backend-module', 'Close')
-    ],
-    'browserSupport' => Yii::$app->params['backend.browserSupport'] ?? []
-]) : '' ?>
 <?php $this->beginBody() ?>
 
 

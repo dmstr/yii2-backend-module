@@ -20,7 +20,6 @@
         "dmstr/yii2-adminlte-asset": "^2.5.0",
         "insolita/yii2-adminlte-widgets": "^1.1.4",
         "loveorigami/yii2-notification-wrapper": "^6.3",
-        "urosg/yii2-outdated-browser-rework": "^1.0",
         "rmrevin/yii2-fontawesome": "^2.17"
     },
     "suggest": {
