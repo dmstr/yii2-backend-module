@@ -217,13 +217,13 @@ if (Yii::$app->hasModule('prototype')) {
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <?= Inflector::id2camel($this->context->module->id) ?>
+                <?= Yii::t('backend-module', Inflector::id2camel($this->context->module->id)) ?>
                 <small><?= Yii::t('backend-module', 'Module') ?></small>
             </h1>
             <?=
             Breadcrumbs::widget(
                 [
-                    'homeLink' => ['label' => 'Backend', 'url' => ['/backend']],
+                    'homeLink' => ['label' => Yii::t('backend-module', 'Backend'), 'url' => ['/backend']],
                     'links' => $this->params['breadcrumbs'] ?? [],
                 ]
             ) ?>
