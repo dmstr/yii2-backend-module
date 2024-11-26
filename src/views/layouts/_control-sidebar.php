@@ -73,7 +73,7 @@ if (Yii::$app->urlManager->hasProperty('languages')) {
                             'encodeLabels' => false,
                             'items' => [
                                 [
-                                    'label' => 'Home',
+                                    'label' => Yii::t('backend-module', 'Home'),
                                     'url' => Yii::$app->homeUrl,
                                 ],
                             ],
