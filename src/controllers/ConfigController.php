@@ -8,6 +8,7 @@ use dmstr\helpers\Metadata;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use Yii;
+use yii\web\HttpException;
 
 class ConfigController extends Controller
 {
@@ -18,6 +19,10 @@ class ConfigController extends Controller
      */
     public function actionView()
     {
+        if (isset(Yii::$app->params['backend.disableConfigView']) && Yii::$app->params['backend.disableConfigView']) {
+            throw new HttpException(423);
+        }
+
         $loadedModules = Metadata::getModules();
         $loadedModulesDataProvider = new ArrayDataProvider(['allModels' => $loadedModules]);
         $loadedModulesDataProvider->pagination->pageSize = 100;
