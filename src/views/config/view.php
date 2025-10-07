@@ -12,6 +12,7 @@ namespace _;
 
 use insolita\wgadminlte\Box;
 use yii\bootstrap\Tabs;
+use yii\helpers\HtmlPurifier;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
 use yii\widgets\ListView;
@@ -99,7 +100,7 @@ $this->title = Yii::t('backend-module', 'Configuration');
 
 <?php $this->beginBlock('env') ?>
 <pre>
-<?= VarDumper::dumpAsString($env) ?>
+<?= HtmlPurifier::process(VarDumper::dumpAsString($env)) ?>
 </pre>
 <?php $this->endBlock('env') ?>
 
