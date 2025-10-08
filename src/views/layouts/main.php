@@ -189,7 +189,7 @@ if (Yii::$app->hasModule('prototype')) {
                         </li>
 
                         <li class="expand-menu">
-                            <a href="<?= Url::to() ?>" target="_top">
+                            <a href="<?= Url::current() ?>" target="_top">
                                 <i class="fa fa-expand"></i>
                             </a>
                         </li>
