@@ -68,6 +68,7 @@ $this->title = Yii::t('backend-module', 'Dashboard');
             </div>
             <!-- ./col -->
 
+            <?php if(isset(Yii::$app->params['backend.disableConfigView']) && !Yii::$app->params['backend.disableConfigView']): ?>
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-olive">
@@ -87,8 +88,8 @@ $this->title = Yii::t('backend-module', 'Dashboard');
                         <?=Yii::t('backend-module', 'Configuration')?> <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
-
             </div>
+            <?php endif; ?>
             <!-- ./col -->
 
             <div class="col-md-3 col-xs-6">
