@@ -1,7 +1,7 @@
 <?php
 
-use yii\bootstrap\Nav;
-use yii\bootstrap\Nav as Menu;
+use yii\bootstrap5\Nav;
+use yii\bootstrap5\Nav as Menu;
 use yii\helpers\Html;
 use yii\helpers\Url;
 

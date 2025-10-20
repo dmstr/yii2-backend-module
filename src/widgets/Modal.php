@@ -9,7 +9,7 @@ use Yii;
  * Class Modal
  * @package dmstr\modules\backend\widgets
  */
-class Modal extends \yii\bootstrap\Widget
+class Modal extends \yii\bootstrap5\Widget
 {
 
     public function init()

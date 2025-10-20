@@ -11,7 +11,7 @@
 namespace _;
 
 use insolita\wgadminlte\Box;
-use yii\bootstrap\Tabs;
+use yii\bootstrap5\Tabs;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
