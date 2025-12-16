@@ -1,19 +1,17 @@
-{# register_asset_bundle('dmstr/web/MermaidAsset') #}
-
-<script src="https://unpkg.com/mermaid@8.5.1/dist/mermaid.min.js"></script>
+{% if mermaidAvailable %}
+{{ register_asset_bundle('dmstr/web/MermaidAsset') }}
 
 <div class="box" style="">
     <div class="box-header with-border">
         Roles and Permissions
     </div>
     <div class="mermaid" style="overflow: scroll">
-        {{ mmd }}
+        {{ mmd|raw }}
     </div>
 </div>
-
-{#
-<h3>Debug</h3>
-<pre><code>
- {{ mmd }}
-</code></pre>
-#}
+{% else %}
+<div class="callout callout-warning">
+    <h4><i class="icon fa fa-warning"></i> {{ t('backend-module', 'Can not display diagram, Mermaid Asset not available') }}</h4>
+    <p>{{ t('backend-module', 'Please install dmstr/yii2-mermaid-asset and the mermaid npm package.') }}</p>
+</div>
+{% endif %}

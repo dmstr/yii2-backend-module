@@ -67,10 +67,22 @@ class RbacController extends Controller
 
     public function actionDiagram()
     {
+        $mermaidAvailable = class_exists('dmstr\web\MermaidAsset');
+
+        if (!$mermaidAvailable) {
+            return $this->render('index.twig', [
+                'mmd' => null,
+                'mermaidAvailable' => false,
+            ]);
+        }
+
         $this->renderDiagram();
 
         $mmd = file_get_contents(\Yii::getAlias($this->_mmdFile));
-        return $this->render('index.twig', ['mmd' => $mmd]);
+        return $this->render('index.twig', [
+            'mmd' => $mmd,
+            'mermaidAvailable' => true,
+        ]);
     }
 
 
@@ -196,7 +208,8 @@ class RbacController extends Controller
             $node = md5($item->name);
         } else {
             $symbols = ($item->type == 1) ? ["(",")"] : ["[","]"];
-            $node = md5($item->name) . $symbols[0]. '"' . $item->name . '<br/><br/>' . $item->description . '"'.$symbols[1];
+            $description = str_replace('"', "'", $item->description ?? '');
+            $node = md5($item->name) . $symbols[0]. $item->name . '<br/><br/>' . $description . $symbols[1];
 
             $node .= ';' . PHP_EOL;
             $routePart = $item->type == 1 ? 'role' : 'permission';

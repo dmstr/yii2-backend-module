@@ -26,7 +26,8 @@
         "codemix/yii2-localeurls": "Extended URL manager",
         "dmstr/yii2-pages-module": "Menu manager",
         "dmstr/yii2-prototype-module": "Content prototyping",
-        "dmstr/lajax-yii2-translate-manager-addons": "Translating"
+        "dmstr/lajax-yii2-translate-manager-addons": "Translating",
+        "dmstr/yii2-mermaid-asset": "Asset bundle for mermaid diagrams"
     },
     "autoload": {
         "psr-4": {
