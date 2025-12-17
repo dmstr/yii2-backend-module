@@ -209,7 +209,9 @@ class RbacController extends Controller
         } else {
             $symbols = ($item->type == 1) ? ["(",")"] : ["[","]"];
             $description = str_replace('"', "'", $item->description ?? '');
-            $node = md5($item->name) . $symbols[0]. $item->name . '<br/><br/>' . $description . $symbols[1];
+            $description = str_replace(['`', "\n", "\r"], ['\'', ' ', ''], $description);
+            // Use Mermaid markdown string syntax for multi-line labels (Mermaid 10.9+)
+            $node = md5($item->name) . $symbols[0] . '"`' . $item->name . "\n" . $description . '`"' . $symbols[1];
 
             $node .= ';' . PHP_EOL;
             $routePart = $item->type == 1 ? 'role' : 'permission';
